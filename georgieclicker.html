@@ -12,6 +12,14 @@
   position: absolute;
   margin: auto;
 }
+.rightSideContain{
+  width: 400px;
+  height: 700px;
+  bottom: 0px;
+  right: 0px;
+  position: absolute;
+  margin: auto;
+}
 .imgButton{
   width: 200px;
   height: 200px;
@@ -19,6 +27,18 @@
 .imgButton:active{
   width: 185px;
   height: 185px;
+}
+#georgeMain{
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  margin: auto;
+  position: absolute;
+}
+#testButton1{
+  top: 400px;
+  left: 20px;
 }
 </style>
 </head>
@@ -28,15 +48,17 @@
 
 
 
-<div id="bigContain">
- <img class="imgButton" src="pictures/george.png" alt="georgeMain" onclick="clickOnGeorge(1);">
-
- <!-- testing for luxuryBathroom powerup
-      click and it will add one bathroom power up    -->
- <img class="imgButton" src="pictures/george.png" alt="georgetest" onclick="luxuryBathroomSpots(1);">
-
+<div class="bigContain">
+ <img class="imgButton" id="georgeMain" src="pictures/george.png" alt="georgeMain" onclick="clickOnGeorge(1);">
 
 </div>
+
+<div class="rightSideContain">
+ <!-- testing for luxuryBathroom powerup
+      click and it will add one bathroom power up    -->
+ <img class="imgButton" id="testButton1" src="pictures/george.png" alt="georgetest" onclick="luxuryBathroomSpots(1);">
+</div>
+
 
 
 </body>
