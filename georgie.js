@@ -6,9 +6,14 @@ var level = 1;
 var levelPointsLeft = 0;
 var levelMult = 1;
 var amountOfBathrooms = 0;
+var clickPower = 1;
 
 //function to handle all clicks
 function clickOnGeorge(clicks){
+  if(typeof clicks === 'undefined'){
+    clicks = clickPower;
+  }
+
   totalClickAmount = totalClickAmount + clicks;
   //checks to see if the player should level up because of this click
   if(totalClickAmount - (Math.pow(100, levelMult)) >= 0){
@@ -16,7 +21,7 @@ function clickOnGeorge(clicks){
     console.log("test");
   }
   //document.cookie = "totalClickAmount = " + totalClickAmount;
-  console.log(totalClickAmount);
+  document.getElementById("score").innerText = totalClickAmount;
 }
 
 //a powerup to help click george automatically
