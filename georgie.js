@@ -16,6 +16,7 @@ function clickOnGeorge(clicks){
     clicks = clickPower;
   }
   console.log(clicks);
+  console.log("points left :" + levelPointsLeft);
   totalClickAmount = totalClickAmount + clicks;
   //checks to see if the player should level up because of this click
   if(totalClickAmount - (Math.pow(100, levelMult)) >= 0){
@@ -31,9 +32,9 @@ function clickOnGeorge(clicks){
 //20 is the most you can have activated
 function luxuryBathroomSpots(amountOfBathroomsInput){
   amountOfBathrooms = amountOfBathrooms + amountOfBathroomsInput;
-  if(amountOfBathrooms > 0 && amountOfBathrooms < 20 && levelPointsLeft >= 50){
+  if(amountOfBathrooms > 0 && amountOfBathrooms < 20 && levelPointsLeft >= 10){
     clearInterval(luxuryBathroomClick);
-    levelPointsLeft = levelPointsLeft - 50;
+    levelPointsLeft = levelPointsLeft - 10;
     luxuryBathroomClick = setInterval(clickOnGeorge, 1000, 5 * amountOfBathrooms);
   }
   else{
@@ -44,7 +45,7 @@ function georgeUpset(angerLevelInput){
   angerLevel = angerLevel + angerLevelInput;
   if(angerLevel > 0 && angerLevel < 101 && levelPointsLeft >= 10 * angerLevel){
     clearInterval(georgeUpsetClick);
-    levelPointsLeft = levelPointsLeft - 50;
+    levelPointsLeft = levelPointsLeft - (10 * angerLevel);
     georgeUpsetClick = setInterval(clickOnGeorge, 1000, 10 * angerLevel);
   }
   else{
