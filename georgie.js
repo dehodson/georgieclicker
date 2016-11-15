@@ -60,6 +60,7 @@ function levelUp(){
   level++;
   levelMult = levelMult + .5;
   console.log("level: " + level);
+  document.getElementById("level").innerText = level;
 }
 
 
