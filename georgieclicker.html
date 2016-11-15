@@ -13,16 +13,16 @@
 			line-height:100%;
 		}
 		.bigContain{
-		  width: 1000px;
-		  height: 700px;
+		  width: 80%;
+		  height: 100%;
 		  bottom: 0px;
-		  left: 200px;
+		  left: 0px;
 
 		  position: absolute;
 		  margin: auto;
 		}
 		.rightSideContain{
-		  width: 400px;
+		  width: 20%;
 		  height: 100%;
 		  bottom: 0px;
 		  right: 0px;
@@ -31,6 +31,11 @@
 		  border-left:3px solid black;
 		  background-color: #FFEEEE;
 		}
+    #clickCountText{
+
+      margin-left: 30%;
+      font-size: 75px;
+    }
 		.imgButton{
 		  width: 400px;
 		  height: 400px;
@@ -40,11 +45,8 @@
 		  height: 390px;
 		}
 		#georgeMain{
-		  top: 0px;
-		  left: 0px;
-		  right: 0px;
-		  bottom: 0px;
-		  margin: auto;
+      top: 25%;
+      margin-left: 35%;
 		  position: absolute;
 		}
 		#testButton1{
@@ -84,8 +86,20 @@
 
 	<div class="bigContain">
 		<img class="imgButton" id="georgeMain" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge();">
+    <div id="clickCountText">
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
 
-		Clicks on George:&nbsp;<span id="score">0</span>
+		    Clicks on George:&nbsp;<span id="score">0</span>
+    </div>
 	</div>
 
 	<div class="rightSideContain">
