@@ -2,10 +2,12 @@
 //var cookieString = document.cookie;
 var totalClickAmount = 0;
 var luxuryBathroomClick;
+var georgeUpsetClick;
 var level = 1;
 var levelPointsLeft = 0;
 var levelMult = 1;
 var amountOfBathrooms = 0;
+var angerLevel = 0;
 var clickPower = 1;
 
 //function to handle all clicks
@@ -13,7 +15,7 @@ function clickOnGeorge(clicks){
   if(typeof clicks === 'undefined'){
     clicks = clickPower;
   }
-
+  console.log(clicks);
   totalClickAmount = totalClickAmount + clicks;
   //checks to see if the player should level up because of this click
   if(totalClickAmount - (Math.pow(100, levelMult)) >= 0){
@@ -36,6 +38,17 @@ function luxuryBathroomSpots(amountOfBathroomsInput){
   }
   else{
     alert("bathroom issues");
+  }
+}
+function georgeUpset(angerLevelInput){
+  angerLevel = angerLevel + angerLevelInput;
+  if(angerLevel > 0 && angerLevel < 101 && levelPointsLeft >= 10 * angerLevel){
+    clearInterval(georgeUpsetClick);
+    levelPointsLeft = levelPointsLeft - 50;
+    georgeUpsetClick = setInterval(clickOnGeorge, 1000, 10 * angerLevel);
+  }
+  else{
+    alert("nothing to be upset about");
   }
 }
 
