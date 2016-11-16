@@ -72,7 +72,7 @@
 			width: 100%;
 			font-size:2em;
 			background-color:#CCCCFF;
-			border-bottom: 2px solid black;
+			border-bottom: 3px solid black;
 			padding: 15px;
 		}
 
@@ -110,6 +110,37 @@
 			margin-top:15px;
 			padding:5px 0px;
 		}
+
+		#upgrade-toggle{
+			height:30px;
+			width: 100%;
+			z-index: 1;
+			position:absolute;
+			bottom:0px;
+			left:0px;
+		}
+		#upgrade-panel{
+			width: 100%;
+			height: calc(100% - 113px);
+			position: absolute;
+			bottom:calc(-100% + 143px);
+			left:0px;
+			background-color: red;
+			transition:bottom .25s;
+			border-top:3px solid black;
+		}
+		#upgrade-toggle:hover + #upgrade-panel.closed{
+			bottom:calc(-100% + 153px);
+		}
+		#upgrade-panel.open{
+			bottom:0px;
+		}
+		#upgrade-panel-title{
+			font-size:2em;
+			position:absolute;
+			top:8px;
+			left:10px;
+		}
 	</style>
 
 </head>
@@ -119,9 +150,13 @@
 		<div id="statistics">
 			Level:&nbsp;<span id="level">1</span><br /><br />
 			Clicks on George:&nbsp;<span id="score">0</span><br /><br />
-			Cash:&nbsp;<span id="cash">0</span>
+			Cash:&nbsp;$<span id="cash">0</span>
 		</div>
 		<img class="imgButton" id="georgeMain" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge();">
+		<div id="upgrade-toggle" onclick="togglePanel();"></div>
+		<div id="upgrade-panel" class="closed">
+			<div id="upgrade-panel-title">Upgrade Center</div>
+		</div>
 	</div>
 
 	<div class="rightSideContain">
@@ -129,7 +164,7 @@
 			<div class="powerup-main">
 				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="upgrade('bathrooms', 1);">
 				<div class="powerup-title">Luxury Bathrooms</div>
-				<div class="powerup-description">George's knowledge of all the best bathrooms is paying off.</div>
+				<div class="powerup-description">George's knowledge of the best bathrooms is paying off.</div>
 			</div>
 			<div class="powerup-info">Price: $<span id="powerup-bathrooms-price">10</span> Amount owned: <span id="powerup-bathrooms-number">0</span>/20</div>
 		</div>
@@ -139,6 +174,7 @@
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
 			<div class="powerup-info">Price: $<span id="powerup-upset-price">100</span> Anger level: <span id="powerup-upset-number">0</span>%</div>
 		</div>
+	</div>
 
 	<script src="georgie.js"></script>
 

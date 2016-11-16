@@ -23,7 +23,7 @@ function clickOnGeorge(clicks){
 		levelUp();
 	}
 	//document.cookie = "totalClickAmount = " + totalClickAmount;
-	document.getElementById("score").innerText = totalClickAmount.toFixed(1);
+	document.getElementById("score").innerText = totalClickAmount.toFixed(0);
 }
 
 function addCash(amount){
@@ -40,10 +40,11 @@ function upgrade(name, number){
 	var powerName = "powerup-" + name;
 
 	if(name == "bathrooms"){
-		if(amountOfBathrooms < 20 && playerCash >= 10){
+		if(amountOfBathrooms < 20 && playerCash >= 10 * (amountOfBathrooms + 1)){
 			amountOfBathrooms = amountOfBathrooms + number;
 			document.getElementById(powerName + "-number").innerText = amountOfBathrooms;
-			spendCash(10);
+			document.getElementById(powerName + "-price").innerText = 10 * (amountOfBathrooms + 1);
+      spendCash(10 * amountOfBathrooms);
 		}
 	}else if(name == "upset"){
 		if(angerLevel < 91 && playerCash >= 10 * (angerLevel + 10)){
@@ -80,6 +81,16 @@ function gameTick(){
 	clickOnGeorge(clicksPerSecond);
 
 	updateBackground();
+}
+
+function togglePanel(){
+  var panel = document.getElementById("upgrade-panel");
+
+  if(panel.className == "open"){
+    panel.className = "closed";
+  }else{
+    panel.className = "open";
+  }
 }
 
 setInterval(gameTick, 50);
