@@ -27,28 +27,6 @@ function clickOnGeorge(clicks){
 	document.getElementById("score").innerText = totalClickAmount;
 }
 
-//a powerup to help click george automatically
-//5 clicks a second per luxuryBathroomSpots activated
-//20 is the most you can have activated
-function luxuryBathroomSpots(amountOfBathroomsInput){
-	amountOfBathrooms = amountOfBathrooms + amountOfBathroomsInput;
-	if(amountOfBathrooms > 0 && amountOfBathrooms < 20 && playerCash >= 10){
-		spendCash(10);
-	}
-	else{
-		alert("bathroom issues");
-	}
-}
-function georgeUpset(angerLevelInput){
-	angerLevel = angerLevel + angerLevelInput;
-	if(angerLevel > 0 && angerLevel < 101 && playerCash >= 10 * angerLevel){
-		spendCash(10 * angerLevel);
-	}
-	else{
-		alert("nothing to be upset about");
-	}
-}
-
 function addCash(amount){
 	playerCash += amount;
 	document.getElementById("cash").innerText = playerCash;
@@ -57,6 +35,25 @@ function addCash(amount){
 function spendCash(amount){
 	playerCash -= amount;
 	document.getElementById("cash").innerText = playerCash;
+}
+
+function upgrade(name, number){
+	var powerName = "powerup-" + name;
+
+	if(name == "bathrooms"){
+		if(amountOfBathrooms < 20 && playerCash >= 10){
+			amountOfBathrooms = amountOfBathrooms + number;
+			document.getElementById(powerName + "-number").innerText = amountOfBathrooms;
+			spendCash(10);
+		}
+	}else if(name == "upset"){
+		if(angerLevel < 91 && playerCash >= 10 * (angerLevel + 10)){
+			angerLevel = angerLevel + number;
+			document.getElementById(powerName + "-number").innerText = angerLevel;
+			document.getElementById(powerName + "-price").innerText = 10 * (angerLevel + 10);
+			spendCash(10 * angerLevel);
+		}
+	}
 }
 
 //adds more points to spend on powerups and levels the player to the next level

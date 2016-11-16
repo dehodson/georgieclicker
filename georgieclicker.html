@@ -113,19 +113,19 @@
 	</div>
 
 	<div class="rightSideContain">
-		<div class="powerup">
+		<div class="powerup" id="powerup-bathrooms">
 			<div class="powerup-main">
-				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="luxuryBathroomSpots(1);">
+				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="upgrade('bathrooms', 1);">
 				<div class="powerup-title">Luxury Bathrooms</div>
 				<div class="powerup-description">George's knowledge of all the best bathrooms is paying off.</div>
 			</div>
-			<div class="powerup-info">Price: X Amount owned: X</div>
+			<div class="powerup-info">Price: $<span id="powerup-bathrooms-price">10</span> Amount owned: <span id="powerup-bathrooms-number">0</span>/20</div>
 		</div>
-		<div class="powerup">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="georgeUpset(10);">
+		<div class="powerup" id="powerup-upset">
+			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('upset', 10);">
 			<div class="powerup-title">George Is Getting Upset</div>
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
-			<div class="powerup-info">Price: X Amount owned: X</div>
+			<div class="powerup-info">Price: $<span id="powerup-upset-price">100</span> Anger level: <span id="powerup-upset-number">0</span>%</div>
 		</div>
 
 	<script src="georgie.js"></script>
