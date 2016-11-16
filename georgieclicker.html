@@ -12,7 +12,7 @@
 			font-family:eightBit, sans-serif;
 			line-height:100%;
 		}
-		.bigContain{
+		#main-container{
 			width: calc(100% - 350px);
 			height: 100%;
 			bottom: 0px;
@@ -23,7 +23,9 @@
 
 			background-image: url("pictures/seinfeldLogo.png");
 			background-repeat: repeat;
-			background-size: 326px 210px;
+			background-size: 250px 250px;
+			background-position: 0px 0px;
+			overflow: hidden;
 		}
 		.rightSideContain{
 			width: 350px;
@@ -39,10 +41,16 @@
 		.imgButton{
 			width: 400px;
 			height: 400px;
+			transition: width .1s, height .1s;
+		}
+		.imgButton:hover{
+			width: 410px;
+			height: 410px;
 		}
 		.imgButton:active{
 			width: 390px;
 			height: 390px;
+			transform: rotate(5deg);
 		}
 		#georgeMain{
 			position: absolute;
@@ -76,6 +84,10 @@
 			border-top:2px solid black;
 			border-bottom: 2px solid black;
 			box-shadow: 0px 7px 7px #888888;
+			transition: background-color .25s;
+		}
+		.powerup:hover{
+			background-color: #FFE;
 		}
 		.powerup .imgButton{
 			width:100px;
@@ -103,7 +115,7 @@
 </head>
 <body>
 
-	<div class="bigContain">
+	<div class="bigContain" id="main-container">
 		<div id="statistics">
 			Level:&nbsp;<span id="level">1</span><br /><br />
 			Clicks on George:&nbsp;<span id="score">0</span><br /><br />

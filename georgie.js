@@ -9,22 +9,21 @@ var levelMult = 1;
 var amountOfBathrooms = 0;
 var angerLevel = 0;
 var clickPower = 1;
+var backgroundX = 0.0;
+var backgroundY = 0.0;
 
 //function to handle all clicks
 function clickOnGeorge(clicks){
 	if(typeof clicks === 'undefined'){
 		clicks = clickPower;
 	}
-	console.log(clicks);
-	console.log("points left :" + playerCash);
 	totalClickAmount = totalClickAmount + clicks;
 	//checks to see if the player should level up because of this click
 	if(totalClickAmount - (Math.pow(10, levelMult)) >= 0){
 		levelUp();
-		console.log("test");
 	}
 	//document.cookie = "totalClickAmount = " + totalClickAmount;
-	document.getElementById("score").innerText = totalClickAmount;
+	document.getElementById("score").innerText = totalClickAmount.toFixed(1);
 }
 
 function addCash(amount){
@@ -59,20 +58,28 @@ function upgrade(name, number){
 //adds more points to spend on powerups and levels the player to the next level
 function levelUp(){
 	addCash(100 * level);
-	console.log(playerCash);
 	level++;
 	levelMult = levelMult + .5;
-	console.log("level: " + level);
 	document.getElementById("level").innerText = level;
+}
+
+function updateBackground(){
+	backgroundX += 1
+	if(backgroundX >= 250){
+		backgroundX = 0;
+	}
+	document.getElementById("main-container").style.backgroundPosition = backgroundX+"px "+backgroundX+"px";
 }
 
 function gameTick(){
 	var clicksPerSecond = 0;
 
-	clicksPerSecond +=  5 * amountOfBathrooms;
-	clicksPerSecond += 10 * angerLevel;
+	clicksPerSecond += .05 * amountOfBathrooms;
+	clicksPerSecond +=  .1 * angerLevel;
 
 	clickOnGeorge(clicksPerSecond);
+
+	updateBackground();
 }
 
-setInterval(gameTick, 1000);
+setInterval(gameTick, 50);
