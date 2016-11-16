@@ -60,6 +60,8 @@
 			right:  0px;
 			margin: auto;
 		}
+
+
 		#powerUpButton{
 			top: 400px;
 			left: 20px;
@@ -125,7 +127,7 @@
 			position: absolute;
 			bottom:calc(-100% + 143px);
 			left:0px;
-			background-color: red;
+			background-color: #d15e7a;
 			transition:bottom .25s;
 			border-top:3px solid black;
 		}
@@ -141,6 +143,14 @@
 			top:8px;
 			left:10px;
 		}
+		#upgrade-panel-closetext{
+			font-size: 1.5em;
+			position: absolute;
+			left: 40%;
+			user-select: none;
+			-moz-user-select: none;
+			visibility: hidden;
+		}
 	</style>
 
 </head>
@@ -153,7 +163,7 @@
 			Cash:&nbsp;$<span id="cash">0</span>
 		</div>
 		<img class="imgButton" id="georgeMain" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge();">
-		<div id="upgrade-toggle" onclick="togglePanel();"></div>
+		<div id="upgrade-toggle" onclick="togglePanel();"><div id="upgrade-panel-closetext">close upgrade center</div></div>
 		<div id="upgrade-panel" class="closed">
 			<div id="upgrade-panel-title">Upgrade Center</div>
 		</div>

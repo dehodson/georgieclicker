@@ -88,8 +88,11 @@ function togglePanel(){
 
   if(panel.className == "open"){
     panel.className = "closed";
+		document.getElementById("upgrade-panel-closetext").style.visibility = "hidden"
+
   }else{
     panel.className = "open";
+		document.getElementById("upgrade-panel-closetext").style.visibility = "visible"
   }
 }
 
