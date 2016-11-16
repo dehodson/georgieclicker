@@ -13,7 +13,7 @@
 			line-height:100%;
 		}
 		.bigContain{
-			width: 70%;
+			width: calc(100% - 350px);
 			height: 100%;
 			bottom: 0px;
 			left: 0px;
@@ -23,10 +23,10 @@
 
 			background-image: url("pictures/seinfeldLogo.png");
 			background-repeat: repeat;
-			background-size: 25% 25%;
+			background-size: 326px 210px;
 		}
 		.rightSideContain{
-			width: 30%;
+			width: 350px;
 			height: 100%;
 			bottom: 0px;
 			right: 0px;
@@ -71,8 +71,8 @@
 		.powerup{
 			background-color: #FFCCCC;
 			margin:10px 0px 20px;
-			min-height: 100px;
-			padding:10px;
+			height:135px;
+			padding:10px 10px 0px 10px;
 			border-top:2px solid black;
 			border-bottom: 2px solid black;
 			box-shadow: 0px 7px 7px #888888;
@@ -90,6 +90,14 @@
 			margin-top:15px;
 			font-size:1.5em;
 		}
+		.powerup-info{
+			display: block;
+			width:100%;
+			height:15px;
+			font-size:1.5em;
+			margin-top:15px;
+			padding:5px 0px;
+		}
 	</style>
 
 </head>
@@ -98,43 +106,27 @@
 	<div class="bigContain">
 		<div id="statistics">
 			Level:&nbsp;<span id="level">1</span><br /><br />
-			Clicks on George:&nbsp;<span id="score">0</span>
+			Clicks on George:&nbsp;<span id="score">0</span><br /><br />
+			Cash:&nbsp;<span id="cash">0</span>
 		</div>
 		<img class="imgButton" id="georgeMain" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge();">
 	</div>
 
 	<div class="rightSideContain">
 		<div class="powerup">
-			<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="luxuryBathroomSpots(1);">
-			<div class="powerup-title">Luxury Bathrooms</div>
-			<div class="powerup-description">George's knowledge of all the best bathrooms is paying off.</div>
+			<div class="powerup-main">
+				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="luxuryBathroomSpots(1);">
+				<div class="powerup-title">Luxury Bathrooms</div>
+				<div class="powerup-description">George's knowledge of all the best bathrooms is paying off.</div>
+			</div>
+			<div class="powerup-info">Price: X Amount owned: X</div>
 		</div>
 		<div class="powerup">
 			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="georgeUpset(10);">
 			<div class="powerup-title">George Is Getting Upset</div>
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
+			<div class="powerup-info">Price: X Amount owned: X</div>
 		</div>
-		<div class="powerup">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="georgeUpset(10);">
-			<div class="powerup-title">George Is Getting Upset</div>
-			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
-		</div>
-		<div class="powerup">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="georgeUpset(10);">
-			<div class="powerup-title">George Is Getting Upset</div>
-			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
-		</div>
-		<div class="powerup">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="georgeUpset(10);">
-			<div class="powerup-title">George Is Getting Upset</div>
-			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
-		</div>
-		<div class="powerup">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="georgeUpset(10);">
-			<div class="powerup-title">George Is Getting Upset</div>
-			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
-		</div>
-	</div>
 
 	<script src="georgie.js"></script>
 
