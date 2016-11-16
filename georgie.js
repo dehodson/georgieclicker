@@ -19,7 +19,7 @@ function clickOnGeorge(clicks){
 	}
 	totalClickAmount = totalClickAmount + clicks;
 	//checks to see if the player should level up because of this click
-	if(totalClickAmount - (Math.pow(10, levelMult)) >= 0){
+	if(totalClickAmount - (Math.pow(10, level)) >= 0){
 		levelUp();
 	}
 	//document.cookie = "totalClickAmount = " + totalClickAmount;
@@ -60,7 +60,7 @@ function upgrade(name, number){
 function levelUp(){
 	addCash(100 * level);
 	level++;
-	levelMult = levelMult + .5;
+	levelMult = levelMult + 1;
 	document.getElementById("level").innerText = level;
 }
 
@@ -92,7 +92,7 @@ function togglePanel(){
 
   }else{
     panel.className = "open";
-		document.getElementById("upgrade-panel-closetext").style.visibility = "visible"
+		setTimeout(function(){document.getElementById("upgrade-panel-closetext").style.visibility = "visible"}, 150);
   }
 }
 

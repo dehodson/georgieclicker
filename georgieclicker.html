@@ -151,6 +151,18 @@
 			-moz-user-select: none;
 			visibility: hidden;
 		}
+		#upgrade-tree{
+			width:500px;
+			height:500px;
+			background-color: white;
+			position: absolute;
+			top:0px;
+			right:0px;
+			left:0px;
+			bottom:0px;
+			margin:auto;
+			z-index: 1;
+		}
 	</style>
 
 </head>
@@ -166,6 +178,7 @@
 		<div id="upgrade-toggle" onclick="togglePanel();"><div id="upgrade-panel-closetext">close upgrade center</div></div>
 		<div id="upgrade-panel" class="closed">
 			<div id="upgrade-panel-title">Upgrade Center</div>
+			<div id="upgrade-tree"></div>
 		</div>
 	</div>
 
