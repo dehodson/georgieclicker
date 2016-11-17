@@ -222,12 +222,14 @@
 		</div>
 		<img class="imgButton" id="georgeMain" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge();">
 		<div id="upgrade-toggle" onclick="togglePanel();"><div id="upgrade-panel-closetext">close upgrade center</div></div>
-		<div id="upgrade-panel" class="open">
+		<div id="upgrade-panel" class="closed">
 			<div id="upgrade-panel-title">Upgrade Center</div>
 			<div id="upgrade-panel-skill-points">Skill Points:&nbsp;<span id="skill-points">0</span></div>
 			<div id="upgrade-tree">
-				<div class="upgrade-node visible" id="upgrade-basic-george" style="top:10px;left:220px;background-image:url('pictures/upgrades/basicGeorge.png');"><span class="upgrade-tooltip">Basic George<br /><span class="tooltip-description">Your everyday George Costanza.</span></span></div>
+				<div class="upgrade-node visible" id="upgrade-basic-george" style="top:0px;left:220px;background-image:url('pictures/upgrades/basicGeorge.png');"><span class="upgrade-tooltip">Basic George<br /><span class="tooltip-description">Your everyday George Costanza.</span></span></div>
 				<div class="upgrade-node visible" id="upgrade-clever-george" style="top:60px;left:60px;"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
+				<div class="upgrade-node visible" id="upgrade-angry-george" style="top:60px;left:220px;"><span class="upgrade-tooltip">Angry George<br /><span class="tooltip-description">The path of Angry George.</span></span></div>
+				<div class="upgrade-node visible" id="upgrade-dishonest-george" style="top:60px;left:380px;"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
 			</div>
 		</div>
 	</div>
