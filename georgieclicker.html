@@ -61,7 +61,6 @@
 			margin: auto;
 		}
 
-
 		#powerUpButton{
 			top: 400px;
 			left: 20px;
@@ -143,6 +142,12 @@
 			top:8px;
 			left:10px;
 		}
+		#upgrade-panel-skill-points{
+			font-size:2em;
+			position:absolute;
+			top:8px;
+			right:10px;
+		}
 		#upgrade-panel-closetext{
 			font-size: 1.5em;
 			position: absolute;
@@ -154,7 +159,7 @@
 		#upgrade-tree{
 			width:500px;
 			height:500px;
-			background-color: white;
+			background-image:url("pictures/simpletree.png");
 			position: absolute;
 			top:0px;
 			right:0px;
@@ -162,6 +167,47 @@
 			bottom:0px;
 			margin:auto;
 			z-index: 1;
+		}
+		.upgrade-node{
+			height:50px;
+			width:50px;
+			position: absolute;
+			background-color:black;
+		}
+		.upgrade-node.disabled{
+			background-color:black;
+		}
+		.upgrade-node .upgrade-tooltip{
+			visibility: hidden;
+			background-color:black;
+			color: #fff;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px 0;
+			position: absolute;
+			z-index: 1;
+			bottom: 110%;
+			left: 50%;
+			font-size:1.5em;
+			width: 150px;
+			margin-left: -75px;
+		}
+		.upgrade-node .upgrade-tooltip::after {
+			content: "";
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			margin-left: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: black transparent transparent transparent;
+		}
+		.upgrade-node:not(.disabled):hover .upgrade-tooltip{
+			visibility: visible;
+		}
+		.tooltip-description{
+			color:#FFB;
+			font-size:.7em;
 		}
 	</style>
 
@@ -176,9 +222,13 @@
 		</div>
 		<img class="imgButton" id="georgeMain" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge();">
 		<div id="upgrade-toggle" onclick="togglePanel();"><div id="upgrade-panel-closetext">close upgrade center</div></div>
-		<div id="upgrade-panel" class="closed">
+		<div id="upgrade-panel" class="open">
 			<div id="upgrade-panel-title">Upgrade Center</div>
-			<div id="upgrade-tree"></div>
+			<div id="upgrade-panel-skill-points">Skill Points:&nbsp;<span id="skill-points">0</span></div>
+			<div id="upgrade-tree">
+				<div class="upgrade-node disabled" id="upgrade-basic-george" style="top:10px;left:220px;"><span class="upgrade-tooltip">Basic George<br /><span class="tooltip-description">Your everyday George Costanza.</span></span></div>
+				<div class="upgrade-node visible" id="upgrade-clever-george" style="top:60px;left:60px;"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
+			</div>
 		</div>
 	</div>
 

@@ -11,6 +11,7 @@ var angerLevel = 0;
 var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
+var skillPoints = 0;
 
 //function to handle all clicks
 function clickOnGeorge(clicks){
@@ -36,6 +37,16 @@ function spendCash(amount){
 	document.getElementById("cash").innerText = playerCash;
 }
 
+function addSkillPoints(amount){
+	skillPoints += amount;
+	document.getElementById("skill-points").innerText = skillPoints;
+}
+
+function spendSkillPoints(amount){
+	skillPoints -= amount;
+	document.getElementById("skill-points").innerText = skillPoints;
+}
+
 function upgrade(name, number){
 	var powerName = "powerup-" + name;
 
@@ -44,7 +55,7 @@ function upgrade(name, number){
 			amountOfBathrooms = amountOfBathrooms + number;
 			document.getElementById(powerName + "-number").innerText = amountOfBathrooms;
 			document.getElementById(powerName + "-price").innerText = 10 * (amountOfBathrooms + 1);
-      spendCash(10 * amountOfBathrooms);
+      		spendCash(10 * amountOfBathrooms);
 		}
 	}else if(name == "upset"){
 		if(angerLevel < 91 && playerCash >= 10 * (angerLevel + 10)){
@@ -60,6 +71,7 @@ function upgrade(name, number){
 function levelUp(){
 	addCash(100 * level);
 	level++;
+	addSkillPoints(1);
 	levelMult = levelMult + 1;
 	document.getElementById("level").innerText = level;
 }
