@@ -86,6 +86,7 @@
 			border-bottom: 2px solid black;
 			box-shadow: 0px 7px 7px #888888;
 			transition: background-color .25s;
+
 		}
 		.powerup:hover{
 			background-color: #FFE;
@@ -227,15 +228,15 @@
 			<div id="upgrade-panel-skill-points">Skill Points:&nbsp;<span id="skill-points">0</span></div>
 			<div id="upgrade-tree">
 				<div class="upgrade-node visible" id="upgrade-basic-george" style="top:0px;left:220px;background-image:url('pictures/upgrades/basicGeorge.png');"><span class="upgrade-tooltip">Basic George<br /><span class="tooltip-description">Your everyday George Costanza.</span></span></div>
-				<div class="upgrade-node visible" id="upgrade-clever-george" style="top:60px;left:60px;"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
-				<div class="upgrade-node visible" id="upgrade-angry-george" style="top:60px;left:220px;"><span class="upgrade-tooltip">Angry George<br /><span class="tooltip-description">The path of Angry George.</span></span></div>
+				<div class="upgrade-node visible" id="upgrade-clever-george" style="top:60px;left:60px;" onclick="newUpgrade('powerup-bathrooms');"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
+				<div class="upgrade-node visible" id="upgrade-angry-george" style="top:60px;left:220px;" onclick="newUpgrade('powerup-upset');"><span class="upgrade-tooltip">Angry George<br /><span class="tooltip-description">The path of Angry George.</span></span></div>
 				<div class="upgrade-node visible" id="upgrade-dishonest-george" style="top:60px;left:380px;"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
 			</div>
 		</div>
 	</div>
 
 	<div class="rightSideContain">
-		<div class="powerup" id="powerup-bathrooms">
+		<div class="powerup" id="powerup-bathrooms" style="display: none;">
 			<div class="powerup-main">
 				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="upgrade('bathrooms', 1);">
 				<div class="powerup-title">Luxury Bathrooms</div>
@@ -243,7 +244,7 @@
 			</div>
 			<div class="powerup-info">Price: $<span id="powerup-bathrooms-price">10</span> Amount owned: <span id="powerup-bathrooms-number">0</span>/20</div>
 		</div>
-		<div class="powerup" id="powerup-upset">
+		<div class="powerup" id="powerup-upset" style="display: none;">
 			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('upset', 10);">
 			<div class="powerup-title">George Is Getting Upset</div>
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>

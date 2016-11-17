@@ -12,6 +12,9 @@ var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
 var skillPoints = 0;
+var powerUpMoveList = ["powerup-bathrooms", "powerup-upset"];
+
+var powerUpsAchieved = [];
 
 //function to handle all clicks
 function clickOnGeorge(clicks){
@@ -41,6 +44,10 @@ function addSkillPoints(amount){
 	skillPoints += amount;
 	document.getElementById("skill-points").innerText = skillPoints;
 }
+function subSkillPoints(amount){
+	skillPoints -= amount;
+	document.getElementById("skill-points").innerText = skillPoints;
+}
 
 function spendSkillPoints(amount){
 	skillPoints -= amount;
@@ -65,6 +72,13 @@ function upgrade(name, number){
 			spendCash(10 * angerLevel);
 		}
 	}
+}
+
+function newUpgrade(newMove){
+	document.getElementById(newMove).style.display = 'inline-block';
+	subSkillPoints(1);
+	powerUpMoveList = powerUpMoveList.filter(function(e) { return e !== newMove });
+	console.log(powerUpMoveList);
 }
 
 //adds more points to spend on powerups and levels the player to the next level
