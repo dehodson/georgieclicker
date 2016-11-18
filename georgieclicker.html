@@ -228,10 +228,18 @@
 			<div id="upgrade-panel-skill-points">Skill Points:&nbsp;<span id="skill-points">0</span></div>
 			<div id="upgrade-tree">
 				<div class="upgrade-node visible" id="upgrade-basic-george" style="top:0px;left:220px;background-image:url('pictures/upgrades/basicGeorge.png');"><span class="upgrade-tooltip">Basic George<br /><span class="tooltip-description">Your everyday George Costanza.</span></span></div>
-				<div class="upgrade-node visible" id="upgrade-clever-george" style="top:60px;left:60px;" onclick="newUpgrade('powerup-bathrooms');"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
-				<div class="upgrade-node visible" id="upgrade-clever-george" style="top:130px;left:10px;" onclick="newUpgrade('powerup-squint'); upgrade('squint', 1);"><span class="upgrade-tooltip">Squint<br /><span class="tooltip-description">Squinting</span></span></div>
 
+<!-- this is the clever george branch -->
+				<div class="upgrade-node visible" id="upgrade-clever-george" style="top:60px;left:60px;" onclick="newUpgrade('powerup-bathrooms');"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
+				<div class="upgrade-node visible" id="disabled" style="top:130px;left:10px;" onclick="newUpgrade('powerup-squint'); upgrade('squint', 1);"><span class="upgrade-tooltip">Squint<br /><span class="tooltip-description">Squinting</span></span></div>
+
+
+<!--  this is the angry george branch-->
 				<div class="upgrade-node visible" id="upgrade-angry-george" style="top:60px;left:220px;" onclick="newUpgrade('powerup-upset');"><span class="upgrade-tooltip">Angry George<br /><span class="tooltip-description">The path of Angry George.</span></span></div>
+
+
+
+<!--  this is the dishonest george branch-->
 				<div class="upgrade-node visible" id="upgrade-dishonest-george" style="top:60px;left:380px;"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
 			</div>
 		</div>

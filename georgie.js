@@ -65,7 +65,14 @@ function upgrade(name, number){
       		spendCash(10 * amountOfBathrooms);
 		}
 	}else if(name == "squint"){
-		clickPower = 5 * number;
+		var index, value, result;
+		for (index = 0; index < powerUpsAchieved.length; index++) {
+    	value = powerUpsAchieved[index];
+    	if (value == powerName) {
+				clickPower = 5 * number;
+				break;
+			}
+    }
 	}
 
 	else if(name == "upset"){
@@ -79,15 +86,17 @@ function upgrade(name, number){
 }
 
 function newUpgrade(newMove){
-	var index, value, result;
+		var index, value, result;
 		for (index = 0; index < powerUpMoveList.length; index++) {
     	value = powerUpMoveList[index];
 			console.log("index value" + value);
 			console.log("move input" + newMove);
-    	if (value == newMove) {
+    	if (value == newMove && skillPoints > 0) {
 				document.getElementById(newMove).style.display = 'inline-block';
 				subSkillPoints(1);
 				powerUpMoveList = powerUpMoveList.filter(function(e) { return e !== newMove });
+				powerUpsAchieved.push(newMove);
+				console.log(powerUpsAchieved);
 				console.log(powerUpMoveList);
 				break;
 			}
