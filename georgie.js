@@ -12,7 +12,7 @@ var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
 var skillPoints = 0;
-var powerUpMoveList = ["powerup-bathrooms", "powerup-upset"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-upset", "powerup-squint"];
 
 var powerUpsAchieved = [];
 
@@ -64,7 +64,11 @@ function upgrade(name, number){
 			document.getElementById(powerName + "-price").innerText = 10 * (amountOfBathrooms + 1);
       		spendCash(10 * amountOfBathrooms);
 		}
-	}else if(name == "upset"){
+	}else if(name == "squint"){
+		clickPower = 5 * number;
+	}
+
+	else if(name == "upset"){
 		if(angerLevel < 91 && playerCash >= 10 * (angerLevel + 10)){
 			angerLevel = angerLevel + number;
 			document.getElementById(powerName + "-number").innerText = angerLevel;
@@ -75,10 +79,19 @@ function upgrade(name, number){
 }
 
 function newUpgrade(newMove){
-	document.getElementById(newMove).style.display = 'inline-block';
-	subSkillPoints(1);
-	powerUpMoveList = powerUpMoveList.filter(function(e) { return e !== newMove });
-	console.log(powerUpMoveList);
+	var index, value, result;
+		for (index = 0; index < powerUpMoveList.length; index++) {
+    	value = powerUpMoveList[index];
+			console.log("index value" + value);
+			console.log("move input" + newMove);
+    	if (value == newMove) {
+				document.getElementById(newMove).style.display = 'inline-block';
+				subSkillPoints(1);
+				powerUpMoveList = powerUpMoveList.filter(function(e) { return e !== newMove });
+				console.log(powerUpMoveList);
+				break;
+			}
+    }
 }
 
 //adds more points to spend on powerups and levels the player to the next level

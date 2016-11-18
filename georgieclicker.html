@@ -229,6 +229,8 @@
 			<div id="upgrade-tree">
 				<div class="upgrade-node visible" id="upgrade-basic-george" style="top:0px;left:220px;background-image:url('pictures/upgrades/basicGeorge.png');"><span class="upgrade-tooltip">Basic George<br /><span class="tooltip-description">Your everyday George Costanza.</span></span></div>
 				<div class="upgrade-node visible" id="upgrade-clever-george" style="top:60px;left:60px;" onclick="newUpgrade('powerup-bathrooms');"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
+				<div class="upgrade-node visible" id="upgrade-clever-george" style="top:130px;left:10px;" onclick="newUpgrade('powerup-squint'); upgrade('squint', 1);"><span class="upgrade-tooltip">Squint<br /><span class="tooltip-description">Squinting</span></span></div>
+
 				<div class="upgrade-node visible" id="upgrade-angry-george" style="top:60px;left:220px;" onclick="newUpgrade('powerup-upset');"><span class="upgrade-tooltip">Angry George<br /><span class="tooltip-description">The path of Angry George.</span></span></div>
 				<div class="upgrade-node visible" id="upgrade-dishonest-george" style="top:60px;left:380px;"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
 			</div>
@@ -243,6 +245,14 @@
 				<div class="powerup-description">George's knowledge of the best bathrooms is paying off.</div>
 			</div>
 			<div class="powerup-info">Price: $<span id="powerup-bathrooms-price">10</span> Amount owned: <span id="powerup-bathrooms-number">0</span>/20</div>
+		</div>
+		<div class="powerup" id="powerup-squint" style="display: none;">
+			<div class="powerup-main">
+				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="squint" >
+				<div class="powerup-title">Squint</div>
+				<div class="powerup-description">Squinting George is clicking more accurately.</div>
+			</div>
+			<div class="powerup-info">PASSIVE	 Vision: <span id="powerup-bathrooms-number">0</span>/20</div>
 		</div>
 		<div class="powerup" id="powerup-upset" style="display: none;">
 			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('upset', 10);">
