@@ -7,6 +7,7 @@ var level = 1;
 var playerCash = 0;
 var levelMult = 1;
 var amountOfBathrooms = 0;
+var bathroomPower = 0.5;
 var angerLevel = 0;
 var clickPower = 1;
 var backgroundX = 0.0;
@@ -17,7 +18,7 @@ var powerUpMoveList = ["powerup-bathrooms", "powerup-upset", "powerup-squint"];
 var powerUpsAchieved = [];
 
 var powerUpTree = {
-	"upgrade-clever-george":["upgrade-squint"]
+	"upgrade-clever-george":["upgrade-squint", "upgrade-bathrooms2"]
 };
 
 //function to handle all clicks
@@ -65,6 +66,9 @@ function upgrade(name, number){
       		spendCash(10 * amountOfBathrooms);
 		}
 	}
+	else if(name == "bathrooms2"){
+		bathroomPower = 1;
+	}
 	else if(name == "squint"){
 		var index, value, result;
 		for (index = 0; index < powerUpsAchieved.length; index++) {
@@ -86,7 +90,7 @@ function upgrade(name, number){
 }
 
 function upgradable(element){
-	if(element.className == "upgrade-node visible"){
+	if(element.className == "upgrade-node visible" && skillPoints > 0){
 		return true;
 	}
 	return false;
@@ -138,7 +142,7 @@ function updateBackground(){
 function gameTick(){
 	var clicksPerSecond = 0;
 
-	clicksPerSecond += .05 * amountOfBathrooms;
+	clicksPerSecond += bathroomPower * amountOfBathrooms;
 	clicksPerSecond +=  .1 * angerLevel;
 
 	clickOnGeorge(clicksPerSecond);
