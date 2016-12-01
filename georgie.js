@@ -13,7 +13,7 @@ var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
 var skillPoints = 0;
-var powerUpMoveList = ["powerup-bathrooms", "powerup-upset", "powerup-squint"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-upset", "powerup-squint"];
 
 var powerUpsAchieved = [];
 
