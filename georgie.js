@@ -16,6 +16,10 @@ var powerUpMoveList = ["powerup-bathrooms", "powerup-upset", "powerup-squint"];
 
 var powerUpsAchieved = [];
 
+var powerUpTree = {
+	"upgrade-clever-george":["upgrade-squint"]
+};
+
 //function to handle all clicks
 function clickOnGeorge(clicks){
 	if(typeof clicks === 'undefined'){
@@ -44,10 +48,6 @@ function addSkillPoints(amount){
 	skillPoints += amount;
 	document.getElementById("skill-points").innerText = skillPoints;
 }
-function subSkillPoints(amount){
-	skillPoints -= amount;
-	document.getElementById("skill-points").innerText = skillPoints;
-}
 
 function spendSkillPoints(amount){
 	skillPoints -= amount;
@@ -64,7 +64,8 @@ function upgrade(name, number){
 			document.getElementById(powerName + "-price").innerText = 10 * (amountOfBathrooms + 1);
       		spendCash(10 * amountOfBathrooms);
 		}
-	}else if(name == "squint"){
+	}
+	else if(name == "squint"){
 		var index, value, result;
 		for (index = 0; index < powerUpsAchieved.length; index++) {
     	value = powerUpsAchieved[index];
@@ -72,9 +73,8 @@ function upgrade(name, number){
 				clickPower = 5 * number;
 				break;
 			}
-    }
+    	}
 	}
-
 	else if(name == "upset"){
 		if(angerLevel < 91 && playerCash >= 10 * (angerLevel + 10)){
 			angerLevel = angerLevel + number;
@@ -82,6 +82,21 @@ function upgrade(name, number){
 			document.getElementById(powerName + "-price").innerText = 10 * (angerLevel + 10);
 			spendCash(10 * angerLevel);
 		}
+	}
+}
+
+function upgradable(element){
+	if(element.className == "upgrade-node visible"){
+		return true;
+	}
+	return false;
+}
+
+function unlockChildren(element){
+	var id = element.id;
+
+	for(var i = 0; i < powerUpTree[id].length; i++){
+		document.getElementById(powerUpTree[id][i]).className = "upgrade-node visible";
 	}
 }
 
@@ -93,7 +108,7 @@ function newUpgrade(newMove){
 			console.log("move input" + newMove);
     	if (value == newMove && skillPoints > 0) {
 				document.getElementById(newMove).style.display = 'inline-block';
-				subSkillPoints(1);
+				spendSkillPoints(1);
 				powerUpMoveList = powerUpMoveList.filter(function(e) { return e !== newMove });
 				powerUpsAchieved.push(newMove);
 				console.log(powerUpsAchieved);
