@@ -13,7 +13,7 @@ var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
 var skillPoints = 0;
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-upset", "powerup-squint"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint"];
 
 var powerUpsAchieved = [];
 
@@ -54,7 +54,9 @@ function spendSkillPoints(amount){
 	skillPoints -= amount;
 	document.getElementById("skill-points").innerText = skillPoints;
 }
-
+function clever(){
+	console.log("whhhat");
+}
 function upgrade(name, number){
 	var powerName = "powerup-" + name;
 
@@ -68,6 +70,11 @@ function upgrade(name, number){
 	}
 	else if(name == "bathrooms2"){
 		bathroomPower = 1;
+		powerUpTree["upgrade-clever-george"].push("upgrade-bathrooms3");
+		console.log("test to see if its pushed " + powerUpTree["upgrade-clever-george"][2]);
+	}
+	else if(name == "bathrooms3"){
+		bathroomPower = 2.5;
 	}
 	else if(name == "squint"){
 		var index, value, result;
@@ -98,7 +105,8 @@ function upgradable(element){
 
 function unlockChildren(element){
 	var id = element.id;
-
+	id = String(id);
+	console.log("this should be the id " + id);
 	for(var i = 0; i < powerUpTree[id].length; i++){
 		document.getElementById(powerUpTree[id][i]).className = "upgrade-node visible";
 	}
@@ -115,8 +123,8 @@ function newUpgrade(newMove){
 				spendSkillPoints(1);
 				powerUpMoveList = powerUpMoveList.filter(function(e) { return e !== newMove });
 				powerUpsAchieved.push(newMove);
-				console.log(powerUpsAchieved);
-				console.log(powerUpMoveList);
+				console.log("powerups achieed " + powerUpsAchieved);
+				console.log("powerup list of not achieved " + powerUpMoveList);
 				break;
 			}
     }
