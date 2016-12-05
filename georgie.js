@@ -18,7 +18,8 @@ var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathr
 var powerUpsAchieved = [];
 
 var powerUpTree = {
-	"upgrade-clever-george":["upgrade-squint", "upgrade-bathrooms2"]
+	"upgrade-clever-george": ["upgrade-squint", "upgrade-bathrooms2"],
+	"upgrade-bathrooms2":    ["upgrade-bathrooms3"]
 };
 
 //function to handle all clicks
@@ -70,8 +71,6 @@ function upgrade(name, number){
 	}
 	else if(name == "bathrooms2"){
 		bathroomPower = 1;
-		powerUpTree["upgrade-clever-george"].push("upgrade-bathrooms3");
-		console.log("test to see if its pushed " + powerUpTree["upgrade-clever-george"][2]);
 	}
 	else if(name == "bathrooms3"){
 		bathroomPower = 2.5;
