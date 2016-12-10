@@ -55,9 +55,11 @@ function spendSkillPoints(amount){
 	skillPoints -= amount;
 	document.getElementById("skill-points").innerText = skillPoints;
 }
+
 function clever(){
 	console.log("whhhat");
 }
+
 function upgrade(name, number){
 	var powerName = "powerup-" + name;
 
@@ -96,18 +98,20 @@ function upgrade(name, number){
 }
 
 function upgradable(element){
-	if(element.className == "upgrade-node visible" && skillPoints > 0){
+	if(element.className != "upgrade-node disabled" && skillPoints > 0){
 		return true;
 	}
 	return false;
 }
 
 function unlockChildren(element){
+	element.className = "upgrade-node visible";
+
 	var id = element.id;
 	id = String(id);
 	console.log("this should be the id " + id);
 	for(var i = 0; i < powerUpTree[id].length; i++){
-		document.getElementById(powerUpTree[id][i]).className = "upgrade-node visible";
+		document.getElementById(powerUpTree[id][i]).className = "upgrade-node available";
 	}
 }
 
