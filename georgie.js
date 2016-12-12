@@ -179,3 +179,9 @@ function togglePanel(){
 }
 
 setInterval(gameTick, 50);
+
+function keyPressed(event){
+	if(event.which == 32){
+		togglePanel();
+	}
+}
