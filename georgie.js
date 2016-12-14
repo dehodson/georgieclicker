@@ -10,6 +10,7 @@ var amountOfBathrooms = 0;
 var bathroomPower = 0.5;
 var angerLevel = 0;
 var twixTimer  = 0;
+
 var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
@@ -112,7 +113,8 @@ function upgrade(name, number){
 //parts for dishonest branch power ups
 
 	else if(name == "dishonest"){
-		clickPower = 1000 * number;
+		clickPower = 1000* number;
+		// TODO add random amount of clicks every 10 seconds
 // above is test code.
 //need to add in the actual logic behind this move.
 	}
