@@ -254,7 +254,7 @@
 				<div class="upgrade-node visible" id="upgrade-basic-george" style="top:0px;left:220px;background-image:url('pictures/upgrades/basicGeorge.png');"><span class="upgrade-tooltip">Basic George<br /><span class="tooltip-description">Your everyday George Costanza.</span></span></div>
 
 <!-- this is the clever george branch -->
-				<div class="upgrade-node available" id="upgrade-clever-george" style="top:60px;left:60px;background-image:url('pictures/upgrades/cleverGeorge.png');""  onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms'); unlockChildren(this);}"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
+				<div class="upgrade-node available" id="upgrade-clever-george" style="top:60px;left:60px;background-image:url('pictures/upgrades/cleverGeorge.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms'); unlockChildren(this);}"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-squint"       style="top:130px;left:10px;background-image:url('pictures/upgrades/squint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-squint'); upgrade('squint', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Squint<br /><span class="tooltip-description">Squint down to 20/20 to see more accurately.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-super-squint"   style="top:200px;left:10px;" onclick="if(upgradable(this)){newUpgrade('powerup-super-squint'); upgrade('super-squint', 1);}"><span class="upgrade-tooltip">Super Squint<br /><span class="tooltip-description">George is squinting as hard as he can.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-bathrooms2"   style="top:130px;left:85px;background-image:url('pictures/upgrades/betterBathrooms.png');" onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms2'); upgrade('bathrooms2', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Better Bathrooms<br /><span class="tooltip-description">George has picked out some real choice locations.</span></span></div>
@@ -262,8 +262,9 @@
 
 
 <!--  this is the angry george branch-->
-				<div class="upgrade-node available" id="upgrade-angry-george"  style="top:60px;left:220px;background-image:url('pictures/upgrades/angryGeorge.png');" onclick="if(upgradable(this)){newUpgrade('powerup-upset');}"><span class="upgrade-tooltip">Angry George<br /><span class="tooltip-description">The path of Angry George.</span></span></div>
-
+				<div class="upgrade-node available" id="upgrade-angry-george"  style="top:60px;left:220px;background-image:url('pictures/upgrades/angryGeorge.png');" onclick="if(upgradable(this)){newUpgrade('powerup-upset'); unlockChildren(this);}"><span class="upgrade-tooltip">Angry George<br /><span class="tooltip-description">The path of Angry George.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-twix"           style="top:130px;left:180px;background-image:url('pictures/upgrades/squint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-twix');}"><span class="upgrade-tooltip">Twix<br /><span class="tooltip-description">Someone ate George's last Twix. He's pretty pissed.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-shrinkage"      style="top:130px;left:255px;background-image:url('pictures/upgrades/squint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-shrinkage');}"><span class="upgrade-tooltip">Shrinkage<br /><span class="tooltip-description">George just got out of the pool and he's feeling mad.</span></span></div>
 
 
 <!--  this is the dishonest george branch-->
@@ -318,6 +319,18 @@
 			<div class="powerup-title">George Is Getting Upset</div>
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
 			<div class="powerup-info">Price: $<span id="powerup-upset-price">100</span> Anger level: <span id="powerup-upset-number">0</span>%</div>
+		</div>
+		<div class="powerup" id="powerup-twix" style="display: none;">
+			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('twix', 1);">
+			<div class="powerup-title">Twix</div>
+			<div class="powerup-description">If you eat George's last Twix, he'll get so mad he can't help but click.</div>
+			<div class="powerup-info">Price: $<span id="powerup-twix-price">50</span> Twix timer: <span id="powerup-twix-number">0</span></div>
+		</div>
+		<div class="powerup" id="powerup-shrinkage" style="display: none;">
+			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('shrinkage', 10);">
+			<div class="powerup-title">Shrinkage</div>
+			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
+			<div class="powerup-info">Price: $<span id="powerup-shrinkage-price">100</span> Anger level: <span id="powerup-shrinkage-number">0</span>%</div>
 		</div>
 	</div>
 
