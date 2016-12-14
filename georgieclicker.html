@@ -268,7 +268,9 @@
 
 
 <!--  this is the dishonest george branch-->
-				<div class="upgrade-node available" id="upgrade-dishonest-george" style="top:60px;left:380px;"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
+				<div class="upgrade-node available" id="upgrade-dishonest-george" style="top:60px;left:380px;" onclick="if(upgradable(this)){newUpgrade('powerup-dishonest'); upgrade('dishonest', 1)}"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-cashmere" style="top:120px;left:330px;"  onclick="if(upgradable(this)){newUpgrade('powerup-cashmere'); unlockChildren(this);}"><span class="upgrade-tooltip">Cashmere Sweater Present<br /><span class="tooltip-description">What red dot? There is barely anything there!</span></span></div>
+
 			</div>
 		</div>
 	</div>
@@ -320,6 +322,12 @@
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
 			<div class="powerup-info">Price: $<span id="powerup-upset-price">100</span> Anger level: <span id="powerup-upset-number">0</span>%</div>
 		</div>
+		<div class="powerup" id="powerup-dishonest" style="display: none;">
+			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeDishonest">
+			<div class="powerup-title">George Is Lying</div>
+			<div class="powerup-description">George is falsifying his click amount.</div>
+			<div class="powerup-info">PASSIVE - Better Clicks</div>
+
 		<div class="powerup" id="powerup-twix" style="display: none;">
 			<img class="imgButton" id="powerUpButton" src="pictures/twix.png" alt="georgeUpset" onclick="upgrade('twix', 1);">
 			<div class="powerup-title">Twix</div>
