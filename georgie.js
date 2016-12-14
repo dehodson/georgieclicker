@@ -13,14 +13,14 @@ var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
 var skillPoints = 0;
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-cashmere", "powerup-dishonest"];
 
 var powerUpsAchieved = [];
 
 var powerUpTree = {
 	"upgrade-clever-george": ["upgrade-squint", "upgrade-bathrooms2"],
 	"upgrade-bathrooms2":    ["upgrade-bathrooms3"],
-	"upgrade-squint":        ["upgrade-super-squint"] 
+	"upgrade-squint":        ["upgrade-super-squint"]
 };
 
 //function to handle all clicks
@@ -79,18 +79,13 @@ function upgrade(name, number){
 		bathroomPower = 2.5;
 	}
 	else if(name == "squint"){
-		var index, value, result;
-		for (index = 0; index < powerUpsAchieved.length; index++) {
-    	value = powerUpsAchieved[index];
-    	if (value == powerName) {
-				clickPower = 5 * number;
-				break;
-			}
-    	}
+		clickPower = 5 * number;
 	}
 	else if(name == "super-squint"){
 		clickPower = 10 * number;
 	}
+
+	//parts for upset george
 	else if(name == "upset"){
 		if(angerLevel < 91 && playerCash >= 10 * (angerLevel + 10)){
 			angerLevel = angerLevel + number;
@@ -98,6 +93,20 @@ function upgrade(name, number){
 			document.getElementById(powerName + "-price").innerText = 10 * (angerLevel + 10);
 			spendCash(10 * angerLevel);
 		}
+	}
+
+
+
+
+
+
+
+	else if(name == "dishonest"){
+		clickPower = 1000 * number;
+// above is test code.
+//need to add in the actual logic behind this move. 
+
+
 	}
 }
 
