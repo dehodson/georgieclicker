@@ -24,7 +24,8 @@ var powerUpTree = {
 	"upgrade-clever-george": ["upgrade-squint", "upgrade-bathrooms2"],
 	"upgrade-bathrooms2":    ["upgrade-bathrooms3"],
 	"upgrade-squint":        ["upgrade-super-squint"],
-	"upgrade-angry-george":  ["upgrade-twix", "upgrade-shrinkage"]
+	"upgrade-angry-george":  ["upgrade-twix", "upgrade-shrinkage"],
+	"upgrade-dishonest-george":	["upgrade-cashmere"]
 };
 
 //function to handle all clicks
@@ -107,10 +108,18 @@ function upgrade(name, number){
 
 	}
 
+
+//parts for dishonest branch power ups
+
 	else if(name == "dishonest"){
 		clickPower = 1000 * number;
 // above is test code.
 //need to add in the actual logic behind this move.
+	}
+
+	else if (name == "cashmere"){
+		clickPower = 1000* number;
+		//the above is test code the logic will need changed
 	}
 
 }

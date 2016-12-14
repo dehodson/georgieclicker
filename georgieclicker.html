@@ -268,7 +268,7 @@
 
 
 <!--  this is the dishonest george branch-->
-				<div class="upgrade-node available" id="upgrade-dishonest-george" style="top:60px;left:380px;" onclick="if(upgradable(this)){newUpgrade('powerup-dishonest'); upgrade('dishonest', 1)}"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
+				<div class="upgrade-node available" id="upgrade-dishonest-george" style="top:60px;left:380px;" onclick="if(upgradable(this)){newUpgrade('powerup-dishonest'); upgrade('dishonest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-cashmere" style="top:120px;left:330px;"  onclick="if(upgradable(this)){newUpgrade('powerup-cashmere'); unlockChildren(this);}"><span class="upgrade-tooltip">Cashmere Sweater Present<br /><span class="tooltip-description">What red dot? There is barely anything there!</span></span></div>
 
 			</div>
@@ -276,70 +276,88 @@
 	</div>
 
 	<div class="rightSideContain">
+
+		<!-- clever george branch powerups -->
+
 		<div class="powerup" id="powerup-bathrooms" style="display: none;">
-			<div class="powerup-main">
 				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="upgrade('bathrooms', 1);">
 				<div class="powerup-title">Luxury Bathrooms</div>
 				<div class="powerup-description">George's knowledge of the best bathrooms is paying off.</div>
-			</div>
-			<div class="powerup-info">Price: $<span id="powerup-bathrooms-price">10</span> Amount owned: <span id="powerup-bathrooms-number">0</span>/20</div>
+				<div class="powerup-info">Price: $<span id="powerup-bathrooms-price">10</span> Amount owned: <span id="powerup-bathrooms-number">0</span>/20</div>
 		</div>
+
 		<div class="powerup" id="powerup-bathrooms2" style="display: none;">
-			<div class="powerup-main">
 				<img class="imgButton" id="powerUpButton" src="pictures/toilet2.png" alt="toilet">
 				<div class="powerup-title">Better Bathrooms</div>
 				<div class="powerup-description">George's bathroom skills have reached a whole new level.</div>
-			</div>
-			<div class="powerup-info">PASSIVE - bathroom clicks x 2</div>
+				<div class="powerup-info">PASSIVE - bathroom clicks x 2</div>
 		</div>
+
 		<div class="powerup" id="powerup-bathrooms3" style="display: none;">
-			<div class="powerup-main">
 				<img class="imgButton" id="powerUpButton" src="pictures/toilet3.png" alt="toilet">
 				<div class="powerup-title">Golden Bathrooms</div>
 				<div class="powerup-description">The royal flusher. whooooosh baby.</div>
-			</div>
-			<div class="powerup-info">PASSIVE - bathroom clicks x 5</div>
+				<div class="powerup-info">PASSIVE - bathroom clicks x 5</div>
 		</div>
+
 		<div class="powerup" id="powerup-squint" style="display: none;">
-			<div class="powerup-main">
 				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="squint" >
 				<div class="powerup-title">Squint</div>
 				<div class="powerup-description">Squinting George is clicking more accurately.</div>
-			</div>
-			<div class="powerup-info">PASSIVE - Better Clicks</div>
+				<div class="powerup-info">PASSIVE - Better Clicks</div>
 		</div>
+
 		<div class="powerup" id="powerup-super-squint" style="display: none;">
-			<div class="powerup-main">
 				<img class="imgButton" id="powerUpButton" src="pictures/toilet2.png" alt="squint" >
 				<div class="powerup-title">Super Squint</div>
 				<div class="powerup-description">George is squinting so hard, he can pick out raccoons on the side of the highway!</div>
-			</div>
-			<div class="powerup-info">PASSIVE - Better Clicks</div>
+				<div class="powerup-info">PASSIVE - Better Clicks</div>
 		</div>
+
+
+
+		<!--  George upset branch powerups-->
+
 		<div class="powerup" id="powerup-upset" style="display: none;">
 			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('upset', 10);">
 			<div class="powerup-title">George Is Getting Upset</div>
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
 			<div class="powerup-info">Price: $<span id="powerup-upset-price">100</span> Anger level: <span id="powerup-upset-number">0</span>%</div>
 		</div>
-		<div class="powerup" id="powerup-dishonest" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeDishonest">
-			<div class="powerup-title">George Is Lying</div>
-			<div class="powerup-description">George is falsifying his click amount.</div>
-			<div class="powerup-info">PASSIVE - Better Clicks</div>
-		</div>
+
 		<div class="powerup" id="powerup-twix" style="display: none;">
 			<img class="imgButton" id="powerUpButton" src="pictures/twix.png" alt="georgeUpset" onclick="upgrade('twix', 1);">
 			<div class="powerup-title">Twix</div>
 			<div class="powerup-description">If you eat George's last Twix, he'll get so mad he can't help but click.</div>
 			<div class="powerup-info">Price: $<span id="powerup-twix-price">50</span> Twix timer: <span id="powerup-twix-number">0</span></div>
 		</div>
+
 		<div class="powerup" id="powerup-shrinkage" style="display: none;">
 			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('shrinkage', 10);">
 			<div class="powerup-title">Shrinkage</div>
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
 			<div class="powerup-info">Price: $<span id="powerup-shrinkage-price">100</span> Anger level: <span id="powerup-shrinkage-number">0</span>%</div>
 		</div>
+
+
+
+		<!--  George dishonest branch power ups-->
+
+		<div class="powerup" id="powerup-dishonest" style="display: none;">
+			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeDishonest">
+			<div class="powerup-title">George Is Lying</div>
+			<div class="powerup-description">George is falsifying his click amount.</div>
+			<div class="powerup-info">PASSIVE - Better Clicks</div>
+		</div>
+
+		<div class="powerup" id="powerup-cashmere" style="display: none;">
+			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="cashmere">
+			<div class="powerup-title">Cashmere Sweater Present</div>
+			<div class="powerup-description">Here Elaine, this present is for you. Mind to help me click though?</div>
+			<div class="powerup-info">PASSIVE - Better Clicks</div>
+		</div>
+
+
 	</div>
 
 	<script src="georgie.js"></script>
