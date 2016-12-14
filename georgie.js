@@ -23,7 +23,7 @@ var powerUpsAchieved = [];
 var powerUpTree = {
 	"upgrade-clever-george": ["upgrade-squint", "upgrade-bathrooms2"],
 	"upgrade-bathrooms2":    ["upgrade-bathrooms3"],
-	"upgrade-squint":        ["upgrade-super-squint"]
+	"upgrade-squint":        ["upgrade-super-squint"],
 	"upgrade-angry-george":  ["upgrade-twix", "upgrade-shrinkage"]
 };
 
@@ -111,7 +111,7 @@ function upgrade(name, number){
 		clickPower = 1000 * number;
 // above is test code.
 //need to add in the actual logic behind this move.
-
+	}
 
 }
 
