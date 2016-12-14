@@ -9,11 +9,14 @@ var levelMult = 1;
 var amountOfBathrooms = 0;
 var bathroomPower = 0.5;
 var angerLevel = 0;
+var twixTimer  = 0;
 var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
 var skillPoints = 0;
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-cashmere", "powerup-dishonest"];
+
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere"];
+
 
 var powerUpsAchieved = [];
 
@@ -21,6 +24,7 @@ var powerUpTree = {
 	"upgrade-clever-george": ["upgrade-squint", "upgrade-bathrooms2"],
 	"upgrade-bathrooms2":    ["upgrade-bathrooms3"],
 	"upgrade-squint":        ["upgrade-super-squint"]
+	"upgrade-angry-george":  ["upgrade-twix", "upgrade-shrinkage"]
 };
 
 //function to handle all clicks
@@ -95,19 +99,20 @@ function upgrade(name, number){
 		}
 	}
 
+	else if(name == "twix"){
+		if(playerCash >= 50){
+			spendCash(50);
+			twixTimer += (60 * 20);
+		}
 
-
-
-
-
+	}
 
 	else if(name == "dishonest"){
 		clickPower = 1000 * number;
 // above is test code.
-//need to add in the actual logic behind this move. 
+//need to add in the actual logic behind this move.
 
 
-	}
 }
 
 function upgradable(element){
@@ -168,6 +173,12 @@ function gameTick(){
 
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
 	clicksPerSecond +=  .1 * angerLevel;
+
+	if(twixTimer > 0){
+		twixTimer -= 1;
+		clicksPerSecond *= 2;
+		document.getElementById("powerup-twix-number").innerText = Math.ceil(twixTimer / 20);
+	}
 
 	clickOnGeorge(clicksPerSecond);
 
