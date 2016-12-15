@@ -195,7 +195,7 @@ function gameTick(){
 		document.getElementById("powerup-twix-number").innerText = Math.ceil(twixTimer / 20);
 	}
 
-	if(Math.random() > .9 && isLaughing){
+	if(Math.random() > .99 && isLaughing){
 		laughing(true)
 	}
 
@@ -233,5 +233,6 @@ function laughing(bool){
 		element.style.visibility = "visible";
 	}else{
 		element.style.visibility = "hidden";
+		clickOnGeorge(totalClickAmount * 0.01);
 	}
 }
