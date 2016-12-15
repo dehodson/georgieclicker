@@ -10,11 +10,13 @@ var amountOfBathrooms = 0;
 var bathroomPower = 0.5;
 var angerLevel = 0;
 var twixTimer  = 0;
-
+var georgeLying = 0;
+var lyingClicks;
 var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
 var skillPoints = 0;
+var tenSecondTimer = 0;
 
 var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere"];
 
@@ -113,7 +115,7 @@ function upgrade(name, number){
 //parts for dishonest branch power ups
 
 	else if(name == "dishonest"){
-		clickPower = 1000* number;
+		georgeLying = 1;
 		// TODO add random amount of clicks every 10 seconds
 // above is test code.
 //need to add in the actual logic behind this move.
@@ -184,6 +186,18 @@ function gameTick(){
 
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
 	clicksPerSecond +=  .1 * angerLevel;
+	if(georgeLying > 0){
+		tenSecondTimer++;
+		document.getElementById("powerup-dishonest-number").innerText = Math.ceil(tenSecondTimer / 20) + "/10";
+		if(tenSecondTimer == 200){
+			var randMin = 100;
+			var randMax = 1500;
+			var lyingClicks = Math.floor(Math.random() * (randMax - randMin + 1)) + randMin;
+			clickOnGeorge(lyingClicks);
+			tenSecondTimer = 0;
+		}
+
+	}
 
 	if(twixTimer > 0){
 		twixTimer -= 1;
