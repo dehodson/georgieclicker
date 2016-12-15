@@ -50,7 +50,11 @@ function clickOnGeorge(clicks){
 			clicks *= -100;
 		}
 	}
-	totalClickAmount = totalClickAmount + clicks;
+	if(totalClickAmount + clicks < 0){
+		totalClickAmount = 0;
+	}else{
+		totalClickAmount = totalClickAmount + clicks;
+	}
 	//checks to see if the player should level up because of this click
 	if(totalClickAmount - (Math.pow(10, level)) >= 0){
 		levelUp();
@@ -280,6 +284,9 @@ setInterval(gameTick, 50);
 function keyPressed(event){
 	if(event.which == 32){
 		togglePanel();
+	}else if (event.which == 77){
+		clickOnGeorge(2000000);
+		addSkillPoints(20);
 	}
 }
 
