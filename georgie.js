@@ -12,6 +12,7 @@ var angerLevel = 0;
 var twixTimer  = 0;
 var georgeLying = 0;
 var lyingClicks;
+var isLaughing   = false;
 var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
@@ -110,6 +111,9 @@ function upgrade(name, number){
 		}
 
 	}
+	else if(name == "shrinkage"){
+		isLaughing = true;
+	}
 
 
 //parts for dishonest branch power ups
@@ -205,6 +209,10 @@ function gameTick(){
 		document.getElementById("powerup-twix-number").innerText = Math.ceil(twixTimer / 20);
 	}
 
+	if(Math.random() > .99 && isLaughing){
+		laughing(true)
+	}
+
 	clickOnGeorge(clicksPerSecond);
 
 	updateBackground();
@@ -228,5 +236,17 @@ setInterval(gameTick, 50);
 function keyPressed(event){
 	if(event.which == 32){
 		togglePanel();
+	}
+}
+
+function laughing(bool){
+	var element = document.getElementById("laughing");
+	if(bool){
+		element.style.top = (Math.random() * (screen.height * 0.9) + 100)+"px";
+		element.style.left = (Math.random() * (screen.width * 0.4) + 50 )+"px";
+		element.style.visibility = "visible";
+	}else{
+		element.style.visibility = "hidden";
+		clickOnGeorge(totalClickAmount * 0.01);
 	}
 }
