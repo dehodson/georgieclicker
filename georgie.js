@@ -17,7 +17,14 @@ var clickPower = 1;
 var backgroundX = 0.0;
 var backgroundY = 0.0;
 var skillPoints = 0;
-var tenSecondTimer = 0;
+var lyingSecondTimer = 0;
+var cashmereSecondTimer = 0;
+var elaineHelping = 0;
+var elaineClickPower;
+var elaineHelpCount;
+
+
+var cashmereSwitchCounter = 0;
 
 var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere"];
 
@@ -36,6 +43,12 @@ var powerUpTree = {
 function clickOnGeorge(clicks){
 	if(typeof clicks === 'undefined'){
 		clicks = clickPower;
+
+		if(elaineHelping == 1){
+			clicks *=  100;
+		}else if(elaineHelping == 2){
+			clicks *= -100;
+		}
 	}
 	totalClickAmount = totalClickAmount + clicks;
 	//checks to see if the player should level up because of this click
@@ -120,16 +133,38 @@ function upgrade(name, number){
 
 	else if(name == "dishonest"){
 		georgeLying = 1;
-		// TODO add random amount of clicks every 10 seconds
-// above is test code.
-//need to add in the actual logic behind this move.
+
 	}
 
 	else if (name == "cashmere"){
-		clickPower = 1000* number;
-		//the above is test code the logic will need changed
+
+		if (playerCash >= 200 && cashmereSwitchCounter%2 == 0){
+			elaineHelping = number;
+			spendCash(200);
+			cashmereSecondTimer += (10 * 20);
+
+			document.getElementById("cashmere-switch").style.visibility = "visible";
+		}
 	}
 
+
+
+}
+
+function powerupSwitch(powerup){
+
+	if(powerup == 'cashmere'){
+		cashmereSwitchCounter++
+		if(cashmereSwitchCounter%2 == 0){
+			document.getElementById("cashmere-button").innerText = "ON";
+			elaineHelping = 1;
+		}else{
+			document.getElementById("cashmere-button").innerText = "OFF";
+			document.getElementById("powerup-cashmere-number").innerText = "Placated";
+			elaineHelping = 0;
+		}
+
+	}
 }
 
 function upgradable(element){
@@ -191,16 +226,25 @@ function gameTick(){
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
 	clicksPerSecond +=  .1 * angerLevel;
 	if(georgeLying > 0){
-		tenSecondTimer++;
-		document.getElementById("powerup-dishonest-number").innerText = Math.ceil(tenSecondTimer / 20) + "/10";
-		if(tenSecondTimer == 200){
+		lyingSecondTimer++;
+		document.getElementById("powerup-dishonest-number").innerText = Math.ceil(lyingSecondTimer / 20) + "/10";
+		if(lyingSecondTimer == 200){
 			var randMin = 100;
 			var randMax = 1500;
 			var lyingClicks = Math.floor(Math.random() * (randMax - randMin + 1)) + randMin;
 			clickOnGeorge(lyingClicks);
-			tenSecondTimer = 0;
+			lyingSecondTimer = 0;
 		}
 
+	}
+
+	if(cashmereSecondTimer > 0 && elaineHelping == 1){
+		cashmereSecondTimer -=1;
+		document.getElementById("powerup-cashmere-number").innerText = "Happy for "+Math.ceil(cashmereSecondTimer / 20);
+	}else if(cashmereSecondTimer == 0 && elaineHelping == 1){
+		//clickPower = clickPower - elaineClickPower;
+		document.getElementById("powerup-cashmere-number").innerText = "Pissed";
+		elaineHelping = 2;
 	}
 
 	if(twixTimer > 0){
