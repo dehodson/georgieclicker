@@ -1,8 +1,5 @@
-
 //var cookieString = document.cookie;
 var totalClickAmount = 0;
-var luxuryBathroomClick;
-var georgeUpsetClick;
 var level = 1;
 var playerCash = 0;
 var levelMult = 1;
@@ -11,17 +8,13 @@ var bathroomPower = 0.5;
 var angerLevel = 0;
 var twixTimer  = 0;
 var georgeLying = 0;
-var lyingClicks;
 var isLaughing   = false;
 var clickPower = 1;
 var backgroundX = 0.0;
-var backgroundY = 0.0;
 var skillPoints = 0;
 var lyingSecondTimer = 0;
 var cashmereSecondTimer = 0;
 var elaineHelping = 0;
-var elaineClickPower;
-var elaineHelpCount;
 var golfBallX = 0.0;
 var golfBallY = 0.0;
 var newGolfBall = 0;
@@ -29,12 +22,9 @@ var golfBallActive = false;
 var golfBallTimer;
 var whaleX = 500;
 var whaleActive = false;
-
-
 var cashmereSwitchCounter = 0;
 
 var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio"];
-
 
 var powerUpsAchieved = [];
 
@@ -62,11 +52,12 @@ function clickOnGeorge(clicks){
 	}else{
 		totalClickAmount = totalClickAmount + clicks;
 	}
+
 	//checks to see if the player should level up because of this click
 	if(totalClickAmount - (Math.pow(10, level)) >= 0){
 		levelUp();
 	}
-	//document.cookie = "totalClickAmount = " + totalClickAmount;
+
 	document.getElementById("score").innerText = totalClickAmount.toFixed(0);
 }
 
@@ -88,10 +79,6 @@ function addSkillPoints(amount){
 function spendSkillPoints(amount){
 	skillPoints -= amount;
 	document.getElementById("skill-points").innerText = skillPoints;
-}
-
-function clever(){
-	console.log("whhhat");
 }
 
 function upgrade(name, number){
@@ -139,9 +126,7 @@ function upgrade(name, number){
 		isLaughing = true;
 	}
 
-
-//parts for dishonest branch power ups
-
+	//parts for dishonest branch power ups
 	else if(name == "dishonest"){
 		georgeLying = 1;
 
@@ -149,7 +134,7 @@ function upgrade(name, number){
 
 	else if (name == "cashmere"){
 
-		if (playerCash >= 200 && cashmereSwitchCounter%2 == 0){
+		if (playerCash >= 200 && cashmereSwitchCounter%2 === 0){
 			elaineHelping = number;
 			spendCash(200);
 			cashmereSecondTimer += (10 * 20);
@@ -172,7 +157,7 @@ function powerupSwitch(powerup){
 
 	if(powerup == 'cashmere'){
 		cashmereSwitchCounter++;
-		if(cashmereSwitchCounter%2 == 0){
+		if(cashmereSwitchCounter%2 === 0){
 			document.getElementById("cashmere-button").innerText = "ON";
 			elaineHelping = 1;
 		}else{
@@ -185,7 +170,7 @@ function powerupSwitch(powerup){
 }
 
 function upgradable(element){
-	if(element.className != "upgrade-node disabled" && skillPoints > 0){
+	if(element.className == "upgrade-node available" && skillPoints > 0){
 		return true;
 	}
 	return false;
@@ -203,20 +188,20 @@ function unlockChildren(element){
 }
 
 function newUpgrade(newMove){
-		var index, value, result;
+		var index, value;
 		for (index = 0; index < powerUpMoveList.length; index++) {
     	value = powerUpMoveList[index];
 			console.log("index value" + value);
 			console.log("move input" + newMove);
     	if (value == newMove && skillPoints > 0) {
-				document.getElementById(newMove).style.display = 'inline-block';
-				spendSkillPoints(1);
-				powerUpMoveList = powerUpMoveList.filter(function(e) { return e !== newMove });
-				powerUpsAchieved.push(newMove);
-				console.log("powerups achieed " + powerUpsAchieved);
-				console.log("powerup list of not achieved " + powerUpMoveList);
-				break;
-			}
+			document.getElementById(newMove).style.display = 'inline-block';
+			spendSkillPoints(1);
+			//powerUpMoveList = powerUpMoveList.filter(function(e) { return e !== newMove;});
+			powerUpsAchieved.push(newMove);
+			console.log("powerups achieed " + powerUpsAchieved);
+			console.log("powerup list of not achieved " + powerUpMoveList);
+			break;
+		}
     }
 }
 
@@ -230,7 +215,7 @@ function levelUp(){
 }
 
 function updateBackground(){
-	backgroundX += 1
+	backgroundX += 1;
 	if(backgroundX >= 250){
 		backgroundX = 0;
 	}
@@ -241,7 +226,8 @@ function gameTick(){
 	var clicksPerSecond = 0;
 
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
-	clicksPerSecond +=  .1 * angerLevel;
+	clicksPerSecond +=  0.1 * angerLevel;
+
 	if(georgeLying > 0){
 		lyingSecondTimer++;
 		document.getElementById("powerup-dishonest-number").innerText = Math.ceil(lyingSecondTimer / 20) + "/10";
@@ -259,7 +245,7 @@ function gameTick(){
 		golfBallTimer -= 1;
 		document.getElementById("powerup-whaleBio-number").innerText = "FORRREE! "+Math.ceil(golfBallTimer / 20);
 	}
-	if(golfBallTimer == 0){
+	if(golfBallTimer === 0){
 		newGolfBall = true;
 		console.log("test");
 		golfBallTimer = 20*20;
@@ -269,12 +255,10 @@ function gameTick(){
 		golfBall();
 	}
 
-
-
 	if(cashmereSecondTimer > 0 && elaineHelping == 1){
 		cashmereSecondTimer -=1;
 		document.getElementById("powerup-cashmere-number").innerText = "Happy for "+Math.ceil(cashmereSecondTimer / 20);
-	}else if(cashmereSecondTimer == 0 && elaineHelping == 1){
+	}else if(cashmereSecondTimer === 0 && elaineHelping == 1){
 		//clickPower = clickPower - elaineClickPower;
 		document.getElementById("powerup-cashmere-number").innerText = "Pissed";
 		elaineHelping = 2;
@@ -286,8 +270,8 @@ function gameTick(){
 		document.getElementById("powerup-twix-number").innerText = Math.ceil(twixTimer / 20);
 	}
 
-	if(Math.random() > .99 && isLaughing){
-		laughing(true)
+	if(Math.random() > 0.99 && isLaughing){
+		laughing(true);
 	}
 
 	clickOnGeorge(clicksPerSecond);
@@ -296,16 +280,16 @@ function gameTick(){
 }
 
 function togglePanel(){
-  var panel = document.getElementById("upgrade-panel");
+	var panel = document.getElementById("upgrade-panel");
 
-  if(panel.className == "open"){
-    panel.className = "closed";
-		document.getElementById("upgrade-panel-closetext").style.visibility = "hidden"
+	if(panel.className == "open"){
+		panel.className = "closed";
+		document.getElementById("upgrade-panel-closetext").style.visibility = "hidden";
 
-  }else{
-    panel.className = "open";
-		setTimeout(function(){document.getElementById("upgrade-panel-closetext").style.visibility = "visible"}, 150);
-  }
+	}else{
+		panel.className = "open";
+		setTimeout(function(){document.getElementById("upgrade-panel-closetext").style.visibility = "visible";}, 150);
+	}
 }
 
 setInterval(gameTick, 50);
@@ -313,15 +297,17 @@ setInterval(gameTick, 50);
 function keyPressed(event){
 	if(event.which == 32){
 		togglePanel();
+
 	}else if (event.which == 77){
 		clickOnGeorge(2000000);
 		addSkillPoints(20);
+
 	}else if (event.which == 37){
-		// move whale left
 		whaleMove("left");
+
 	}else if( event.which == 39){
-		//move whale right
 		whaleMove("right");
+		
 	}
 }
 
@@ -349,8 +335,6 @@ function whaleMove(direction){
 		element.style.left = whaleX + "px";
 		element.className  = "flip";
 	}
-
-
 }
 
 function golfBall(){
@@ -366,14 +350,14 @@ function golfBall(){
                 rect1.top > rect2.bottom);
 
 	element.style.visibility = "visible";
-	if(newGolfBall == true){
+	if(newGolfBall === true){
 		golfBallX = (Math.random() * (screen.width * 0.4) + 50 );
 		golfBallY = 0;
 		newGolfBall = false;
 	}
 
 	if(!newGolfBall){
-		golfBallY += 10
+		golfBallY += 10;
 		element.style.left = golfBallX + "px";
 		element.style.top = golfBallY + "px";
 		if(golfBallY >= 1000){
