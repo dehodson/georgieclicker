@@ -171,7 +171,7 @@ function upgrade(name, number){
 function powerupSwitch(powerup){
 
 	if(powerup == 'cashmere'){
-		cashmereSwitchCounter++
+		cashmereSwitchCounter++;
 		if(cashmereSwitchCounter%2 == 0){
 			document.getElementById("cashmere-button").innerText = "ON";
 			elaineHelping = 1;
@@ -262,7 +262,7 @@ function gameTick(){
 	if(golfBallTimer == 0){
 		newGolfBall = true;
 		console.log("test");
-		golfBallTimer = 45*20;
+		golfBallTimer = 20*20;
 		golfBallActive = true;
 	}
 	if (golfBallActive){
@@ -342,10 +342,12 @@ function whaleMove(direction){
 	if(direction == "left"){
 		whaleX -= 15;
 		element.style.left = whaleX + "px";
+		element.className  = "";
 	}
 	else if(direction == "right"){
 		whaleX += 15;
 		element.style.left = whaleX + "px";
+		element.className  = "flip";
 	}
 
 
@@ -353,10 +355,19 @@ function whaleMove(direction){
 
 function golfBall(){
 	var element = document.getElementById("golfball");
+	var whale   = document.getElementById("whale");
+
+	var rect1 = element.getBoundingClientRect();
+	var rect2 = whale.getBoundingClientRect();
+
+	var overlap = !(rect1.right < rect2.left || 
+                rect1.left > rect2.right || 
+                rect1.bottom < rect2.top || 
+                rect1.top > rect2.bottom);
+
 	element.style.visibility = "visible";
 	if(newGolfBall == true){
 		golfBallX = (Math.random() * (screen.width * 0.4) + 50 );
-		var golfBallXString = golfBallX;
 		golfBallY = 0;
 		newGolfBall = false;
 	}
@@ -371,12 +382,11 @@ function golfBall(){
 			newGolfBall = true;
 		}
 	}
-	if(golfBallX > whaleX - 30 && whaleX + 120 > golfBallX && golfBallY == 750){
+	if(overlap){
 		//clickOnGeorge(1000);
 		addCash(500);
 		element.style.visibility = "hidden";
 		golfBallActive = false;
 		newGolfBall = true;
-
 	}
 }

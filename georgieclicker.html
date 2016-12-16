@@ -257,6 +257,14 @@
 			bottom: 30px;
 			left:500px;
 		}
+		#whale.flip{
+		    -moz-transform: scaleX(-1);
+		    -webkit-transform: scaleX(-1);
+		    -o-transform: scaleX(-1);
+		    transform: scaleX(-1);
+		    -ms-filter: fliph; /*IE*/
+		    filter: fliph; /*IE*/
+		}
 		.powerup-switch{
 			position: absolute;
 			visibility: hidden;
@@ -397,7 +405,7 @@
 		<div class="powerup" id="powerup-whaleBio" style="display: none;">
 			<img class="imgButton" id="powerUpButton" src="pictures/georgeMarine.png" alt="whaleBio">
 			<div class="powerup-title">Whale Biologist</div>
-			<div class="powerup-description">You had to tell her I was a Whale Biologoist?</div>
+			<div class="powerup-description">You had to tell her I was a Whale Biologist?</div>
 			<div class="powerup-info"><span id="powerup-whaleBio-number">0</span></div>
 		</div>
 
