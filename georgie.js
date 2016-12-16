@@ -22,11 +22,18 @@ var cashmereSecondTimer = 0;
 var elaineHelping = 0;
 var elaineClickPower;
 var elaineHelpCount;
+var golfBallX = 0.0;
+var golfBallY = 0.0;
+var newGolfBall = 0;
+var golfBallActive = false;
+var golfBallTimer;
+var whaleX = 500;
+var whaleActive = false;
 
 
 var cashmereSwitchCounter = 0;
 
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio"];
 
 
 var powerUpsAchieved = [];
@@ -36,7 +43,7 @@ var powerUpTree = {
 	"upgrade-bathrooms2":    ["upgrade-bathrooms3"],
 	"upgrade-squint":        ["upgrade-super-squint"],
 	"upgrade-angry-george":  ["upgrade-twix", "upgrade-shrinkage"],
-	"upgrade-dishonest-george":	["upgrade-cashmere"]
+	"upgrade-dishonest-george":	["upgrade-cashmere", "upgrade-whaleBio"]
 };
 
 //function to handle all clicks
@@ -151,6 +158,12 @@ function upgrade(name, number){
 		}
 	}
 
+	else if(name == "whaleBio"){
+		golfBallTimer = 20;
+		whaleActive = true;
+
+	}
+
 
 
 }
@@ -239,8 +252,24 @@ function gameTick(){
 			clickOnGeorge(lyingClicks);
 			lyingSecondTimer = 0;
 		}
-
 	}
+
+	if(whaleActive){
+		document.getElementById("whale").style.visibility = "visible";
+		golfBallTimer -= 1;
+		document.getElementById("powerup-whaleBio-number").innerText = "FORRREE! "+Math.ceil(golfBallTimer / 20);
+	}
+	if(golfBallTimer == 0){
+		newGolfBall = true;
+		console.log("test");
+		golfBallTimer = 45*20;
+		golfBallActive = true;
+	}
+	if (golfBallActive){
+		golfBall();
+	}
+
+
 
 	if(cashmereSecondTimer > 0 && elaineHelping == 1){
 		cashmereSecondTimer -=1;
@@ -287,6 +316,12 @@ function keyPressed(event){
 	}else if (event.which == 77){
 		clickOnGeorge(2000000);
 		addSkillPoints(20);
+	}else if (event.which == 37){
+		// move whale left
+		whaleMove("left");
+	}else if( event.which == 39){
+		//move whale right
+		whaleMove("right");
 	}
 }
 
@@ -299,5 +334,49 @@ function laughing(bool){
 	}else{
 		element.style.visibility = "hidden";
 		clickOnGeorge(totalClickAmount * 0.01);
+	}
+}
+
+function whaleMove(direction){
+	var element = document.getElementById("whale");
+	if(direction == "left"){
+		whaleX -= 15;
+		element.style.left = whaleX + "px";
+	}
+	else if(direction == "right"){
+		whaleX += 15;
+		element.style.left = whaleX + "px";
+	}
+
+
+}
+
+function golfBall(){
+	var element = document.getElementById("golfball");
+	element.style.visibility = "visible";
+	if(newGolfBall == true){
+		golfBallX = (Math.random() * (screen.width * 0.4) + 50 );
+		var golfBallXString = golfBallX;
+		golfBallY = 0;
+		newGolfBall = false;
+	}
+
+	if(!newGolfBall){
+		golfBallY += 10
+		element.style.left = golfBallX + "px";
+		element.style.top = golfBallY + "px";
+		if(golfBallY >= 1000){
+			element.style.visibility = "hidden";
+			golfBallActive = false;
+			newGolfBall = true;
+		}
+	}
+	if(golfBallX > whaleX - 30 && whaleX + 120 > golfBallX && golfBallY == 750){
+		//clickOnGeorge(1000);
+		addCash(500);
+		element.style.visibility = "hidden";
+		golfBallActive = false;
+		newGolfBall = true;
+
 	}
 }
