@@ -23,6 +23,8 @@ var golfBallTimer;
 var whaleX = 500;
 var whaleActive = false;
 var cashmereSwitchCounter = 0;
+var contestCounter = 0;
+var contestActive  = false;
 
 var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest"];
 
@@ -46,6 +48,10 @@ function clickOnGeorge(clicks){
 			clicks *=  100;
 		}else if(elaineHelping == 2){
 			clicks *= -100;
+		}
+
+		if(contestActive){
+			contestCounter = 60 * 20;
 		}
 	}
 	if(totalClickAmount + clicks < 0){
@@ -150,7 +156,10 @@ function upgrade(name, number){
 
 	}
 
-
+	else if(name == "contest"){
+		contestActive  = true;
+		contestCounter = 60 * 20;
+	}
 
 }
 
@@ -269,6 +278,14 @@ function gameTick(){
 		twixTimer -= 1;
 		clicksPerSecond *= 2;
 		document.getElementById("powerup-twix-number").innerText = Math.ceil(twixTimer / 20);
+	}
+
+	if(contestActive && contestCounter > 0){
+		contestCounter -= 1;
+		document.getElementById("powerup-contest-number").innerText = Math.ceil(contestCounter / 20);
+	}else if(contestActive && contestCounter == 0){
+		contestCounter = 60 * 20;
+		addCash(100);
 	}
 
 	if(Math.random() > 0.99 && isLaughing){
