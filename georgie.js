@@ -92,7 +92,7 @@ function upgrade(name, number){
 	var powerName = "powerup-" + name;
 
 	if(name == "bathrooms"){
-		if(amountOfBathrooms < 20 && playerCash >= 10 * (amountOfBathrooms + 1)){
+		if(playerCash >= 10 * (amountOfBathrooms + 1)){
 			amountOfBathrooms = amountOfBathrooms + number;
 			document.getElementById(powerName + "-number").innerText = amountOfBathrooms;
 			document.getElementById(powerName + "-price").innerText = 10 * (amountOfBathrooms + 1);
