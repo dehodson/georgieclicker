@@ -314,7 +314,8 @@
 <!--  this is the dishonest george branch-->
 				<div class="upgrade-node available" id="upgrade-dishonest-george" style="top:60px;left:380px;background-image:url('pictures/upgrades/lieGeorge.png');" onclick="if(upgradable(this)){newUpgrade('powerup-dishonest'); upgrade('dishonest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-cashmere" style="top:130px;left:350px;background-image:url('pictures/upgrades/.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-cashmere'); unlockChildren(this);}"><span class="upgrade-tooltip">Cashmere Sweater<br /><span class="tooltip-description">What red dot? There is barely anything there!</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-whaleBio" style="top:130px;left:450px;background-image:url('pictures/upgrades/.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-whaleBio'); upgrade('whaleBio', 1);unlockChildren(this);}"><span class="upgrade-tooltip">Whale Biologist<br /><span class="tooltip-description">It was a hole in one I tell you.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-whaleBio" style="top:130px;left:425px;background-image:url('pictures/upgrades/.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-whaleBio'); upgrade('whaleBio', 1);unlockChildren(this);}"><span class="upgrade-tooltip">Whale Biologist<br /><span class="tooltip-description">It was a hole in one I tell you.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-contest"  style="top:200px;left:425px;background-image:url('pictures/upgrades/.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-contest'); upgrade('contest', 1);unlockChildren(this);}"><span class="upgrade-tooltip">The Contest<br /><span class="tooltip-description">I'm the master of my domain.</span></span></div>
 			</div>
 		</div>
 	</div>
@@ -407,6 +408,13 @@
 			<div class="powerup-title">Whale Biologist</div>
 			<div class="powerup-description">You had to tell her I was a Whale Biologist?</div>
 			<div class="powerup-info"><span id="powerup-whaleBio-number">0</span></div>
+		</div>
+
+		<div class="powerup" id="powerup-contest" style="display: none;">
+			<img class="imgButton" id="powerUpButton" src="pictures/georgeMarine.png" alt="contest">
+			<div class="powerup-title">The Contest</div>
+			<div class="powerup-description">If George can just hold out for a little while, he can win some money.</div>
+			<div class="powerup-info"><span id="powerup-contest-number">0</span></div>
 		</div>
 
 
