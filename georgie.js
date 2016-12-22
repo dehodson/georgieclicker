@@ -117,7 +117,7 @@ function upgrade(name, number){
 
 	//parts for upset george
 	else if(name == "upset"){
-		if(angerLevel < 91 && playerCash >= 10 * (angerLevel + 10)){
+		if((parentLevel == 3 || angerLevel < parentLevel * 100) && playerCash >= 10 * (angerLevel + 10)){
 			angerLevel = angerLevel + number;
 			document.getElementById(powerName + "-number").innerText = angerLevel;
 			document.getElementById(powerName + "-price").innerText = 10 * (angerLevel + 10);
@@ -134,6 +134,9 @@ function upgrade(name, number){
 	}
 	else if(name == "shrinkage"){
 		isLaughing = true;
+	}
+	else if(name == "parents"){
+		parentLevel = number;
 	}
 
 	//parts for dishonest branch power ups
@@ -239,7 +242,7 @@ function gameTick(){
 	var clicksPerSecond = 0;
 
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
-	clicksPerSecond +=  0.1 * angerLevel;
+	clicksPerSecond +=  (0.1 * (parentLevel * parentLevel)) * angerLevel;
 
 	if(georgeLying > 0){
 		lyingSecondTimer++;
@@ -322,6 +325,7 @@ function keyPressed(event){
 	}else if (event.which == 77){
 		clickOnGeorge(2000000);
 		addSkillPoints(20);
+		addCash(1000);
 
 	}else if (event.which == 37){
 		whaleMove("left");
