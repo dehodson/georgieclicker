@@ -307,8 +307,10 @@
 
 <!--  this is the angry george branch-->
 				<div class="upgrade-node available" id="upgrade-angry-george"  style="top:60px;left:220px;background-image:url('pictures/upgrades/angryGeorge.png');" onclick="if(upgradable(this)){newUpgrade('powerup-upset'); unlockChildren(this);}"><span class="upgrade-tooltip">Angry George<br /><span class="tooltip-description">The path of Angry George.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-twix"           style="top:130px;left:180px;background-image:url('pictures/upgrades/twix.png');" onclick="if(upgradable(this)){newUpgrade('powerup-twix'); unlockChildren(this);}"><span class="upgrade-tooltip">Twix<br /><span class="tooltip-description">Someone ate George's last Twix. He's pretty pissed.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-shrinkage"      style="top:130px;left:255px;background-image:url('pictures/upgrades/shrinkage.png');" onclick="if(upgradable(this)){newUpgrade('powerup-shrinkage'); upgrade('shrinkage', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Shrinkage<br /><span class="tooltip-description">George just got out of the pool and he's feeling mad.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-twix"           style="top:130px;left:255px;background-image:url('pictures/upgrades/twix.png');" onclick="if(upgradable(this)){newUpgrade('powerup-twix'); unlockChildren(this);}"><span class="upgrade-tooltip">Twix<br /><span class="tooltip-description">Someone ate George's last Twix. He's pretty pissed.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-shrinkage"      style="top:200px;left:255px;background-image:url('pictures/upgrades/shrinkage.png');" onclick="if(upgradable(this)){newUpgrade('powerup-shrinkage'); upgrade('shrinkage', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Shrinkage<br /><span class="tooltip-description">George just got out of the pool and he's feeling mad.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-dad"            style="top:130px;left:180px;background-image:url('pictures/upgrades/twix.png');" onclick="if(upgradable(this)){newUpgrade('powerup-dad'); unlockChildren(this); upgrade('parents', 2)}"><span class="upgrade-tooltip">George's Dad<br /><span class="tooltip-description">Being around his dad doesn't really help George's temper.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-mom"            style="top:200px;left:180px;background-image:url('pictures/upgrades/shrinkage.png');" onclick="if(upgradable(this)){newUpgrade('powerup-mom'); upgrade('parents', 3); unlockChildren(this);}"><span class="upgrade-tooltip">George's Mom<br /><span class="tooltip-description">When George's mom is around, his anger knows no bounds.</span></span></div>
 
 
 <!--  this is the dishonest george branch-->
@@ -383,6 +385,21 @@
 			<div class="powerup-description">There has been a misunderstanding. George was just in the pool, it shrank!</div>
 			<div class="powerup-info">PASSIVE - Laughing women.</div>
 		</div>
+
+		<div class="powerup" id="powerup-dad" style="display: none;">
+			<img class="imgButton" id="powerUpButton" src="pictures/twix.png" alt="georgeUpset" onclick="upgrade('twix', 1);">
+			<div class="powerup-title">Frank Costanza</div>
+			<div class="powerup-description">George's dad really gets under his skin.</div>
+			<div class="powerup-info">PASSIVE - George gets twice as angry.</div>
+		</div>
+
+		<div class="powerup" id="powerup-mom" style="display: none;">
+			<img class="imgButton" id="powerUpButton" src="pictures/georgeShrunk.png" alt="georgeUpset" onclick="upgrade('shrinkage', 10);">
+			<div class="powerup-title">Estelle Costanza</div>
+			<div class="powerup-description">George's mom gets him furious.</div>
+			<div class="powerup-info">PASSIVE - George's anger is unlimited.</div>
+		</div>
+
 
 
 

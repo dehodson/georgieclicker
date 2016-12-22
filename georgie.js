@@ -25,8 +25,9 @@ var whaleActive = false;
 var cashmereSwitchCounter = 0;
 var contestCounter = 0;
 var contestActive  = false;
+var parentLevel = 1;
 
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad"];
 
 var powerUpsAchieved = [];
 
@@ -34,7 +35,9 @@ var powerUpTree = {
 	"upgrade-clever-george":    ["upgrade-squint", "upgrade-bathrooms2"],
 	"upgrade-bathrooms2":       ["upgrade-bathrooms3"],
 	"upgrade-squint":           ["upgrade-super-squint"],
-	"upgrade-angry-george":     ["upgrade-twix", "upgrade-shrinkage"],
+	"upgrade-angry-george":     ["upgrade-twix", "upgrade-dad"],
+	"upgrade-twix":             ["upgrade-shrinkage"],
+	"upgrade-dad":              ["upgrade-mom"],
 	"upgrade-dishonest-george":	["upgrade-cashmere", "upgrade-whaleBio"],
 	"upgrade-whaleBio":         ["upgrade-contest"]
 };
