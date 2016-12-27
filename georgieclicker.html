@@ -38,9 +38,15 @@
 			background-color: #FFEEEE;
 			overflow: auto;
 		}
-		.imgButton{
+		.imgButton:not(.powerUpButton){
 			width: 400px;
 			height: 400px;
+			position: absolute;
+			bottom: 0px;
+			left:   0px;
+			top:    0px;
+			right:  0px;
+			margin: auto;
 			transition: width .1s, height .1s;
 		}
 		.imgButton:hover{
@@ -58,11 +64,13 @@
 			left:   0px;
 			top:    0px;
 			right:  0px;
+			width:  410px;
+			height: 410px;
 			margin: auto;
 			z-index: 0;
 		}
 
-		#powerUpButton{
+		.powerUpButton{
 			top: 400px;
 			left: 20px;
 		}
@@ -289,7 +297,9 @@
 			Clicks on George:&nbsp;<span id="score">0</span><br /><br />
 			Cash:&nbsp;$<span id="cash">0</span>
 		</div>
-		<img class="imgButton" id="georgeMain" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge();">
+		<div id="georgeMain">
+			<img class="imgButton" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge();">
+		</div>
 		<div id="upgrade-toggle" onclick="togglePanel();"><div id="upgrade-panel-closetext">close upgrade center</div></div>
 		<div id="upgrade-panel" class="closed">
 			<div id="upgrade-panel-title">Upgrade Center</div>
@@ -327,35 +337,35 @@
 		<!-- clever george branch powerups -->
 
 		<div class="powerup" id="powerup-bathrooms" style="display: none;">
-				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="upgrade('bathrooms', 1);">
+				<img class="imgButton powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="upgrade('bathrooms', 1);">
 				<div class="powerup-title">Luxury Bathrooms</div>
 				<div class="powerup-description">George's supreme bathroom knowledge is paying off.</div>
 				<div class="powerup-info">Price: $<span id="powerup-bathrooms-price">10</span> Amount owned: <span id="powerup-bathrooms-number">0</span></div>
 		</div>
 
 		<div class="powerup" id="powerup-bathrooms2" style="display: none;">
-				<img class="imgButton" id="powerUpButton" src="pictures/toilet2.png" alt="toilet">
+				<img class="imgButton powerUpButton" src="pictures/toilet2.png" alt="toilet">
 				<div class="powerup-title">Better Bathrooms</div>
 				<div class="powerup-description">George's bathroom skills have reached a whole new level.</div>
 				<div class="powerup-info">PASSIVE - bathroom clicks x 2</div>
 		</div>
 
 		<div class="powerup" id="powerup-bathrooms3" style="display: none;">
-				<img class="imgButton" id="powerUpButton" src="pictures/toilet3.png" alt="toilet">
+				<img class="imgButton powerUpButton" src="pictures/toilet3.png" alt="toilet">
 				<div class="powerup-title">Golden Bathrooms</div>
 				<div class="powerup-description">The royal flusher. whooooosh baby.</div>
 				<div class="powerup-info">PASSIVE - bathroom clicks x 5</div>
 		</div>
 
 		<div class="powerup" id="powerup-squint" style="display: none;">
-				<img class="imgButton" id="powerUpButton" src="pictures/toilet.png" alt="squint" >
+				<img class="imgButton powerUpButton" src="pictures/toilet.png" alt="squint" >
 				<div class="powerup-title">Squint</div>
 				<div class="powerup-description">Squinting George is clicking more accurately.</div>
 				<div class="powerup-info">PASSIVE - Better Clicks</div>
 		</div>
 
 		<div class="powerup" id="powerup-super-squint" style="display: none;">
-				<img class="imgButton" id="powerUpButton" src="pictures/toilet2.png" alt="squint" >
+				<img class="imgButton powerUpButton" src="pictures/toilet2.png" alt="squint" >
 				<div class="powerup-title">Super Squint</div>
 				<div class="powerup-description">George is squinting so hard, he can pick out raccoons on the side of the highway!</div>
 				<div class="powerup-info">PASSIVE - Better Clicks</div>
@@ -366,35 +376,35 @@
 		<!--  George upset branch powerups-->
 
 		<div class="powerup" id="powerup-upset" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('upset', 10);">
+			<img class="imgButton powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('upset', 10);">
 			<div class="powerup-title">George Is Getting Upset</div>
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
 			<div class="powerup-info">Price: $<span id="powerup-upset-price">100</span> <span text-align="right">Anger level: <span id="powerup-upset-number">0</span></span>%</div>
 		</div>
 
 		<div class="powerup" id="powerup-twix" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/twix.png" alt="georgeUpset" onclick="upgrade('twix', 1);">
+			<img class="imgButton powerUpButton" src="pictures/twix.png" alt="georgeUpset" onclick="upgrade('twix', 1);">
 			<div class="powerup-title">Twix</div>
 			<div class="powerup-description">If you eat George's last Twix, he'll get so mad he can't help but click.</div>
 			<div class="powerup-info">Price: $<span id="powerup-twix-price">50</span> Twix timer: <span id="powerup-twix-number">0</span></div>
 		</div>
 
 		<div class="powerup" id="powerup-shrinkage" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeShrunk.png" alt="georgeUpset">
+			<img class="imgButton powerUpButton" src="pictures/georgeShrunk.png" alt="georgeUpset">
 			<div class="powerup-title">Shrinkage</div>
 			<div class="powerup-description">There has been a misunderstanding. George was just in the pool, it shrank!</div>
 			<div class="powerup-info">PASSIVE - Laughing women.</div>
 		</div>
 
 		<div class="powerup" id="powerup-dad" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/frankCostanza.png" alt="georgeUpset">
+			<img class="imgButton powerUpButton" src="pictures/frankCostanza.png" alt="georgeUpset">
 			<div class="powerup-title">Frank Costanza</div>
 			<div class="powerup-description">Jerry, it's Frank. Mr. Steinbrenner's here. George is dead. Call me back.</div>
 			<div class="powerup-info">PASSIVE - Double anger.</div>
 		</div>
 
 		<div class="powerup" id="powerup-mom" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/estelleCostanza.png" alt="georgeUpset">
+			<img class="imgButton powerUpButton" src="pictures/estelleCostanza.png" alt="georgeUpset">
 			<div class="powerup-title">Estelle<br />Costanza</div>
 			<div class="powerup-description">Georgie, why do you eat so fast? You can't even taste it!</div>
 			<div class="powerup-info">PASSIVE - Unlimited anger.</div>
@@ -406,14 +416,14 @@
 		<!--  George dishonest branch power ups-->
 
 		<div class="powerup" id="powerup-dishonest" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgelie.png" alt="georgeDishonest">
+			<img class="imgButton powerUpButton" src="pictures/georgelie.png" alt="georgeDishonest">
 			<div class="powerup-title">George Is Lying</div>
 			<div class="powerup-description">George is falsifying his click amount.</div>
 			<div class="powerup-info">Next Lie: <span id="powerup-dishonest-number">0</span></div>
 		</div>
 
 		<div class="powerup" id="powerup-cashmere" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/cashmere.png" alt="cashmere" onclick="upgrade('cashmere', 1)">
+			<img class="imgButton powerUpButton" src="pictures/cashmere.png" alt="cashmere" onclick="upgrade('cashmere', 1)">
 			<div class="powerup-title">Cashmere Sweater</div>
 			<div class="powerup-description">Elaine, this present is for you. Mind to help me click?</div>
 			<div class="powerup-info">Price: $200 Elaine: <span id="powerup-cashmere-number">Ambivalent</span></div>
@@ -421,14 +431,14 @@
 		</div>
 
 		<div class="powerup" id="powerup-whaleBio" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeMarine.png" alt="whaleBio">
+			<img class="imgButton powerUpButton" src="pictures/georgeMarine.png" alt="whaleBio">
 			<div class="powerup-title">Whale Biologist</div>
 			<div class="powerup-description">You had to tell her I was a Whale Biologist?</div>
 			<div class="powerup-info"><span id="powerup-whaleBio-number">0</span></div>
 		</div>
 
 		<div class="powerup" id="powerup-contest" style="display: none;">
-			<img class="imgButton" id="powerUpButton" src="pictures/georgeMarine.png" alt="contest">
+			<img class="imgButton powerUpButton" src="pictures/georgeMarine.png" alt="contest">
 			<div class="powerup-title">The Contest</div>
 			<div class="powerup-description">If George can just hold out for a little while, he can win some money.</div>
 			<div class="powerup-info">Time without touching: <span id="powerup-contest-number">0</span></div>
