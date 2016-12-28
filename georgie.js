@@ -26,6 +26,7 @@ var cashmereSwitchCounter = 0;
 var contestCounter = 0;
 var contestActive  = false;
 var parentLevel = 1;
+var parentPosition = 0;
 
 var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad"];
 
@@ -137,6 +138,10 @@ function upgrade(name, number){
 	}
 	else if(name == "parents"){
 		parentLevel = number;
+		if(number == 2)
+			document.getElementById("frank").style.visibility   = "visible";
+		if(number == 3)
+			document.getElementById("estelle").style.visibility = "visible";
 	}
 
 	//parts for dishonest branch power ups
@@ -301,6 +306,11 @@ function gameTick(){
 	clickOnGeorge(clicksPerSecond);
 
 	updateBackground();
+	parentPosition += .02;
+	if(parentPosition >= 6.28){
+		parentPosition = 0;
+	}
+	orbitParents();
 }
 
 function togglePanel(){
@@ -398,4 +408,17 @@ function golfBall(){
 		golfBallActive = false;
 		newGolfBall = true;
 	}
+}
+
+function orbitParents(){
+	var originX = 130;
+	var originY = 122;
+
+	var mom = document.getElementById("estelle");
+	var dad = document.getElementById("frank");
+
+	mom.style.top  = (originX + Math.cos(parentPosition) * 250) + "px";
+	mom.style.left = (originY + Math.sin(parentPosition) * 250) + "px";
+	dad.style.top  = (originX + Math.cos(parentPosition - 3.14) * 250) + "px";
+	dad.style.left = (originY + Math.sin(parentPosition - 3.14) * 250) + "px";
 }
