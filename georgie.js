@@ -28,7 +28,7 @@ var contestActive  = false;
 var parentLevel = 1;
 var parentPosition = 0;
 
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest"];
 
 var powerUpsAchieved = [];
 
@@ -40,7 +40,8 @@ var powerUpTree = {
 	"upgrade-twix":             ["upgrade-shrinkage"],
 	"upgrade-dad":              ["upgrade-mom"],
 	"upgrade-dishonest-george":	["upgrade-cashmere", "upgrade-whaleBio"],
-	"upgrade-whaleBio":         ["upgrade-contest"]
+	"upgrade-whaleBio":         ["upgrade-contest"],
+	"upgrade-cashmere":         ["upgrade-iqTest"]
 };
 
 //function to handle all clicks
@@ -151,6 +152,9 @@ function upgrade(name, number){
 	}
 
 	else if (name == "cashmere"){
+		//elaineHelping equals 0 then she isnt helping
+		//elaineHelping equals 1 then she is helping with time not out and each click gives more points
+		//elaineHelping equals 2 she is helping but time is out and each click takes away clicks
 
 		if (playerCash >= 200 && cashmereSwitchCounter%2 === 0){
 			elaineHelping = number;
@@ -172,6 +176,17 @@ function upgrade(name, number){
 		contestCounter = 60 * 20;
 	}
 
+	else if(name = "iqTest"){
+
+		// iqTest should be effected by the function powerupSwitch and in gameTick under cashmere portion
+
+
+		//TODO make it so cash can be added per click. then do the rest of the TODO related to this mechanic. 
+
+		iqTestActive = true;
+		//TODO per click addCash(3);
+	}
+
 }
 
 function powerupSwitch(powerup){
@@ -184,6 +199,9 @@ function powerupSwitch(powerup){
 		}else{
 			document.getElementById("cashmere-button").innerText = "OFF";
 			document.getElementById("powerup-cashmere-number").innerText = "Placated";
+			if(iqTestActive == true){
+				// per click addCash(3);
+			}
 			elaineHelping = 0;
 		}
 
@@ -277,10 +295,16 @@ function gameTick(){
 	}
 
 	if(cashmereSecondTimer > 0 && elaineHelping == 1){
+		if(iqTestActive == true){
+			//TODO per click addCash(5);
+		}
 		cashmereSecondTimer -=1;
 		document.getElementById("powerup-cashmere-number").innerText = "Happy for "+Math.ceil(cashmereSecondTimer / 20);
 	}else if(cashmereSecondTimer === 0 && elaineHelping == 1){
 		//clickPower = clickPower - elaineClickPower;
+		if(iqTestActive == true){
+			//TODO per click addCash(-5);
+		}
 		document.getElementById("powerup-cashmere-number").innerText = "Pissed";
 		elaineHelping = 2;
 	}
@@ -342,7 +366,7 @@ function keyPressed(event){
 
 	}else if( event.which == 39){
 		whaleMove("right");
-		
+
 	}
 }
 
@@ -379,9 +403,9 @@ function golfBall(){
 	var rect1 = element.getBoundingClientRect();
 	var rect2 = whale.getBoundingClientRect();
 
-	var overlap = !(rect1.right < rect2.left || 
-                rect1.left > rect2.right || 
-                rect1.bottom < rect2.top || 
+	var overlap = !(rect1.right < rect2.left ||
+                rect1.left > rect2.right ||
+                rect1.bottom < rect2.top ||
                 rect1.top > rect2.bottom);
 
 	element.style.visibility = "visible";
