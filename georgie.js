@@ -27,6 +27,7 @@ var contestCounter = 0;
 var contestActive  = false;
 var parentLevel = 1;
 var parentPosition = 0;
+var iqTestActive;
 
 var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest"];
 
@@ -65,12 +66,32 @@ function clickOnGeorge(clicks){
 		totalClickAmount = totalClickAmount + clicks;
 	}
 
+
+
 	//checks to see if the player should level up because of this click
 	if(totalClickAmount - (Math.pow(10, level)) >= 0){
 		levelUp();
 	}
 
 	document.getElementById("score").innerText = totalClickAmount.toFixed(0);
+}
+function clickOnGeorgeMoney(){
+	if(iqTestActive == true){
+		if(elaineHelping == 0){
+			addCash(3);
+			console.log("adding 3 cash")
+
+		}
+		else if(elaineHelping == 1){
+			addCash(5);
+			console.log("adding 5 cash")
+		}
+		else if(elaineHelping == 2){
+			addCash(-5);
+			console.log("sub 5 cash")
+
+		}
+	}
 }
 
 function addCash(amount){
@@ -177,14 +198,9 @@ function upgrade(name, number){
 	}
 
 	else if(name = "iqTest"){
-
 		// iqTest should be effected by the function powerupSwitch and in gameTick under cashmere portion
-
-
-		//TODO make it so cash can be added per click. then do the rest of the TODO related to this mechanic. 
-
 		iqTestActive = true;
-		//TODO per click addCash(3);
+
 	}
 
 }
@@ -199,9 +215,6 @@ function powerupSwitch(powerup){
 		}else{
 			document.getElementById("cashmere-button").innerText = "OFF";
 			document.getElementById("powerup-cashmere-number").innerText = "Placated";
-			if(iqTestActive == true){
-				// per click addCash(3);
-			}
 			elaineHelping = 0;
 		}
 
@@ -295,16 +308,10 @@ function gameTick(){
 	}
 
 	if(cashmereSecondTimer > 0 && elaineHelping == 1){
-		if(iqTestActive == true){
-			//TODO per click addCash(5);
-		}
 		cashmereSecondTimer -=1;
 		document.getElementById("powerup-cashmere-number").innerText = "Happy for "+Math.ceil(cashmereSecondTimer / 20);
 	}else if(cashmereSecondTimer === 0 && elaineHelping == 1){
 		//clickPower = clickPower - elaineClickPower;
-		if(iqTestActive == true){
-			//TODO per click addCash(-5);
-		}
 		document.getElementById("powerup-cashmere-number").innerText = "Pissed";
 		elaineHelping = 2;
 	}
