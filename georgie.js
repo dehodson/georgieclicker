@@ -1,4 +1,3 @@
-//var cookieString = document.cookie;
 var totalClickAmount = 0;
 var level = 1;
 var playerCash = 0;
@@ -200,7 +199,6 @@ function upgrade(name, number){
 	else if(name = "iqTest"){
 		// iqTest should be effected by the function powerupSwitch and in gameTick under cashmere portion
 		iqTestActive = true;
-
 	}
 
 }
@@ -248,7 +246,6 @@ function newUpgrade(newMove){
     	if (value == newMove && skillPoints > 0) {
 			document.getElementById(newMove).style.display = 'inline-block';
 			spendSkillPoints(1);
-			//powerUpMoveList = powerUpMoveList.filter(function(e) { return e !== newMove;});
 			powerUpsAchieved.push(newMove);
 			console.log("powerups achieed " + powerUpsAchieved);
 			console.log("powerup list of not achieved " + powerUpMoveList);
@@ -392,14 +389,20 @@ function laughing(bool){
 function whaleMove(direction){
 	var element = document.getElementById("whale");
 	if(direction == "left"){
-		whaleX -= 15;
-		element.style.left = whaleX + "px";
-		element.className  = "";
+		if( whaleX > 0){
+			whaleX -= 15;
+			element.style.left = whaleX + "px";
+			element.className  = "";
+		}
 	}
 	else if(direction == "right"){
-		whaleX += 15;
-		element.style.left = whaleX + "px";
-		element.className  = "flip";
+		if( whaleX < document.getElementById("main-container").clientWidth - 150){
+			console.log(whaleX )
+			console.log(document.getElementById("main-container").clientWidth - 150)
+			whaleX += 15;
+			element.style.left = whaleX + "px";
+			element.className  = "flip";
+		}
 	}
 }
 
@@ -433,7 +436,6 @@ function golfBall(){
 		}
 	}
 	if(overlap){
-		//clickOnGeorge(1000);
 		addCash(500);
 		element.style.visibility = "hidden";
 		golfBallActive = false;
