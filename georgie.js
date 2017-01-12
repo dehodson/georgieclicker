@@ -28,9 +28,13 @@ var parentLevel = 1;
 var parentPosition = 0;
 var iqTestActive;
 
+var deathCount;
+
 var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest"];
 
 var powerUpsAchieved = [];
+
+var deathsAchieved = [];
 
 var powerUpTree = {
 	"upgrade-clever-george":    ["upgrade-squint", "upgrade-bathrooms2"],
@@ -43,6 +47,13 @@ var powerUpTree = {
 	"upgrade-whaleBio":         ["upgrade-contest"],
 	"upgrade-cashmere":         ["upgrade-iqTest"]
 };
+
+function killYourSelf(methodOfDeath){
+	deathCount++;
+	
+
+
+}
 
 //function to handle all clicks
 function clickOnGeorge(clicks){
