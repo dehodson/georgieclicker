@@ -257,6 +257,30 @@
 			color:#FFB;
 			font-size:.7em;
 		}
+		.powerup-img .upgrade-tooltip::after{
+			content: "";
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			margin-left: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: black transparent transparent transparent;
+		}
+		.powerup-img:hover .upgrade-tooltip{
+			background-color:black;
+			color: #fff;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px 0;
+			position: absolute;
+			z-index: 1;
+			left: 170px;
+			font-size:1.5em;
+			width: 150px;
+			margin-left: -75px;
+
+		}
 
 		#laughing{
 			position: absolute;
@@ -395,7 +419,7 @@
 		<!--  George upset branch powerups-->
 
 		<div class="powerup" id="powerup-upset" style="display: none;">
-			<img class="imgButton powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('upset', 10);">
+			<div class="powerup-img"><img class="imgButton powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('upset', 10);"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George has had it. His choice of death is pills.</span></span></div>
 			<div class="powerup-title">George Is Getting Upset</div>
 			<div class="powerup-description">George really isn't that happy but he is clicking like crazy.</div>
 			<div class="powerup-info">Price: $<span id="powerup-upset-price">100</span> <span text-align="right">Anger level: <span id="powerup-upset-number">0</span></span>%</div>
