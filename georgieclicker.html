@@ -301,13 +301,13 @@
 			color: #fff;
 			text-align: center;
 			border-radius: 6px;
-			padding: 5px 0;
+			padding: 5px 5px;
 			position: absolute;
 			z-index: 10;
 			left:180px;
 			top: 25px;
-			font-size:1.2em;
-			width: 180px;
+			font-size:1em;
+			width: 200px;
 			margin-left: -75px;
 			visibility: hidden;
 			box-shadow: 0px 0px 25px #FFF;
@@ -372,7 +372,7 @@
 <!--  this is the dishonest george branch-->
 				<div class="upgrade-node available" id="upgrade-dishonest-george" style="top:60px;left:380px;background-image:url('pictures/upgrades/lieGeorge.png');" onclick="if(upgradable(this)){newUpgrade('powerup-dishonest'); upgrade('dishonest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-cashmere" style="top:130px;left:350px;background-image:url('pictures/upgrades/georgeCashmere.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-cashmere'); unlockChildren(this);}"><span class="upgrade-tooltip">Cashmere Sweater<br /><span class="tooltip-description">What red dot? There is barely anything there!</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-whaleBio" style="top:130px;left:425px;background-image:url('pictures/upgrades/.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-whaleBio'); upgrade('whaleBio', 1);unlockChildren(this);}"><span class="upgrade-tooltip">Marine Biologist<br /><span class="tooltip-description">It was a hole in one I tell you.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-whaleBio" style="top:130px;left:425px;background-image:url('pictures/upgrades/marinebio.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-whaleBio'); upgrade('whaleBio', 1);unlockChildren(this);}"><span class="upgrade-tooltip">Marine Biologist<br /><span class="tooltip-description">It was a hole in one I tell you.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-contest"  style="top:200px;left:425px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-contest'); upgrade('contest', 1);unlockChildren(this);}"><span class="upgrade-tooltip">The Contest<br /><span class="tooltip-description">I'm the master of my domain.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-iqTest"  style="top:200px;left:350px;background-image:url('pictures/upgrades/georgeIQTest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-iqTest'); upgrade('iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The IQ Test<br /><span class="tooltip-description">Elaine, did you spill coffee on my IQ test?</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-kys-dishonest"  style="top:300px;left:375px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){killYourSelf(''); upgrade('iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George has had it. His choice of death is pills.</span></span></div>
@@ -497,55 +497,54 @@
 		<!--  George dishonest branch power ups-->
 
 		<div class="powerup" id="powerup-dishonest" style="display: none;">
-			<div class="powerup-img">
-				<img class="imgButton powerUpButton" src="pictures/georgelie.png" alt="georgeDishonest">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
-			</div>
-			<div class="powerup-title">George Is Lying</div>
-			<div class="powerup-description">George is falsifying his click amount.</div>
-			<div class="powerup-info">Next Lie: <span id="powerup-dishonest-number">0</span></div>
-		</div>
+	 			<div class="powerup-img">
+	 				<img class="imgButton powerUpButton" src="pictures/georgelie.png" alt="georgeDishonest">
+					<span class="powerup-tooltip">Every 10 seconds recieve random amount of clicks from a range of numbers.</span>
+	 			</div>
+	 			<div class="powerup-title">George Is Lying</div>
+	 			<div class="powerup-description">George is falsifying his click amount.</div>
+	 			<div class="powerup-info">Next Lie: <span id="powerup-dishonest-number">0</span></div>
+	 		</div>
 
-		<div class="powerup" id="powerup-cashmere" style="display: none;">
-			<div class="powerup-img">
-				<img class="imgButton powerUpButton" src="pictures/cashmere.png" alt="cashmere" onclick="upgrade('cashmere', 1)">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
-			</div>
-			<div class="powerup-title">Cashmere Sweater</div>
-			<div class="powerup-description">Elaine, this present is for you. Mind to help me click?</div>
-			<div class="powerup-info">Price: $200 Elaine: <span id="powerup-cashmere-number">Ambivalent</span></div>
-			<div class="powerup-switch" id="cashmere-switch">Switch: <span class="powerup-switch-button" id="cashmere-button" onclick="powerupSwitch('cashmere');">ON</span></div>
-		</div>
+	 		<div class="powerup" id="powerup-cashmere" style="display: none;">
+	 			<div class="powerup-img">
+	 				<img class="imgButton powerUpButton" src="pictures/cashmere.png" alt="cashmere" onclick="upgrade('cashmere', 1)">
+					<span class="powerup-tooltip">Buy a cashmere sweater get extra clicks for everytime you physically click for 10 seconds. After time is up if you leave the switch on clicks will be taken away. If switch is off go back to standard clicks.</span>
+	 			</div>
+	 			<div class="powerup-title">Cashmere Sweater</div>
+	 			<div class="powerup-description">Elaine, this present is for you. Mind to help me click?</div>
+	 			<div class="powerup-info">Price: $200 Elaine: <span id="powerup-cashmere-number">Ambivalent</span></div>
+	 			<div class="powerup-switch" id="cashmere-switch">Switch: <span class="powerup-switch-button" id="cashmere-button" onclick="powerupSwitch('cashmere');">ON</span></div>
+	 		</div>
 
-		<div class="powerup" id="powerup-whaleBio" style="display: none;">
-			<div class="powerup-img">
-				<img class="imgButton powerUpButton" src="pictures/georgeMarine.png" alt="whaleBio">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
-			</div>
-			<div class="powerup-title">Marine Biologist</div>
-			<div class="powerup-description">You had to tell her I was a Marine Biologist?</div>
-			<div class="powerup-info"><span id="powerup-whaleBio-number">0</span></div>
-		</div>
+	 		<div class="powerup" id="powerup-whaleBio" style="display: none;">
+	 			<div class="powerup-img">
+	 				<img class="imgButton powerUpButton" src="pictures/georgeMarine.png" alt="whaleBio">
+					<span class="powerup-tooltip">Every 20 seconds a golfball will drop, if you catch golfball with whale you get cash. Control whale with arrow keys.</span>
+	 			</div>
+	 			<div class="powerup-title">Marine Biologist</div>
+	 			<div class="powerup-description">You had to tell her I was a Marine Biologist?</div>
+	 			<div class="powerup-info"><span id="powerup-whaleBio-number">0</span></div>
+	 		</div>
 
-		<div class="powerup" id="powerup-contest" style="display: none;">
-			<div class="powerup-img">
-				<img class="imgButton powerUpButton" src="pictures/contest.png" alt="contest">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
-			</div>
-			<div class="powerup-title">The Contest</div>
-			<div class="powerup-description">If George can just hold out for a little while, he can win some money.</div>
-			<div class="powerup-info">Time without touching: <span id="powerup-contest-number">0</span></div>
-		</div>
+	 		<div class="powerup" id="powerup-contest" style="display: none;">
+	 			<div class="powerup-img">
+	 				<img class="imgButton powerUpButton" src="pictures/contest.png" alt="contest">
+					<span class="powerup-tooltip">If you dont click for 60 seconds you will receive cash, if you click the timer will start over.</span>
+	 			</div>
+	 			<div class="powerup-title">The Contest</div>
+	 			<div class="powerup-description">If George can just hold out for a little while, he can win some money.</div>
+	 			<div class="powerup-info">Time without touching: <span id="powerup-contest-number">0</span></div>
+	 		</div>
 
-		<div class="powerup" id="powerup-iqTest" style="display: none;">
-			<div class="powerup-img">
-				<img class="imgButton powerUpButton" src="pictures/georgeMarine.png" alt="iqTest">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
-			</div>
-			<div class="powerup-title">The IQ Test</div>
-			<div class="powerup-description">"Elaine, You got 150 on your IQ test?", You have to take it for me.</div>
-		</div>
-
+	 		<div class="powerup" id="powerup-iqTest" style="display: none;">
+	 			<div class="powerup-img">
+	 				<img class="imgButton powerUpButton" src="pictures/iqTest.png" alt="iqTest">
+					<span class="powerup-tooltip">If Elaine is happy from cashmere sweater, you recieve 5 cash per click, if she is pissed you recieve -5 cash per click, if she is neutral recieve 3 cash per click. </span>
+	 			</div>
+	 			<div class="powerup-title">The IQ Test</div>
+	 			<div class="powerup-description">"Elaine, You got 150 on your IQ test?", You have to take it for me.</div>
+	</div>
 
 	</div>
 
