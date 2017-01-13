@@ -1,5 +1,4 @@
 art for squint and super squint powerups
-art for whale biologist in the branch
 
 all possibilities of KYS need created ---mech., name, and artwork.
 
@@ -9,4 +8,4 @@ all moves and powerups need to be balanced out.
 leveling up needs to be adjusted
 
 
-fix all tooltips for powerups so they display correct information 
+fix all tooltips for powerups so they display correct information
