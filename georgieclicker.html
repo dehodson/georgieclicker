@@ -301,14 +301,14 @@
 			color: #fff;
 			text-align: center;
 			border-radius: 6px;
-			padding: 5px 0;
+			padding: 20px 5px;
 			position: absolute;
 			z-index: 10;
 			left:180px;
 			top: 25px;
-			font-size:1.5em;
-			width: 150px;
-			margin-left: -75px;
+			font-size:1em;
+			width: 200px;
+			margin-left: -125px;
 			visibility: hidden;
 			box-shadow: 0px 0px 25px #FFF;
 		}
@@ -325,6 +325,8 @@
 		}
 		.powerup-img:hover .powerup-tooltip{
 			visibility: visible;
+
+
 		}
 	</style>
 
@@ -499,7 +501,7 @@
 		<div class="powerup" id="powerup-dishonest" style="display: none;">
 			<div class="powerup-img">
 				<img class="imgButton powerUpButton" src="pictures/georgelie.png" alt="georgeDishonest">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
+				<span class="powerup-tooltip">Every 10 seconds recieve random amount of clicks from a range of numbers.</span>
 			</div>
 			<div class="powerup-title">George Is Lying</div>
 			<div class="powerup-description">George is falsifying his click amount.</div>
@@ -509,7 +511,7 @@
 		<div class="powerup" id="powerup-cashmere" style="display: none;">
 			<div class="powerup-img">
 				<img class="imgButton powerUpButton" src="pictures/cashmere.png" alt="cashmere" onclick="upgrade('cashmere', 1)">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
+				<span class="powerup-tooltip">Buy a cashmere sweater get extra clicks for everytime you physically click for 10 seconds. After time is up if you leave the switch on clicks will be taken away. If switch is off go back to standard clicks.</span>
 			</div>
 			<div class="powerup-title">Cashmere Sweater</div>
 			<div class="powerup-description">Elaine, this present is for you. Mind to help me click?</div>
@@ -520,7 +522,7 @@
 		<div class="powerup" id="powerup-whaleBio" style="display: none;">
 			<div class="powerup-img">
 				<img class="imgButton powerUpButton" src="pictures/georgeMarine.png" alt="whaleBio">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
+				<span class="powerup-tooltip">Every 20 seconds a golfball will drop, if you catch golfball with whale you get cash. Control whale with arrow keys.</span>
 			</div>
 			<div class="powerup-title">Marine Biologist</div>
 			<div class="powerup-description">You had to tell her I was a Marine Biologist?</div>
@@ -530,7 +532,7 @@
 		<div class="powerup" id="powerup-contest" style="display: none;">
 			<div class="powerup-img">
 				<img class="imgButton powerUpButton" src="pictures/contest.png" alt="contest">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
+				<span class="powerup-tooltip">If you dont click for 60 seconds you will receive cash, if you click the timer will start over.</span>
 			</div>
 			<div class="powerup-title">The Contest</div>
 			<div class="powerup-description">If George can just hold out for a little while, he can win some money.</div>
@@ -540,7 +542,7 @@
 		<div class="powerup" id="powerup-iqTest" style="display: none;">
 			<div class="powerup-img">
 				<img class="imgButton powerUpButton" src="pictures/georgeMarine.png" alt="iqTest">
-				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
+				<span class="powerup-tooltip">If Elaine is happy from cashmere sweater, you recieve 5 cash per click, if she is pissed you recieve -5 cash per click, if she is neutral recieve 3 cash per click. </span>
 			</div>
 			<div class="powerup-title">The IQ Test</div>
 			<div class="powerup-description">"Elaine, You got 150 on your IQ test?", You have to take it for me.</div>
