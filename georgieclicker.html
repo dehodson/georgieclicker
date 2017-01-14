@@ -348,7 +348,7 @@
 		<div id="statistics">
 			Level:&nbsp;<span id="level">1</span><br /><br />
 			Clicks on George:&nbsp;<span id="score">0</span><br /><br />
-			Cash:&nbsp;$<span id="cash"></span>
+			Cash:&nbsp;$<span id="cash">0</span>
 		</div>
 		<div id="georgeMain">
 			<img class="imgButton" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge(); clickOnGeorgeMoney();">
@@ -364,27 +364,27 @@
 
 <!-- this is the clever george branch -->
 				<div class="upgrade-node available" id="upgrade-clever-george" style="top:60px;left:60px;background-image:url('pictures/upgrades/cleverGeorge.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms'); unlockChildren(this);}"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-squint"         style="top:130px;left:10px;background-image:url('pictures/upgrades/squint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-squint'); upgrade('squint', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Squint<br /><span class="tooltip-description">Squint down to 20/20 to see more accurately.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-super-squint"   style="top:200px;left:10px;background-image:url('pictures/upgrades/superSquint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-super-squint'); upgrade('super-squint', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Super Squint<br /><span class="tooltip-description">George is squinting as hard as he can.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-bathrooms2"     style="top:130px;left:85px;background-image:url('pictures/upgrades/betterBathrooms.png');" onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms2'); upgrade('bathrooms2', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Better Bathrooms<br /><span class="tooltip-description">George has picked out some real choice locations.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-bathrooms3"     style="top:200px;left:85px;background-image:url('pictures/upgrades/goldBathrooms.png');" onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms3'); upgrade('bathrooms3', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Golden Bathrooms<br /><span class="tooltip-description">George has revealed the mac daddy of bathrooms.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-squint"         style="top:130px;left:10px;background-image:url('pictures/upgrades/squint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-squint'); upgrade('powerup-squint', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Squint<br /><span class="tooltip-description">Squint down to 20/20 to see more accurately.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-super-squint"   style="top:200px;left:10px;background-image:url('pictures/upgrades/superSquint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-super-squint'); upgrade('powerup-super-squint', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Super Squint<br /><span class="tooltip-description">George is squinting as hard as he can.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-bathrooms2"     style="top:130px;left:85px;background-image:url('pictures/upgrades/betterBathrooms.png');" onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms2'); upgrade('powerup-bathrooms2', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Better Bathrooms<br /><span class="tooltip-description">George has picked out some real choice locations.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-bathrooms3"     style="top:200px;left:85px;background-image:url('pictures/upgrades/goldBathrooms.png');" onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms3'); upgrade('powerup-bathrooms3', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Golden Bathrooms<br /><span class="tooltip-description">George has revealed the mac daddy of bathrooms.</span></span></div>
 
 
 <!--  this is the angry george branch-->
 				<div class="upgrade-node available" id="upgrade-angry-george"  style="top:60px;left:220px;background-image:url('pictures/upgrades/angryGeorge.png');" onclick="if(upgradable(this)){newUpgrade('powerup-upset'); unlockChildren(this);}"><span class="upgrade-tooltip">Angry George<br /><span class="tooltip-description">The path of Angry George.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-twix"           style="top:130px;left:255px;background-image:url('pictures/upgrades/twix.png');" onclick="if(upgradable(this)){newUpgrade('powerup-twix'); unlockChildren(this);}"><span class="upgrade-tooltip">Twix<br /><span class="tooltip-description">Someone ate George's last Twix. He's pretty pissed.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-shrinkage"      style="top:200px;left:255px;background-image:url('pictures/upgrades/shrinkage.png');" onclick="if(upgradable(this)){newUpgrade('powerup-shrinkage'); upgrade('shrinkage', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Shrinkage<br /><span class="tooltip-description">George just got out of the pool and he's feeling mad.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-dad"            style="top:130px;left:180px;background-image:url('pictures/upgrades/dad.png');" onclick="if(upgradable(this)){newUpgrade('powerup-dad'); unlockChildren(this); upgrade('parents', 2)}"><span class="upgrade-tooltip">George's Dad<br /><span class="tooltip-description">Being around his dad doesn't really help George's temper.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-mom"            style="top:200px;left:180px;background-image:url('pictures/upgrades/mom.png');" onclick="if(upgradable(this)){newUpgrade('powerup-mom'); upgrade('parents', 3); unlockChildren(this);}"><span class="upgrade-tooltip">George's Mom<br /><span class="tooltip-description">When George's mom is around, his anger knows no bounds.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-shrinkage"      style="top:200px;left:255px;background-image:url('pictures/upgrades/shrinkage.png');" onclick="if(upgradable(this)){newUpgrade('powerup-shrinkage'); upgrade('powerup-shrinkage', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Shrinkage<br /><span class="tooltip-description">George just got out of the pool and he's feeling mad.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-dad"            style="top:130px;left:180px;background-image:url('pictures/upgrades/dad.png');" onclick="if(upgradable(this)){newUpgrade('powerup-dad'); unlockChildren(this); upgrade('powerup-parents', 2)}"><span class="upgrade-tooltip">George's Dad<br /><span class="tooltip-description">Being around his dad doesn't really help George's temper.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-mom"            style="top:200px;left:180px;background-image:url('pictures/upgrades/mom.png');" onclick="if(upgradable(this)){newUpgrade('powerup-mom'); upgrade('powerup-parents', 3); unlockChildren(this);}"><span class="upgrade-tooltip">George's Mom<br /><span class="tooltip-description">When George's mom is around, his anger knows no bounds.</span></span></div>
 
 
 <!--  this is the dishonest george branch-->
-				<div class="upgrade-node available" id="upgrade-dishonest-george" style="top:60px;left:380px;background-image:url('pictures/upgrades/lieGeorge.png');" onclick="if(upgradable(this)){newUpgrade('powerup-dishonest'); upgrade('dishonest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
+				<div class="upgrade-node available" id="upgrade-dishonest-george" style="top:60px;left:380px;background-image:url('pictures/upgrades/lieGeorge.png');" onclick="if(upgradable(this)){newUpgrade('powerup-dishonest'); upgrade('powerup-dishonest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Dishonest George<br /><span class="tooltip-description">The path of Dishonest George.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-cashmere" style="top:130px;left:350px;background-image:url('pictures/upgrades/georgeCashmere.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-cashmere'); unlockChildren(this);}"><span class="upgrade-tooltip">Cashmere Sweater<br /><span class="tooltip-description">What red dot? There is barely anything there!</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-whaleBio" style="top:130px;left:425px;background-image:url('pictures/upgrades/marinebio.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-whaleBio'); upgrade('whaleBio', 1);unlockChildren(this);}"><span class="upgrade-tooltip">Marine Biologist<br /><span class="tooltip-description">It was a hole in one I tell you.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-contest"  style="top:200px;left:425px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-contest'); upgrade('contest', 1);unlockChildren(this);}"><span class="upgrade-tooltip">The Contest<br /><span class="tooltip-description">I'm the master of my domain.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-iqTest"  style="top:200px;left:350px;background-image:url('pictures/upgrades/georgeIQTest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-iqTest'); upgrade('iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The IQ Test<br /><span class="tooltip-description">Elaine, did you spill coffee on my IQ test?</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-kys-dishonest"  style="top:300px;left:375px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){killYourSelf(''); upgrade('iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George has had it. His choice of death is pills.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-whaleBio" style="top:130px;left:425px;background-image:url('pictures/upgrades/marinebio.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-whaleBio'); upgrade('powerup-whaleBio', 1);unlockChildren(this);}"><span class="upgrade-tooltip">Marine Biologist<br /><span class="tooltip-description">It was a hole in one I tell you.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-contest"  style="top:200px;left:425px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-contest'); upgrade('powerup-contest', 1);unlockChildren(this);}"><span class="upgrade-tooltip">The Contest<br /><span class="tooltip-description">I'm the master of my domain.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-iqTest"  style="top:200px;left:350px;background-image:url('pictures/upgrades/georgeIQTest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-iqTest'); upgrade('powerup-iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The IQ Test<br /><span class="tooltip-description">Elaine, did you spill coffee on my IQ test?</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-kys-dishonest"  style="top:300px;left:375px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){killYourSelf(''); upgrade('powerup-iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George has had it. His choice of death is pills.</span></span></div>
 
 <!--  TODO: add in a death counter once you kill yourself you add add up deaths and the game starts over but you get bonuses-->
 <!--  -->
@@ -398,7 +398,7 @@
 
 		<div class="powerup" id="powerup-bathrooms" style="display: none;">
 			<div class="powerup-img">
-				<img class="imgButton powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="upgrade('bathrooms', 1);">
+				<img class="imgButton powerUpButton" src="pictures/toilet.png" alt="toilet" onclick="upgrade('powerup-bathrooms', 1);">
 				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
 			</div>
 			<div class="powerup-title">Luxury Bathrooms</div>
@@ -452,7 +452,7 @@
 
 		<div class="powerup" id="powerup-upset" style="display: none;">
 			<div class="powerup-img">
-				<img class="imgButton powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('upset', 10);">
+				<img class="imgButton powerUpButton" src="pictures/georgeUpset.png" alt="georgeUpset" onclick="upgrade('powerup-upset', 10);">
 				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
 			</div>
 			<div class="powerup-title">George Is Getting Upset</div>
@@ -462,7 +462,7 @@
 
 		<div class="powerup" id="powerup-twix" style="display: none;">
 			<div class="powerup-img">
-				<img class="imgButton powerUpButton" src="pictures/twix.png" alt="georgeUpset" onclick="upgrade('twix', 1);">
+				<img class="imgButton powerUpButton" src="pictures/twix.png" alt="georgeUpset" onclick="upgrade('powerup-twix', 1);">
 				<span class="powerup-tooltip">For every anger level added, George clicks more.</span>
 			</div>
 			<div class="powerup-title">Twix</div>
@@ -517,7 +517,7 @@
 
 	 		<div class="powerup" id="powerup-cashmere" style="display: none;">
 	 			<div class="powerup-img">
-	 				<img class="imgButton powerUpButton" src="pictures/cashmere.png" alt="cashmere" onclick="upgrade('cashmere', 1)">
+	 				<img class="imgButton powerUpButton" src="pictures/cashmere.png" alt="cashmere" onclick="upgrade('powerup-cashmere', 1)">
 					<span class="powerup-tooltip">Keep elaine not pissed and gain clicks, else lose clicks</span>
 	 			</div>
 	 			<div class="powerup-title">Cashmere Sweater</div>

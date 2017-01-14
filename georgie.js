@@ -135,8 +135,20 @@ if(localStorage.saveState){
 	for(var n in unlockedUpgrades){
 		unlockChildren(document.getElementById(unlockedUpgrades[n]));
 	}
+
+
+
+//This is what loads the powerUpsAchieved
+//TODO:	make it run powerup() after the element has been displayed on the page. You will need a
+	for(var n in powerUpsAchieved){
+		document.getElementById(powerUpsAchieved[n]).style.display = 'inline-block';
+		upgrade(powerUpsAchieved[n],0);
+
+	}
 	addCash(0);
 	addSkillPoints(0);
+	document.getElementById("level").innerText = level;
+
 }
 
 function killYourSelf(methodOfDeath){
@@ -215,50 +227,50 @@ function spendSkillPoints(amount){
 }
 
 function upgrade(name, number){
-	var powerName = "powerup-" + name;
+	//var powerName = "powerup-" + name;
 
-	if(name == "bathrooms"){
+	if(name == "powerup-bathrooms"){
 		if(playerCash >= 10 * (amountOfBathrooms + 1)){
 			amountOfBathrooms = amountOfBathrooms + number;
-			document.getElementById(powerName + "-number").innerText = amountOfBathrooms;
-			document.getElementById(powerName + "-price").innerText = 10 * (amountOfBathrooms + 1);
+			document.getElementById(name + "-number").innerText = amountOfBathrooms;
+			document.getElementById(name + "-price").innerText = 10 * (amountOfBathrooms + 1);
       		spendCash(10 * amountOfBathrooms);
 		}
 	}
-	else if(name == "bathrooms2"){
+	else if(name == "powerup-bathrooms2"){
 		bathroomPower = 1;
 	}
-	else if(name == "bathrooms3"){
+	else if(name == "powerup-bathrooms3"){
 		bathroomPower = 2.5;
 	}
-	else if(name == "squint"){
+	else if(name == "powerup-squint"){
 		clickPower = 5 * number;
 	}
-	else if(name == "super-squint"){
+	else if(name == "powerup-super-squint"){
 		clickPower = 10 * number;
 	}
 
 	//parts for upset george
-	else if(name == "upset"){
+	else if(name == "powerup-upset"){
 		if((parentLevel == 3 || angerLevel < parentLevel * 100) && playerCash >= 10 * (angerLevel + 10)){
 			angerLevel = angerLevel + number;
-			document.getElementById(powerName + "-number").innerText = angerLevel;
-			document.getElementById(powerName + "-price").innerText = 10 * (angerLevel + 10);
+			document.getElementById(name + "-number").innerText = angerLevel;
+			document.getElementById(name + "-price").innerText = 10 * (angerLevel + 10);
 			spendCash(10 * angerLevel);
 		}
 	}
 
-	else if(name == "twix"){
-		if(playerCash >= 50){
+	else if(name == "powerup-twix"){
+		if(playerCash >= 50 && number == 1){
 			spendCash(50);
 			twixTimer += (60 * 20);
 		}
 
 	}
-	else if(name == "shrinkage"){
+	else if(name == "powerup-shrinkage"){
 		isLaughing = true;
 	}
-	else if(name == "parents"){
+	else if(name == "powerup-parents"){
 		parentLevel = number;
 		if(number == 2)
 			document.getElementById("frank").style.visibility   = "visible";
@@ -267,11 +279,11 @@ function upgrade(name, number){
 	}
 
 	//parts for dishonest branch power ups
-	else if(name == "dishonest"){
+	else if(name == "powerup-dishonest"){
 		georgeLying = 1;
 	}
 
-	else if (name == "cashmere"){
+	else if (name == "powerup-cashmere"){
 		//elaineHelping equals 0 then she isnt helping
 		//elaineHelping equals 1 then she is helping with time not out and each click gives more points
 		//elaineHelping equals 2 she is helping but time is out and each click takes away clicks
@@ -285,18 +297,18 @@ function upgrade(name, number){
 		}
 	}
 
-	else if(name == "whaleBio"){
+	else if(name == "powerup-whaleBio"){
 		golfBallTimer = 20;
 		whaleActive = true;
 
 	}
 
-	else if(name == "contest"){
+	else if(name == "powerup-contest"){
 		contestActive  = true;
 		contestCounter = 60 * 20;
 	}
 
-	else if(name = "iqTest"){
+	else if(name = "powerup-iqTest"){
 		// iqTest should be effected by the function powerupSwitch and in gameTick under cashmere portion
 		iqTestActive = true;
 	}
@@ -375,6 +387,8 @@ function updateBackground(){
 
 function gameTick(){
 
+
+//saves the game every  second
 	saveGameTimer++
 	if(saveGameTimer % 20 == 0){
 		saveGame();
