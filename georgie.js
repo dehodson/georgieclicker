@@ -35,6 +35,7 @@ var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathr
 var powerUpsAchieved = [];
 
 var deathsAchieved = [];
+var unlockedUpgrades = [];
 
 var powerUpTree = {
 	"upgrade-clever-george":    ["upgrade-squint", "upgrade-bathrooms2"],
@@ -80,6 +81,10 @@ function saveGame(){
 	saveState.parentLevel = parentLevel;
 	saveState.parentPosition = parentPosition;
 	saveState.iqTestActive = iqTestActive;
+	saveState.deathCount = deathCount;
+	saveState.powerUpsAchieved = powerUpsAchieved;
+	saveState.deathsAchieved = deathsAchieved;
+	saveState.unlockedUpgrades = unlockedUpgrades;
 
 	localStorage.saveState = JSON.stringify(saveState);
 }
@@ -116,6 +121,13 @@ if(localStorage.saveState){
 	parentLevel = saveState.parentLevel;
 	parentPosition = saveState.parentPosition;
 	iqTestActive = saveState.iqTestActive;
+	deathCount = saveState.deathCount;
+	powerUpsAchieved = saveState.powerUpsAchieved;
+	unlockedUpgrades = saveState.unlockedUpgrades;
+
+	for(var n in unlockedUpgrades){
+		unlockChildren(document.getElementById(unlockedUpgrades[n]));
+	}
 }
 
 function killYourSelf(methodOfDeath){
@@ -311,6 +323,7 @@ function unlockChildren(element){
 	var id = element.id;
 	id = String(id);
 	console.log("this should be the id " + id);
+	unlockedUpgrades.push(element.id);
 	for(var i = 0; i < powerUpTree[id].length; i++){
 		document.getElementById(powerUpTree[id][i]).className = "upgrade-node available";
 	}
