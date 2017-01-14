@@ -27,6 +27,7 @@ var contestActive  = false;
 var parentLevel = 1;
 var parentPosition = 0;
 var iqTestActive;
+var saveGameTimer = 0;
 
 var deathCount;
 
@@ -40,13 +41,19 @@ var unlockedUpgrades = [];
 var powerUpTree = {
 	"upgrade-clever-george":    ["upgrade-squint", "upgrade-bathrooms2"],
 	"upgrade-bathrooms2":       ["upgrade-bathrooms3"],
+	"upgrade-bathrooms3":				[],
 	"upgrade-squint":           ["upgrade-super-squint"],
+	"upgrade-super-squint":			[],
 	"upgrade-angry-george":     ["upgrade-twix", "upgrade-dad"],
 	"upgrade-twix":             ["upgrade-shrinkage"],
+	"upgrade-shrinkage":				[],
 	"upgrade-dad":              ["upgrade-mom"],
+	"upgrade-mom":							[],
 	"upgrade-dishonest-george":	["upgrade-cashmere", "upgrade-whaleBio"],
 	"upgrade-whaleBio":         ["upgrade-contest"],
-	"upgrade-cashmere":         ["upgrade-iqTest"]
+	"upgrade-contest":					[],
+	"upgrade-cashmere":         ["upgrade-iqTest"],
+	"upgrade-iqTest":						[]
 };
 
 var saveState = {};
@@ -128,6 +135,8 @@ if(localStorage.saveState){
 	for(var n in unlockedUpgrades){
 		unlockChildren(document.getElementById(unlockedUpgrades[n]));
 	}
+	addCash(0);
+	addSkillPoints(0);
 }
 
 function killYourSelf(methodOfDeath){
@@ -324,6 +333,7 @@ function unlockChildren(element){
 	id = String(id);
 	console.log("this should be the id " + id);
 	unlockedUpgrades.push(element.id);
+	console.log(unlockedUpgrades);
 	for(var i = 0; i < powerUpTree[id].length; i++){
 		document.getElementById(powerUpTree[id][i]).className = "upgrade-node available";
 	}
@@ -364,6 +374,14 @@ function updateBackground(){
 }
 
 function gameTick(){
+
+	saveGameTimer++
+	if(saveGameTimer % 20 == 0){
+		saveGame();
+		console.log("saving")
+		saveGameTimer = 0;
+	}
+
 	var clicksPerSecond = 0;
 
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
