@@ -413,7 +413,7 @@ function gameTick(){
 	clickOnGeorge(clicksPerSecond);
 
 	updateBackground();
-	parentPosition += 02;
+	parentPosition += .02;
 	if(parentPosition >= 6.28){
 		parentPosition = 0;
 	}
