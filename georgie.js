@@ -120,7 +120,6 @@ if(localStorage.saveState){
 
 function killYourSelf(methodOfDeath){
 	deathCount++;
-	
 
 
 }
@@ -158,17 +157,17 @@ function clickOnGeorge(clicks){
 function clickOnGeorgeMoney(){
 	if(iqTestActive == true){
 		if(elaineHelping == 0){
-			addCash(3);
-			console.log("adding 3 cash")
+			addCash(.5);
+			console.log("adding .5 cash")
 
 		}
 		else if(elaineHelping == 1){
-			addCash(5);
-			console.log("adding 5 cash")
+			addCash(1);
+			console.log("adding 1 cash")
 		}
 		else if(elaineHelping == 2){
-			addCash(-5);
-			console.log("sub 5 cash")
+			addCash(-3);
+			console.log("sub 3 cash")
 
 		}
 	}
@@ -249,7 +248,6 @@ function upgrade(name, number){
 	//parts for dishonest branch power ups
 	else if(name == "dishonest"){
 		georgeLying = 1;
-
 	}
 
 	else if (name == "cashmere"){
