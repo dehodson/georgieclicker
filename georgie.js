@@ -7,7 +7,7 @@ var bathroomPower = 0.5;
 var angerLevel = 0;
 var twixTimer  = 0;
 var georgeLying = 0;
-var isLaughing   = false;
+var isLaughing = false;
 var clickPower = 1;
 var backgroundX = 0.0;
 var skillPoints = 0;
@@ -47,6 +47,76 @@ var powerUpTree = {
 	"upgrade-whaleBio":         ["upgrade-contest"],
 	"upgrade-cashmere":         ["upgrade-iqTest"]
 };
+
+var saveState = {};
+
+function saveGame(){
+	saveState.totalClickAmount = totalClickAmount;
+	saveState.level = level;
+	saveState.playerCash = playerCash;
+	saveState.levelMult = levelMult;
+	saveState.amountOfBathrooms = amountOfBathrooms;
+	saveState.bathroomPower = bathroomPower;
+	saveState.angerLevel = angerLevel;
+	saveState.twixTimer = twixTimer;
+	saveState.georgeLying = georgeLying;
+	saveState.isLaughing = isLaughing;
+	saveState.clickPower = clickPower;
+	saveState.backgroundX = backgroundX;
+	saveState.skillPoints = skillPoints;
+	saveState.lyingSecondTimer = lyingSecondTimer;
+	saveState.cashmereSecondTimer = cashmereSecondTimer;
+	saveState.elaineHelping = elaineHelping;
+	saveState.golfBallX = golfBallX;
+	saveState.golfBallY = golfBallY;
+	saveState.newGolfBall = newGolfBall;
+	saveState.golfBallActive = golfBallActive;
+	saveState.golfBallTimer = golfBallTimer;
+	saveState.whaleX = whaleX;
+	saveState.whaleActive = whaleActive;
+	saveState.cashmereSwitchCounter = cashmereSwitchCounter;
+	saveState.contestCounter = contestCounter;
+	saveState.contestActive = contestActive;
+	saveState.parentLevel = parentLevel;
+	saveState.parentPosition = parentPosition;
+	saveState.iqTestActive = iqTestActive;
+
+	localStorage.saveState = JSON.stringify(saveState);
+}
+
+if(localStorage.saveState){
+	saveState = JSON.parse(localStorage.saveState);
+
+	totalClickAmount = saveState.totalClickAmount;
+	level = saveState.level;
+	playerCash = saveState.playerCash;
+	levelMult = saveState.levelMult;
+	amountOfBathrooms = saveState.amountOfBathrooms;
+	bathroomPower = saveState.bathroomPower;
+	angerLevel = saveState.angerLevel;
+	twixTimer = saveState.twixTimer;
+	georgeLying = saveState.georgeLying;
+	isLaughing = saveState.isLaughing;
+	clickPower = saveState.clickPower;
+	backgroundX = saveState.backgroundX;
+	skillPoints = saveState.skillPoints;
+	lyingSecondTimer = saveState.lyingSecondTimer;
+	cashmereSecondTimer = saveState.cashmereSecondTimer;
+	elaineHelping = saveState.elaineHelping;
+	golfBallX = saveState.golfBallX;
+	golfBallY = saveState.golfBallY;
+	newGolfBall = saveState.newGolfBall;
+	golfBallActive = saveState.golfBallActive;
+	golfBallTimer = saveState.golfBallTimer;
+	whaleX = saveState.whaleX;
+	whaleActive = saveState.whaleActive;
+	cashmereSwitchCounter = saveState.cashmereSwitchCounter;
+	contestCounter = saveState.contestCounter;
+	contestActive = saveState.contestActive;
+	parentLevel = saveState.parentLevel;
+	parentPosition = saveState.parentPosition;
+	iqTestActive = saveState.iqTestActive;
+}
 
 function killYourSelf(methodOfDeath){
 	deathCount++;
@@ -345,7 +415,7 @@ function gameTick(){
 	clickOnGeorge(clicksPerSecond);
 
 	updateBackground();
-	parentPosition += .02;
+	parentPosition += 02;
 	if(parentPosition >= 6.28){
 		parentPosition = 0;
 	}
