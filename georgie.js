@@ -144,9 +144,20 @@ if(localStorage.saveState){
 //TODO:	make it run powerup() after the element has been displayed on the page. You will need a
 	for(var n in powerUpsAchieved){
 		document.getElementById(powerUpsAchieved[n]).style.display = 'inline-block';
-		upgrade(powerUpsAchieved[n],0);
-
+		if(powerUpsAchieved[n] != "powerup-cashmere"){
+			upgrade(powerUpsAchieved[n],0);
+		}else{
+			if(cashmereSwitchCounter%2 === 0){
+				document.getElementById("cashmere-button").innerText = "ON";
+				elaineHelping = 1;
+			}else{
+					document.getElementById("cashmere-button").innerText = "OFF";
+					document.getElementById("powerup-cashmere-number").innerText = "Placated";
+					elaineHelping = 0;
+				}
+		}
 	}
+	//powerupSwitch('cashmere');
 	addCash(0);
 	addSkillPoints(0);
 	document.getElementById("level").innerText = level;
@@ -294,7 +305,6 @@ function upgrade(name, number){
 			elaineHelping = number;
 			spendCash(200);
 			cashmereSecondTimer += (10 * 20);
-
 			document.getElementById("cashmere-switch").style.visibility = "visible";
 		}
 	}
