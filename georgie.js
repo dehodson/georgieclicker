@@ -41,19 +41,19 @@ var unlockedUpgrades = [];
 var powerUpTree = {
 	"upgrade-clever-george":    ["upgrade-squint", "upgrade-bathrooms2"],
 	"upgrade-bathrooms2":       ["upgrade-bathrooms3"],
-	"upgrade-bathrooms3":				[],
+	"upgrade-bathrooms3":		[],
 	"upgrade-squint":           ["upgrade-super-squint"],
-	"upgrade-super-squint":			[],
+	"upgrade-super-squint":		[],
 	"upgrade-angry-george":     ["upgrade-twix", "upgrade-dad"],
 	"upgrade-twix":             ["upgrade-shrinkage"],
-	"upgrade-shrinkage":				[],
+	"upgrade-shrinkage":		[],
 	"upgrade-dad":              ["upgrade-mom"],
-	"upgrade-mom":							[],
+	"upgrade-mom":				[],
 	"upgrade-dishonest-george":	["upgrade-cashmere", "upgrade-whaleBio"],
 	"upgrade-whaleBio":         ["upgrade-contest"],
-	"upgrade-contest":					[],
+	"upgrade-contest":			[],
 	"upgrade-cashmere":         ["upgrade-iqTest"],
-	"upgrade-iqTest":						[]
+	"upgrade-iqTest":			[]
 };
 
 var saveState = {};
@@ -90,6 +90,7 @@ function saveGame(){
 	saveState.iqTestActive = iqTestActive;
 	saveState.deathCount = deathCount;
 	saveState.powerUpsAchieved = powerUpsAchieved;
+	saveState.powerUpMoveList = powerUpMoveList;
 	saveState.deathsAchieved = deathsAchieved;
 	saveState.unlockedUpgrades = unlockedUpgrades;
 
@@ -130,6 +131,7 @@ if(localStorage.saveState){
 	iqTestActive = saveState.iqTestActive;
 	deathCount = saveState.deathCount;
 	powerUpsAchieved = saveState.powerUpsAchieved;
+	powerUpMoveList = saveState.powerUpMoveList;
 	unlockedUpgrades = saveState.unlockedUpgrades;
 
 	for(var n in unlockedUpgrades){
@@ -344,7 +346,18 @@ function unlockChildren(element){
 	var id = element.id;
 	id = String(id);
 	console.log("this should be the id " + id);
-	unlockedUpgrades.push(element.id);
+
+	var exists = false;
+	for(var item in unlockedUpgrades){
+		if(unlockedUpgrades[item] == element.id){
+			exists = true;
+		}
+	}
+
+	if(!exists){
+		unlockedUpgrades.push(element.id);
+	}
+
 	console.log(unlockedUpgrades);
 	for(var i = 0; i < powerUpTree[id].length; i++){
 		document.getElementById(powerUpTree[id][i]).className = "upgrade-node available";
@@ -352,20 +365,24 @@ function unlockChildren(element){
 }
 
 function newUpgrade(newMove){
-		var index, value;
-		for (index = 0; index < powerUpMoveList.length; index++) {
+	var index, value;
+
+	for (index = 0; index < powerUpMoveList.length; index++) {
+
     	value = powerUpMoveList[index];
-			console.log("index value" + value);
-			console.log("move input" + newMove);
+		console.log("index value" + value);
+		console.log("move input" + newMove);
+
     	if (value == newMove && skillPoints > 0) {
 			document.getElementById(newMove).style.display = 'inline-block';
 			spendSkillPoints(1);
 			powerUpsAchieved.push(newMove);
+			powerUpMoveList.splice(index, 1);
 			console.log("powerups achieed " + powerUpsAchieved);
 			console.log("powerup list of not achieved " + powerUpMoveList);
 			break;
 		}
-    }
+	}
 }
 
 //adds more points to spend on powerups and levels the player to the next level
@@ -388,9 +405,9 @@ function updateBackground(){
 function gameTick(){
 
 
-//saves the game every  second
+//saves the game every ten seconds
 	saveGameTimer++
-	if(saveGameTimer % 20 == 0){
+	if(saveGameTimer >= 200){
 		saveGame();
 		console.log("saving")
 		saveGameTimer = 0;
