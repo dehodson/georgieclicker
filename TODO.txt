@@ -1,6 +1,5 @@
 all possibilities of KYS need created ---mech., name, and artwork.
 
-local storage saving still needs to be applied.
 
 all moves and powerups need to be balanced out.
 leveling up needs to be adjusted

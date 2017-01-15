@@ -39,21 +39,21 @@ var deathsAchieved = [];
 var unlockedUpgrades = [];
 
 var powerUpTree = {
-	"upgrade-clever-george":    ["upgrade-squint", "upgrade-bathrooms2"],
-	"upgrade-bathrooms2":       ["upgrade-bathrooms3"],
-	"upgrade-bathrooms3":		[],
-	"upgrade-squint":           ["upgrade-super-squint"],
-	"upgrade-super-squint":		[],
-	"upgrade-angry-george":     ["upgrade-twix", "upgrade-dad"],
-	"upgrade-twix":             ["upgrade-shrinkage"],
-	"upgrade-shrinkage":		[],
-	"upgrade-dad":              ["upgrade-mom"],
-	"upgrade-mom":				[],
+	"upgrade-clever-george":		["upgrade-squint", "upgrade-bathrooms2"],
+	"upgrade-bathrooms2":				["upgrade-bathrooms3"],
+	"upgrade-bathrooms3":				[],
+	"upgrade-squint":						["upgrade-super-squint"],
+	"upgrade-super-squint":			[],
+	"upgrade-angry-george":			["upgrade-twix", "upgrade-dad"],
+	"upgrade-twix":							["upgrade-shrinkage"],
+	"upgrade-shrinkage":				[],
+	"upgrade-dad":							["upgrade-mom"],
+	"upgrade-mom":							[],
 	"upgrade-dishonest-george":	["upgrade-cashmere", "upgrade-whaleBio"],
-	"upgrade-whaleBio":         ["upgrade-contest"],
-	"upgrade-contest":			[],
-	"upgrade-cashmere":         ["upgrade-iqTest"],
-	"upgrade-iqTest":			[]
+	"upgrade-whaleBio":					["upgrade-contest"],
+	"upgrade-contest":					[],
+	"upgrade-cashmere":					["upgrade-iqTest"],
+	"upgrade-iqTest":						[]
 };
 
 var saveState = {};
