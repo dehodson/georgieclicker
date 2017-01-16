@@ -363,11 +363,12 @@
 				<div class="upgrade-node visible" id="upgrade-basic-george" style="top:0px;left:220px;background-image:url('pictures/upgrades/basicGeorge.png');"><span class="upgrade-tooltip">Basic George<br /><span class="tooltip-description">Your everyday George Costanza.</span></span></div>
 
 <!-- this is the clever george branch -->
-				<div class="upgrade-node available" id="upgrade-clever-george" style="top:60px;left:60px;background-image:url('pictures/upgrades/cleverGeorge.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms'); unlockChildren(this);}"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-squint"         style="top:130px;left:10px;background-image:url('pictures/upgrades/squint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-squint'); upgrade('powerup-squint', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Squint<br /><span class="tooltip-description">Squint down to 20/20 to see more accurately.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-super-squint"   style="top:200px;left:10px;background-image:url('pictures/upgrades/superSquint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-super-squint'); upgrade('powerup-super-squint', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Super Squint<br /><span class="tooltip-description">George is squinting as hard as he can.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-bathrooms2"     style="top:130px;left:85px;background-image:url('pictures/upgrades/betterBathrooms.png');" onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms2'); upgrade('powerup-bathrooms2', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Better Bathrooms<br /><span class="tooltip-description">George has picked out some real choice locations.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-bathrooms3"     style="top:200px;left:85px;background-image:url('pictures/upgrades/goldBathrooms.png');" onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms3'); upgrade('powerup-bathrooms3', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Golden Bathrooms<br /><span class="tooltip-description">George has revealed the mac daddy of bathrooms.</span></span></div>
+				<div class="upgrade-node available" id="upgrade-clever-george" 		style="top:60px;left:60px;background-image:url('pictures/upgrades/cleverGeorge.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms'); unlockChildren(this);}"><span class="upgrade-tooltip">Clever George<br /><span class="tooltip-description">The path of Clever George.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-squint"         		style="top:130px;left:10px;background-image:url('pictures/upgrades/squint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-squint'); upgrade('powerup-squint', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Squint<br /><span class="tooltip-description">Squint down to 20/20 to see more accurately.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-super-squint"   		style="top:200px;left:10px;background-image:url('pictures/upgrades/superSquint.png');" onclick="if(upgradable(this)){newUpgrade('powerup-super-squint'); upgrade('powerup-super-squint', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Super Squint<br /><span class="tooltip-description">George is squinting as hard as he can.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-bathrooms2"     		style="top:130px;left:85px;background-image:url('pictures/upgrades/betterBathrooms.png');" onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms2'); upgrade('powerup-bathrooms2', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Better Bathrooms<br /><span class="tooltip-description">George has picked out some real choice locations.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-bathrooms3"     		style="top:200px;left:85px;background-image:url('pictures/upgrades/goldBathrooms.png');" onclick="if(upgradable(this)){newUpgrade('powerup-bathrooms3'); upgrade('powerup-bathrooms3', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Golden Bathrooms<br /><span class="tooltip-description">George has revealed the mac daddy of bathrooms.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-answer-machine"    style="top:270px;left:48px;background-image:url('pictures/upgrades/georgeanswermachine.png');" onclick="if(upgradable(this)){newUpgrade('powerup-answer-machine'); upgrade('powerup-answer-machine', 1); unlockChildren(this);}"><span class="upgrade-tooltip">George's Answering Machine<br /><span class="tooltip-description">George can now avoid all social encounters to click nonstop.</span></span></div>
 
 
 <!--  this is the angry george branch-->
@@ -384,7 +385,7 @@
 				<div class="upgrade-node disabled" id="upgrade-whaleBio" 						style="top:130px;left:425px;background-image:url('pictures/upgrades/marinebio.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-whaleBio'); upgrade('powerup-whaleBio', 1);unlockChildren(this);}"><span class="upgrade-tooltip">Marine Biologist<br /><span class="tooltip-description">It was a hole in one I tell you.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-contest"  						style="top:200px;left:425px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-contest'); upgrade('powerup-contest', 1);unlockChildren(this);}"><span class="upgrade-tooltip">The Contest<br /><span class="tooltip-description">I'm the master of my domain.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-iqTest"  						style="top:200px;left:350px;background-image:url('pictures/upgrades/georgeIQTest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-iqTest'); upgrade('powerup-iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The IQ Test<br /><span class="tooltip-description">Elaine, did you spill coffee on my IQ test?</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-kys-dishonest"  			style="top:300px;left:375px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){killYourSelf(''); upgrade('powerup-iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George has had it. His choice of death is pills.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-kys-dishonest"  			style="top:270px;left:375px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){killYourSelf(''); upgrade('powerup-iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George has had it. His choice of death is pills.</span></span></div>
 
 <!--  TODO: add in a death counter once you kill yourself you add add up deaths and the game starts over but you get bonuses-->
 <!--  -->
@@ -440,6 +441,15 @@
 			</div>
 			<div class="powerup-title">Super Squint</div>
 			<div class="powerup-description">George is squinting so hard, he can pick out raccoons on the side of the highway!</div>
+		</div>
+
+		<div class="powerup" id="powerup-answer-machine" style="display: none;">
+			<div class="powerup-img">
+				<img class="imgButton powerUpButton" src="pictures/supersquint.png" alt="squint" >
+				<span class="powerup-tooltip">George has gone full anti social</span>
+			</div>
+			<div class="powerup-title">George's answering Machine</div>
+			<div class="powerup-description">George has set his appartment up so no one will be able to bother him.</div>
 		</div>
 
 

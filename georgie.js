@@ -33,7 +33,7 @@ var angryBranchCount = 0;
 var dishonestBranchCount = 0;
 var deathCount;
 var deathsAchieved = [];
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine"];
 var powerUpsAchieved = [];
 var unlockedUpgrades = [];
 var powerUpTree = {
@@ -51,7 +51,8 @@ var powerUpTree = {
 	"upgrade-whaleBio": 				["upgrade-contest"],
 	"upgrade-contest": 					[],
 	"upgrade-cashmere": 				["upgrade-iqTest"],
-	"upgrade-iqTest": 					[]
+	"upgrade-iqTest": 					[],
+	"upgrade-answer-machine":		[]
 };
 var saveState = {};
 
@@ -276,6 +277,8 @@ function upgrade(name, number) {
 	} else if (name == "powerup-iqTest") {
 		// iqTest should be effected by the function powerupSwitch and in gameTick under cashmere portion
 		iqTestActive = true;
+	} else if (name == "powerup-answer-machine") {
+		//move for answer machine
 	}
 }
 
@@ -319,6 +322,7 @@ function unlockChildren(element) {
 	if (document.getElementById("upgrade-bathrooms3").className == 'upgrade-node visible' && document.getElementById("upgrade-super-squint").className == 'upgrade-node visible' && cleverBranchCount === 0) {
 		cleverBranchCount = 1;
 		console.log("unlock clever george last node");
+		document.getElementById("upgrade-answer-machine").className = "upgrade-node available";
 	}
 	if (document.getElementById("upgrade-shrinkage").className == 'upgrade-node visible' && document.getElementById("upgrade-mom").className == 'upgrade-node visible' && angryBranchCount === 0) {
 		angryBranchCount = 1;
