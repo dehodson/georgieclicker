@@ -218,7 +218,6 @@ function spendSkillPoints(amount) {
 }
 
 function upgrade(name, number) {
-	//var powerName = "powerup-" + name;
 	if (name == "powerup-bathrooms") {
 		if (playerCash >= 10 * (amountOfBathrooms + 1)) {
 			amountOfBathrooms = amountOfBathrooms + number;
