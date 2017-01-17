@@ -33,9 +33,10 @@ var angryBranchCount = 0;
 var dishonestBranchCount = 0;
 var deathCount;
 var deathsAchieved = [];
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund", "powerup-pulp"];
 var powerUpsAchieved = [];
 var unlockedUpgrades = [];
+var pulpActive = false;
 var powerUpTree = {
 	"upgrade-clever-george": 		["upgrade-squint", "upgrade-bathrooms2"],
 	"upgrade-bathrooms2": 			["upgrade-bathrooms3"],
@@ -54,6 +55,7 @@ var powerUpTree = {
 	"upgrade-iqTest": 					[],
 	"upgrade-answer-machine":		[],
 	"upgrade-human-fund":				[],
+	"upgrade-pulp":							[]
 };
 var saveState = {};
 
@@ -95,6 +97,7 @@ function saveGame() {
 	saveState.cleverBranchCount = cleverBranchCount;
 	saveState.dishonestBranchCount = dishonestBranchCount;
 	saveState.angryBranchCount = angryBranchCount;
+	saveState.pulpActive = pulpActive;
 	localStorage.saveState = JSON.stringify(saveState);
 }
 if (localStorage.saveState) {
@@ -134,6 +137,7 @@ if (localStorage.saveState) {
 	unlockedUpgrades = saveState.unlockedUpgrades;
 	cleverBranchCount = saveState.cleverBranchCount;
 	angryBranchCount = saveState.angryBranchCount;
+	pulpActive = saveState.pulpActive;
 	dishonestBranchCount = saveState.dishonestBranchCount;
 	for (var n in unlockedUpgrades) {
 		unlockChildren(document.getElementById(unlockedUpgrades[n]));
@@ -210,6 +214,15 @@ function spendCash(amount) {
 }
 
 function addSkillPoints(amount) {
+	if(pulpActive == true){
+		console.log("pulpActive");
+		var skillChance = Math.floor(Math.random() * 10) + 1
+		console.log(skillChance);
+		if(skillChance < 3){
+			amount = 2;
+			console.log("adding 2 skill points")
+		}
+	}
 	skillPoints += amount;
 	document.getElementById("skill-points").innerText = skillPoints;
 }
@@ -269,7 +282,12 @@ function upgrade(name, number) {
 		parentLevel = number;
 		if (number == 2) document.getElementById("frank").style.visibility = "visible";
 		if (number == 3) document.getElementById("estelle").style.visibility = "visible";
+	} else if (name == "powerup-pulp"){
+		pulpActive = true;
 	}
+
+
+
 	//parts for dishonest branch power ups
 	else if (name == "powerup-dishonest") {
 		georgeLying = 1;
@@ -342,6 +360,8 @@ function unlockChildren(element) {
 	if (document.getElementById("upgrade-shrinkage").className == 'upgrade-node visible' && document.getElementById("upgrade-mom").className == 'upgrade-node visible' && angryBranchCount === 0) {
 		angryBranchCount = 1;
 		console.log("unlock angry george last node");
+		document.getElementById("upgrade-pulp").className = "upgrade-node available";
+
 
 	}
 	if (document.getElementById("upgrade-contest").className == 'upgrade-node visible' && document.getElementById("upgrade-iqTest").className == 'upgrade-node visible' && dishonestBranchCount === 0) {
