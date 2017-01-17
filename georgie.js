@@ -215,14 +215,12 @@ function spendCash(amount) {
 
 function addSkillPoints(amount) {
 	if(pulpActive == true){
-		console.log("pulpActive");
 		var skillChance = Math.floor(Math.random() * 10) + 1
-		console.log(skillChance);
-		if(skillChance < 3){
+		if(skillChance < 4){
 			amount = 2;
-			console.log("adding 2 skill points")
 		}
 	}
+	console.log(amount);
 	skillPoints += amount;
 	document.getElementById("skill-points").innerText = skillPoints;
 }
