@@ -220,7 +220,6 @@ function addSkillPoints(amount) {
 			amount = 2;
 		}
 	}
-	console.log(amount);
 	skillPoints += amount;
 	document.getElementById("skill-points").innerText = skillPoints;
 }
@@ -352,19 +351,14 @@ function unlockChildren(element) {
 	}
 	if (document.getElementById("upgrade-bathrooms3").className == 'upgrade-node visible' && document.getElementById("upgrade-super-squint").className == 'upgrade-node visible' && cleverBranchCount === 0) {
 		cleverBranchCount = 1;
-		console.log("unlock clever george last node");
 		document.getElementById("upgrade-answer-machine").className = "upgrade-node available";
 	}
 	if (document.getElementById("upgrade-shrinkage").className == 'upgrade-node visible' && document.getElementById("upgrade-mom").className == 'upgrade-node visible' && angryBranchCount === 0) {
 		angryBranchCount = 1;
-		console.log("unlock angry george last node");
 		document.getElementById("upgrade-pulp").className = "upgrade-node available";
-
-
 	}
 	if (document.getElementById("upgrade-contest").className == 'upgrade-node visible' && document.getElementById("upgrade-iqTest").className == 'upgrade-node visible' && dishonestBranchCount === 0) {
 		dishonestBranchCount = 1;
-		console.log("unlock dishonest george last node");
 		document.getElementById("upgrade-human-fund").className = "upgrade-node available";
 
 	}
