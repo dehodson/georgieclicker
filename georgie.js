@@ -33,7 +33,7 @@ var angryBranchCount = 0;
 var dishonestBranchCount = 0;
 var deathCount;
 var deathsAchieved = [];
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine"];
+var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund"];
 var powerUpsAchieved = [];
 var unlockedUpgrades = [];
 var powerUpTree = {
@@ -52,7 +52,8 @@ var powerUpTree = {
 	"upgrade-contest": 					[],
 	"upgrade-cashmere": 				["upgrade-iqTest"],
 	"upgrade-iqTest": 					[],
-	"upgrade-answer-machine":		[]
+	"upgrade-answer-machine":		[],
+	"upgrade-human-fund":				[],
 };
 var saveState = {};
 
@@ -231,9 +232,23 @@ function upgrade(name, number) {
 	} else if (name == "powerup-bathrooms3") {
 		bathroomPower = 2.5;
 	} else if (name == "powerup-squint") {
+		if(number < 1){
+			number = 1;
+		}
 		clickPower = 5 * number;
 	} else if (name == "powerup-super-squint") {
+		if(number < 1){
+			number = 1;
+		}
 		clickPower = 10 * number;
+	} else if (name == "powerup-answer-machine") {
+		//move for answer machine
+		if(number < 1){
+			number = 1;
+		}
+		bathroomPower = bathroomPower * 2.5;
+		clickPower = 100 * number;
+
 	}
 	//parts for upset george
 	else if (name == "powerup-upset") {
@@ -277,8 +292,8 @@ function upgrade(name, number) {
 	} else if (name == "powerup-iqTest") {
 		// iqTest should be effected by the function powerupSwitch and in gameTick under cashmere portion
 		iqTestActive = true;
-	} else if (name == "powerup-answer-machine") {
-		//move for answer machine
+	} else if (name == "powerup-human-fund"){
+		addCash(20000);
 	}
 }
 
@@ -327,10 +342,13 @@ function unlockChildren(element) {
 	if (document.getElementById("upgrade-shrinkage").className == 'upgrade-node visible' && document.getElementById("upgrade-mom").className == 'upgrade-node visible' && angryBranchCount === 0) {
 		angryBranchCount = 1;
 		console.log("unlock angry george last node");
+
 	}
 	if (document.getElementById("upgrade-contest").className == 'upgrade-node visible' && document.getElementById("upgrade-iqTest").className == 'upgrade-node visible' && dishonestBranchCount === 0) {
 		dishonestBranchCount = 1;
 		console.log("unlock dishonest george last node");
+		document.getElementById("upgrade-human-fund").className = "upgrade-node available";
+
 	}
 }
 

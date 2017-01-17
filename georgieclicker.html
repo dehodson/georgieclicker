@@ -385,7 +385,7 @@
 				<div class="upgrade-node disabled" id="upgrade-whaleBio" 						style="top:130px;left:425px;background-image:url('pictures/upgrades/marinebio.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-whaleBio'); upgrade('powerup-whaleBio', 1);unlockChildren(this);}"><span class="upgrade-tooltip">Marine Biologist<br /><span class="tooltip-description">It was a hole in one I tell you.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-contest"  						style="top:200px;left:425px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-contest'); upgrade('powerup-contest', 1);unlockChildren(this);}"><span class="upgrade-tooltip">The Contest<br /><span class="tooltip-description">I'm the master of my domain.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-iqTest"  						style="top:200px;left:350px;background-image:url('pictures/upgrades/georgeIQTest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-iqTest'); upgrade('powerup-iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The IQ Test<br /><span class="tooltip-description">Elaine, did you spill coffee on my IQ test?</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-kys-dishonest"  			style="top:270px;left:375px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){killYourSelf(''); upgrade('powerup-iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George has had it. His choice of death is pills.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-human-fund"  				style="top:270px;left:385px;background-image:url('pictures/upgrades/.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-human-fund'); upgrade('powerup-human-fund', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The Human Fund<br /><span class="tooltip-description">George's made up charity.</span></span></div>
 
 <!--  TODO: add in a death counter once you kill yourself you add add up deaths and the game starts over but you get bonuses-->
 <!--  -->
@@ -556,7 +556,16 @@
 	 			</div>
 	 			<div class="powerup-title">The IQ Test</div>
 	 			<div class="powerup-description">"Elaine, You got 150 on your IQ test?", You have to take it for me.</div>
-	</div>
+		 </div>
+
+		 <div class="powerup" id="powerup-human-fund" style="display: none;">
+			 <div class="powerup-img">
+				 <img class="imgButton powerUpButton" src="pictures/contest.png" alt="contest">
+				 <span class="powerup-tooltip">Recieved one massive lump some of 20k cash.</span>
+			 </div>
+			 <div class="powerup-title">The Human Fund</div>
+			 <div class="powerup-description">George, here is a 20k check for your charity.</div>
+		 </div>
 
 	</div>
 
