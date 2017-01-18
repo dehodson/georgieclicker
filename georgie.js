@@ -151,8 +151,11 @@ if (localStorage.saveState) {
 		unlockChildren(document.getElementById(unlockedUpgrades[n]));
 	}
 
-	document.getElementById("death").style.display=  'inline-block';
-	document.getElementById("death-number").innerText = deathCount;
+	if ( deathCount > 0){
+		document.getElementById("death").style.display=  'inline-block';
+		document.getElementById("death-number").innerText = deathCount;
+	}
+
 
 
 	document.getElementById("powerup-upset-number").innerText = angerLevel;
@@ -261,7 +264,7 @@ function clickOnGeorge(clicks) {
 		totalClickAmount = totalClickAmount + clicks;
 	}
 	//checks to see if the player should level up because of this click
-	if (totalClickAmount - (Math.pow(10, level)) >= 0) {
+	if (totalClickAmount - (Math.pow(2, (2*level)+2 )) >= 0) {
 		levelUp();
 	}
 	document.getElementById("score").innerText = totalClickAmount.toFixed(0);
@@ -504,15 +507,6 @@ function gameTick() {
 		saveGame();
 		saveGameTimer = 0;
 	}
-	// if (deathCount > 0 && saveGameTimer < 5){
-	// 	document.getElementById("death").style.display=  'inline-block';
-	// 	document.getElementById("death-number").innerText = deathCount;
-	// }
-	// if (angerLevel > 0 && saveGameTimer < 5){
-	// 	document.getElementById("powerup-upset-number").innerText = angerLevel;
-	// 	document.getElementById("powerup-upset-price").innerText = 10 * (angerLevel + 10);
-	//
-	// }
 	var clicksPerSecond = 0;
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
 	clicksPerSecond += (0.1 * (parentLevel * parentLevel)) * angerLevel;
@@ -520,8 +514,8 @@ function gameTick() {
 		lyingSecondTimer++;
 		document.getElementById("powerup-dishonest-number").innerText = Math.ceil(lyingSecondTimer / 20) + "/10";
 		if (lyingSecondTimer == 200) {
-			var randMin = 100;
-			var randMax = 1500;
+			var randMin = .01 * totalClickAmount;
+			var randMax = .05 * totalClickAmount;
 			var lyingClicks = Math.floor(Math.random() * (randMax - randMin + 1)) + randMin;
 			clickOnGeorge(lyingClicks);
 			lyingSecondTimer = 0;
@@ -608,7 +602,7 @@ function laughing(bool) {
 		element.style.visibility = "visible";
 	} else {
 		element.style.visibility = "hidden";
-		clickOnGeorge(totalClickAmount * 0.01);
+		clickOnGeorge(totalClickAmount * 0.03);
 	}
 }
 
