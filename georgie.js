@@ -102,6 +102,7 @@ function saveGame() {
 	saveState.angryBranchCount = angryBranchCount;
 	saveState.kysCount = kysCount;
 	saveState.pulpActive = pulpActive;
+	saveState.availableUpgrades = availableUpgrades;
 	localStorage.saveState = JSON.stringify(saveState);
 }
 if (localStorage.saveState) {
@@ -144,9 +145,15 @@ if (localStorage.saveState) {
 	angryBranchCount = saveState.angryBranchCount;
 	kysCount = saveState.kysCount;
 	pulpActive = saveState.pulpActive;
+	availableUpgrades = saveState.availableUpgrades;
 	dishonestBranchCount = saveState.dishonestBranchCount;
 	for (var n in unlockedUpgrades) {
 		unlockChildren(document.getElementById(unlockedUpgrades[n]));
+	}
+
+	console.log(availableUpgrades);
+	for (var n in availableUpgrades) {
+		document.getElementById(availableUpgrades[n]).className = "upgrade-node available";
 	}
 	for (var n in powerUpsAchieved) {
 		document.getElementById(powerUpsAchieved[n]).style.display = 'inline-block';
@@ -395,19 +402,24 @@ function powerupSwitch(powerup) {
 
 function upgradable(element) {
 	if (element.className == "upgrade-node available" && skillPoints > 0) {
-		return true;
 		saveGame();
+		return true;
 	}
 	return false;
 }
 
 function unlockChildren(element) {
 
-	//TODO: the last nodes in each branch will be disabled if you havent fully unlocked them and refresh the page.
-	// this will cause it so you can't unlock the node ever. 
+
 	element.className = "upgrade-node visible";
 	var id = element.id;
 	id = String(id);
+	var found = availableUpgrades.indexOf(id);
+
+	 while (found !== -1) {
+			 availableUpgrades.splice(found, 1);
+			 found = availableUpgrades.indexOf(id);
+	 }
 	var exists = false;
 	for (var item in unlockedUpgrades) {
 		if (unlockedUpgrades[item] == element.id) {
@@ -419,23 +431,31 @@ function unlockChildren(element) {
 	}
 	for (var i = 0; i < powerUpTree[id].length; i++) {
 		document.getElementById(powerUpTree[id][i]).className = "upgrade-node available";
+		availableUpgrades.push(powerUpTree[id][i]);
 	}
 	if (document.getElementById("upgrade-bathrooms3").className == 'upgrade-node visible' && document.getElementById("upgrade-super-squint").className == 'upgrade-node visible' && cleverBranchCount === 0) {
 		cleverBranchCount = 1;
 		document.getElementById("upgrade-answer-machine").className = "upgrade-node available";
+		availableUpgrades.push("upgrade-answer-machine");
 	}
 	if (document.getElementById("upgrade-shrinkage").className == 'upgrade-node visible' && document.getElementById("upgrade-mom").className == 'upgrade-node visible' && angryBranchCount === 0) {
 		angryBranchCount = 1;
 		document.getElementById("upgrade-pulp").className = "upgrade-node available";
+		availableUpgrades.push("upgrade-pulp");
+
 	}
 	if (document.getElementById("upgrade-contest").className == 'upgrade-node visible' && document.getElementById("upgrade-iqTest").className == 'upgrade-node visible' && dishonestBranchCount === 0) {
 		dishonestBranchCount = 1;
 		document.getElementById("upgrade-human-fund").className = "upgrade-node available";
+		availableUpgrades.push("upgrade-human-fund");
+
 
 	}
 	if( document.getElementById("upgrade-answer-machine").className == "upgrade-node visible" && document.getElementById("upgrade-pulp").className == "upgrade-node visible" && document.getElementById("upgrade-human-fund").className == "upgrade-node visible" && kysCount === 0){
 		kysCount = 1;
 		document.getElementById("upgrade-kys").className = "upgrade-node available";
+		availableUpgrades.push("upgrade-kys");
+
 	}
 }
 
