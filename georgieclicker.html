@@ -192,7 +192,7 @@
 			height:500px;
 			background-image:url("pictures/simpletree.png");
 			position: absolute;
-			top:0px;
+			top:50px;
 			right:0px;
 			left:0px;
 			bottom:0px;
@@ -410,7 +410,7 @@
 
 <!--  TODO: add in a death counter once you kill yourself you add add up deaths and the game starts over but you get bonuses-->
 
-				<div class="upgrade-node disabled" id="upgrade-kys"  				style="width:75px;height:75px;top:350px;left:200px;background-image:url('pictures/upgrades/humanfund.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-kys'); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George just can't handle this life anymore.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-kys"  				style="width:75px;height:75px;top:350px;left:200px;background-image:url('pictures/upgrades/kys.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-kys'); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George just can't handle this life anymore.</span></span></div>
 
 <!--  -->
 			</div>
@@ -600,9 +600,11 @@
 			 <div class="powerup-description">George, here is a 20k check for your charity.</div>
 		 </div>
 
+
+<!--  kill your self powerup-->
 		 <div class="powerup" id="powerup-kys" style="display: none;">
 			 <div class="powerup-img">
-				 <img class="imgButton powerUpButton" src="pictures/humanfund.png" alt="contest" onclick="upgrade('powerup-kys', 1)" >
+				 <img class="imgButton powerUpButton" src="pictures/kyspills.png" alt="contest" onclick="upgrade('powerup-kys', 1)" >
 				 <span class="powerup-tooltip">Kill yourself and restart the game with a deathcount bonus</span>
 			 </div>
 			 <div class="powerup-title">Kill Yourself</div>
@@ -610,7 +612,7 @@
 		 </div>
 
 	</div>
-
+	<script src= "HackTimer.js"></script>
 	<script src="georgie.js"></script>
 
 </body>

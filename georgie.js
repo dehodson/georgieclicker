@@ -130,7 +130,7 @@ if (localStorage.saveState) {
 	golfBallTimer = saveState.golfBallTimer;
 	whaleX = saveState.whaleX;
 	whaleActive = saveState.whaleActive;
-	cashmereSwitchCounter = saveState.cashmereSwitchCounter;
+	cashmereSwitchCounter = 1;
 	contestCounter = saveState.contestCounter;
 	contestActive = saveState.contestActive;
 	parentLevel = saveState.parentLevel;
@@ -150,6 +150,13 @@ if (localStorage.saveState) {
 	for (var n in unlockedUpgrades) {
 		unlockChildren(document.getElementById(unlockedUpgrades[n]));
 	}
+
+	document.getElementById("death").style.display=  'inline-block';
+	document.getElementById("death-number").innerText = deathCount;
+
+
+	document.getElementById("powerup-upset-number").innerText = angerLevel;
+	document.getElementById("powerup-upset-price").innerText = 10 * (angerLevel + 10);
 
 	for (var n in availableUpgrades) {
 		document.getElementById(availableUpgrades[n]).className = "upgrade-node available";
@@ -265,7 +272,7 @@ function clickOnGeorgeMoney() {
 		if (elaineHelping === 0) {
 			addCash(0.5);
 		} else if (elaineHelping == 1) {
-			addCash(1);
+			addCash(10);
 		} else if (elaineHelping == 2) {
 			addCash(-3);
 		}
@@ -286,6 +293,7 @@ function addSkillPoints(amount) {
 	if(pulpActive == true){
 		var skillChance = Math.floor(Math.random() * 10) + 1
 		if(skillChance < 4){
+			console.log("gain 2 skill points ")
 			amount = 2;
 		}
 	}
@@ -496,10 +504,15 @@ function gameTick() {
 		saveGame();
 		saveGameTimer = 0;
 	}
-	if (deathCount > 0 && saveGameTimer < 5){
-		document.getElementById("death").style.display=  'inline-block';
-		document.getElementById("death-number").innerText = deathCount;
-	}
+	// if (deathCount > 0 && saveGameTimer < 5){
+	// 	document.getElementById("death").style.display=  'inline-block';
+	// 	document.getElementById("death-number").innerText = deathCount;
+	// }
+	// if (angerLevel > 0 && saveGameTimer < 5){
+	// 	document.getElementById("powerup-upset-number").innerText = angerLevel;
+	// 	document.getElementById("powerup-upset-price").innerText = 10 * (angerLevel + 10);
+	//
+	// }
 	var clicksPerSecond = 0;
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
 	clicksPerSecond += (0.1 * (parentLevel * parentLevel)) * angerLevel;
