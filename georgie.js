@@ -197,7 +197,7 @@ function killYourSelf(num) {
 			document.getElementById(powerUpsAchieved[n]).style.display = "none";
 		}
 		deathCount++;
-		deathMult = deathCount * 50;
+		deathMult = (deathCount + .5) * (deathCount + .5) * 5;
 
 		totalClickAmount = 0;
 		totalClickAmount = 0;
