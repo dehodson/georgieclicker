@@ -151,7 +151,6 @@ if (localStorage.saveState) {
 		unlockChildren(document.getElementById(unlockedUpgrades[n]));
 	}
 
-	console.log(availableUpgrades);
 	for (var n in availableUpgrades) {
 		document.getElementById(availableUpgrades[n]).className = "upgrade-node available";
 	}
@@ -170,7 +169,6 @@ if (localStorage.saveState) {
 			}
 		}
 	}
-	//powerupSwitch('cashmere');
 	addCash(0);
 	addSkillPoints(0);
 	document.getElementById("level").innerText = level;
@@ -392,10 +390,12 @@ function powerupSwitch(powerup) {
 		if (cashmereSwitchCounter % 2 === 0) {
 			document.getElementById("cashmere-button").innerText = "ON";
 			elaineHelping = 1;
+			saveGame();
 		} else {
 			document.getElementById("cashmere-button").innerText = "OFF";
 			document.getElementById("powerup-cashmere-number").innerText = "Placated";
 			elaineHelping = 0;
+			saveGame();
 		}
 	}
 }
@@ -494,7 +494,6 @@ function gameTick() {
 	saveGameTimer++;
 	if (saveGameTimer >= 200) {
 		saveGame();
-		console.log("saving");
 		saveGameTimer = 0;
 	}
 	if (deathCount > 0 && saveGameTimer < 5){
@@ -532,7 +531,6 @@ function gameTick() {
 		cashmereSecondTimer -= 1;
 		document.getElementById("powerup-cashmere-number").innerText = "Happy for " + Math.ceil(cashmereSecondTimer / 20);
 	} else if (cashmereSecondTimer === 0 && elaineHelping == 1) {
-		//clickPower = clickPower - elaineClickPower;
 		document.getElementById("powerup-cashmere-number").innerText = "Pissed";
 		elaineHelping = 2;
 	}
