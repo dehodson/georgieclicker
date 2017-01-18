@@ -212,6 +212,7 @@
 			height: 100%;
 			content: " ";
 		}
+
 		.upgrade-node.disabled::after{
 			content: "?";
 			color:white;
@@ -222,6 +223,17 @@
 			position: absolute;
 			top:15px;
 		}
+		#upgrade-kys.upgrade-node.disabled::after {
+			content: "?";
+			color:white;
+			text-align: center;
+			font-size: 3em;
+			height:75px;
+			width:75px;
+			position: absolute;
+			top:28px;
+		}
+
 		.upgrade-node.available::after{
 			content: ' ';
 			display: block;
@@ -377,7 +389,7 @@
 				<div class="upgrade-node disabled" id="upgrade-shrinkage"      style="top:200px;left:255px;background-image:url('pictures/upgrades/shrinkage.png');" onclick="if(upgradable(this)){newUpgrade('powerup-shrinkage'); upgrade('powerup-shrinkage', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Shrinkage<br /><span class="tooltip-description">George just got out of the pool and he's feeling mad.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-dad"            style="top:130px;left:180px;background-image:url('pictures/upgrades/dad.png');" onclick="if(upgradable(this)){newUpgrade('powerup-dad'); unlockChildren(this); upgrade('powerup-parents', 2)}"><span class="upgrade-tooltip">George's Dad<br /><span class="tooltip-description">Being around his dad doesn't really help George's temper.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-mom"            style="top:200px;left:180px;background-image:url('pictures/upgrades/mom.png');" onclick="if(upgradable(this)){newUpgrade('powerup-mom'); upgrade('powerup-parents', 3); unlockChildren(this);}"><span class="upgrade-tooltip">George's Mom<br /><span class="tooltip-description">When George's mom is around, his anger knows no bounds.</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-pulp"  				 style="top:270px;left:200px;background-image:url('pictures/upgrades/.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-pulp'); upgrade('powerup-pulp', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The Grapefruit Pulp<br /><span class="tooltip-description">Pulp can fly baby!</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-pulp"  				 style="top:270px;left:215px;background-image:url('pictures/upgrades/pulp.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-pulp'); upgrade('powerup-pulp', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The Grapefruit Pulp<br /><span class="tooltip-description">Pulp can fly baby!</span></span></div>
 
 
 <!--  this is the dishonest george branch-->
@@ -386,9 +398,12 @@
 				<div class="upgrade-node disabled" id="upgrade-whaleBio" 						style="top:130px;left:425px;background-image:url('pictures/upgrades/marinebio.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-whaleBio'); upgrade('powerup-whaleBio', 1);unlockChildren(this);}"><span class="upgrade-tooltip">Marine Biologist<br /><span class="tooltip-description">It was a hole in one I tell you.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-contest"  						style="top:200px;left:425px;background-image:url('pictures/upgrades/contest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-contest'); upgrade('powerup-contest', 1);unlockChildren(this);}"><span class="upgrade-tooltip">The Contest<br /><span class="tooltip-description">I'm the master of my domain.</span></span></div>
 				<div class="upgrade-node disabled" id="upgrade-iqTest"  						style="top:200px;left:350px;background-image:url('pictures/upgrades/georgeIQTest.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-iqTest'); upgrade('powerup-iqTest', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The IQ Test<br /><span class="tooltip-description">Elaine, did you spill coffee on my IQ test?</span></span></div>
-				<div class="upgrade-node disabled" id="upgrade-human-fund"  				style="top:270px;left:385px;background-image:url('pictures/upgrades/.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-human-fund'); upgrade('powerup-human-fund', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The Human Fund<br /><span class="tooltip-description">George's made up charity.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-human-fund"  				style="top:270px;left:385px;background-image:url('pictures/upgrades/humanfund.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-human-fund'); upgrade('powerup-human-fund', 1); unlockChildren(this);}"><span class="upgrade-tooltip">The Human Fund<br /><span class="tooltip-description">George's made up charity.</span></span></div>
 
 <!--  TODO: add in a death counter once you kill yourself you add add up deaths and the game starts over but you get bonuses-->
+
+				<div class="upgrade-node disabled" id="upgrade-kys"  				style="width:75px;height:75px;top:350px;left:200px;background-image:url('pictures/upgrades/humanfund.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-kys'); upgrade('powerup-kys', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George just can't handle this life anymore.</span></span></div>
+
 <!--  -->
 			</div>
 		</div>
@@ -446,7 +461,7 @@
 
 		<div class="powerup" id="powerup-answer-machine" style="display: none;">
 			<div class="powerup-img">
-				<img class="imgButton powerUpButton" src="pictures/supersquint.png" alt="squint" >
+				<img class="imgButton powerUpButton" src="pictures/answermachine.png" alt="squint" >
 				<span class="powerup-tooltip">George has gone full anti social</span>
 			</div>
 			<div class="powerup-title">George's answering Machine</div>
@@ -570,11 +585,20 @@
 
 		 <div class="powerup" id="powerup-human-fund" style="display: none;">
 			 <div class="powerup-img">
-				 <img class="imgButton powerUpButton" src="pictures/contest.png" alt="contest">
+				 <img class="imgButton powerUpButton" src="pictures/humanfund.png" alt="contest">
 				 <span class="powerup-tooltip">Recieved one massive lump some of 20k cash.</span>
 			 </div>
 			 <div class="powerup-title">The Human Fund</div>
 			 <div class="powerup-description">George, here is a 20k check for your charity.</div>
+		 </div>
+
+		 <div class="powerup" id="powerup-kys" style="display: none;">
+			 <div class="powerup-img">
+				 <img class="imgButton powerUpButton" src="pictures/humanfund.png" alt="contest">
+				 <span class="powerup-tooltip">KYS this should be kys</span>
+			 </div>
+			 <div class="powerup-title">KYS title for kys</div>
+			 <div class="powerup-description">KYS kys kys kys kys kys and fucking kys</div>
 		 </div>
 
 	</div>
