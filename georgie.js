@@ -33,7 +33,7 @@ var angryBranchCount = 0;
 var dishonestBranchCount = 0;
 var kysCount = 0;
 var deathCount;
-var deathsAchieved = [];
+var deathMult = 1;
 var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund", "powerup-pulp", "powerup-kys"];
 var powerUpsAchieved = [];
 var unlockedUpgrades = [];
@@ -94,7 +94,6 @@ function saveGame() {
 	saveState.deathCount = deathCount;
 	saveState.powerUpsAchieved = powerUpsAchieved;
 	saveState.powerUpMoveList = powerUpMoveList;
-	saveState.deathsAchieved = deathsAchieved;
 	saveState.unlockedUpgrades = unlockedUpgrades;
 	saveState.cleverBranchCount = cleverBranchCount;
 	saveState.dishonestBranchCount = dishonestBranchCount;
@@ -167,17 +166,70 @@ if (localStorage.saveState) {
 	document.getElementById("level").innerText = level;
 }
 
-function killYourSelf() {
-	deathCount++;
+function killYourSelf(num) {
+	if (num != 0){
+
+		for (var n in powerUpsAchieved){
+			document.getElementById(powerUpsAchieved[n]).style.display = 'none'
+		}
+		console.log('killYourSelf');
+		deathCount++;
+		deathMult = deathCount * 50;
+
+		totalClickAmount = 0;
+		level = 1;
+		playerCash = 0;
+		levelMult = 1;
+		amountOfBathrooms = 0;
+		bathroomPower = 0.5;
+		angerLevel = 0;
+		twixTimer = 0;
+		georgeLying = 0;
+		isLaughing = false;
+		clickPower = 1;
+		skillPoints = 0;
+		lyingSecondTimer = 0;
+		cashmereSecondTimer = 0;
+		elaineHelping = 0;
+		golfBallX = 0.0;
+		golfBallY = 0.0;
+		newGolfBall = 0;
+		golfBallActive = false;
+		golfBallTimer;
+		whaleX = 500;
+		whaleActive = false;
+		cashmereSwitchCounter = 0;
+		contestCounter = 0;
+		contestActive = false;
+		parentLevel = 1;
+	 	parentPosition = 0;
+		iqTestActive;
+		saveGameTimer = 0;
+		cleverBranchCount = 0;
+		angryBranchCount = 0;
+		dishonestBranchCount = 0;
+		kysCount = 0;
+		pulpActive = false;
+		var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund", "powerup-pulp", "powerup-kys"];
+		var powerUpsAchieved = [];
+		var unlockedUpgrades = [];
+
+
+
+
+	}
+	document.getElementById("score").innerText = totalClickAmount.toFixed(0);
+	document.getElementById("death").style.visibility = "visible";
+	document.getElementById("death-number").innerText = deathCount;
 }
 //function to handle all clicks
 function clickOnGeorge(clicks) {
 	if (typeof clicks === 'undefined') {
-		clicks = clickPower;
+		clicks = clickPower * deathMult;
 		if (elaineHelping == 1) {
-			clicks *= 100;
+			clicks *= 100 * deathMult;
 		} else if (elaineHelping == 2) {
-			clicks *= -100;
+			clicks *= -100 * deathMult;
 		}
 		if (contestActive) {
 			contestCounter = 60 * 20;
@@ -315,8 +367,7 @@ function upgrade(name, number) {
 		addCash(20000);
 	} else if (name == "powerup-kys"){
 		//TODO: restart the game and add death counter
-		killYourSelf();
-		console.log("fucking unlock bitch");
+		killYourSelf(number);
 	}
 }
 
@@ -465,6 +516,7 @@ function gameTick() {
 	if (Math.random() > 0.99 && isLaughing) {
 		laughing(true);
 	}
+	clicksPerSecond = clicksPerSecond * deathMult;
 	clickOnGeorge(clicksPerSecond);
 	updateBackground();
 	parentPosition += 0.02;

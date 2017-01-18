@@ -347,6 +347,13 @@
 		.powerup-img:hover .powerup-tooltip{
 			visibility: visible;
 		}
+		#death{
+			visibility: hidden;
+			float: right;
+			text-align: right;
+			margin-right: 100px;
+
+		}
 	</style>
 
 </head>
@@ -358,9 +365,10 @@
 
 
 		<div id="statistics">
-			Level:&nbsp;<span id="level">1</span><br /><br />
+			Level:&nbsp;<span id="level">1</span><div id="death"> <img src="pictures/death.png" width="20" height="20"><span id="death-number">0</span></div><br /><br />
 			Clicks on George:&nbsp;<span id="score">0</span><br /><br />
 			Cash:&nbsp;$<span id="cash">0</span>
+
 		</div>
 		<div id="georgeMain">
 			<img class="imgButton" src="pictures/georgeMain.png" alt="georgeMain" onclick="clickOnGeorge(); clickOnGeorgeMoney();">
@@ -402,7 +410,7 @@
 
 <!--  TODO: add in a death counter once you kill yourself you add add up deaths and the game starts over but you get bonuses-->
 
-				<div class="upgrade-node disabled" id="upgrade-kys"  				style="width:75px;height:75px;top:350px;left:200px;background-image:url('pictures/upgrades/humanfund.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-kys'); upgrade('powerup-kys', 1); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George just can't handle this life anymore.</span></span></div>
+				<div class="upgrade-node disabled" id="upgrade-kys"  				style="width:75px;height:75px;top:350px;left:200px;background-image:url('pictures/upgrades/humanfund.png');"  onclick="if(upgradable(this)){newUpgrade('powerup-kys'); unlockChildren(this);}"><span class="upgrade-tooltip">Kill Yourself<br /><span class="tooltip-description">George just can't handle this life anymore.</span></span></div>
 
 <!--  -->
 			</div>
@@ -594,11 +602,11 @@
 
 		 <div class="powerup" id="powerup-kys" style="display: none;">
 			 <div class="powerup-img">
-				 <img class="imgButton powerUpButton" src="pictures/humanfund.png" alt="contest">
-				 <span class="powerup-tooltip">KYS this should be kys</span>
+				 <img class="imgButton powerUpButton" src="pictures/humanfund.png" alt="contest" onclick="upgrade('powerup-kys', 1)" >
+				 <span class="powerup-tooltip">Kill yourself and restart the game with a deathcount bonus</span>
 			 </div>
-			 <div class="powerup-title">KYS title for kys</div>
-			 <div class="powerup-description">KYS kys kys kys kys kys and fucking kys</div>
+			 <div class="powerup-title">Kill Yourself</div>
+			 <div class="powerup-description">George has declared it easier to end it all than put up with all these lies he has going on.</div>
 		 </div>
 
 	</div>
