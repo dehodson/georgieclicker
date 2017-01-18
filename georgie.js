@@ -32,10 +32,11 @@ var cleverBranchCount = 0;
 var angryBranchCount = 0;
 var dishonestBranchCount = 0;
 var kysCount = 0;
-var deathCount;
+var deathCount = 0;
 var deathMult = 1;
 var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund", "powerup-pulp", "powerup-kys"];
 var powerUpsAchieved = [];
+var availableUpgrades = [];
 var unlockedUpgrades = [];
 var pulpActive = false;
 var powerUpTree = {
@@ -92,6 +93,7 @@ function saveGame() {
 	saveState.parentPosition = parentPosition;
 	saveState.iqTestActive = iqTestActive;
 	saveState.deathCount = deathCount;
+	saveState.deathMult = deathMult;
 	saveState.powerUpsAchieved = powerUpsAchieved;
 	saveState.powerUpMoveList = powerUpMoveList;
 	saveState.unlockedUpgrades = unlockedUpgrades;
@@ -134,6 +136,7 @@ if (localStorage.saveState) {
 	parentPosition = saveState.parentPosition;
 	iqTestActive = saveState.iqTestActive;
 	deathCount = saveState.deathCount;
+	deathMult = saveState.deathMult;
 	powerUpsAchieved = saveState.powerUpsAchieved;
 	powerUpMoveList = saveState.powerUpMoveList;
 	unlockedUpgrades = saveState.unlockedUpgrades;
@@ -167,15 +170,21 @@ if (localStorage.saveState) {
 }
 
 function killYourSelf(num) {
-	if (num != 0){
-
-		for (var n in powerUpsAchieved){
-			document.getElementById(powerUpsAchieved[n]).style.display = 'none'
+	if (num != 0 ){
+		for (var n in unlockedUpgrades){
+			if (document.getElementById(unlockedUpgrades[n]).id == 'upgrade-clever-george' || document.getElementById(unlockedUpgrades[n]).id == 'upgrade-angry-george' || document.getElementById(unlockedUpgrades[n]).id == 'upgrade-dishonest-george' ) {
+				document.getElementById(unlockedUpgrades[n]).className = "upgrade-node available";
+			}else{
+				document.getElementById(unlockedUpgrades[n]).className = "upgrade-node disabled";
+			}
 		}
-		console.log('killYourSelf');
+		for (var n in powerUpsAchieved){
+			document.getElementById(powerUpsAchieved[n]).style.display = "none";
+		}
 		deathCount++;
 		deathMult = deathCount * 50;
 
+		totalClickAmount = 0;
 		totalClickAmount = 0;
 		level = 1;
 		playerCash = 0;
@@ -203,23 +212,22 @@ function killYourSelf(num) {
 		contestActive = false;
 		parentLevel = 1;
 	 	parentPosition = 0;
-		iqTestActive;
+		iqTestActive = false;
 		saveGameTimer = 0;
 		cleverBranchCount = 0;
 		angryBranchCount = 0;
 		dishonestBranchCount = 0;
 		kysCount = 0;
 		pulpActive = false;
-		var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund", "powerup-pulp", "powerup-kys"];
-		var powerUpsAchieved = [];
-		var unlockedUpgrades = [];
+		powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund", "powerup-pulp", "powerup-kys"];
+		powerUpsAchieved = [];
+		unlockedUpgrades = [];
 
-
-
+		saveGame();
+		location.reload();
 
 	}
-	document.getElementById("score").innerText = totalClickAmount.toFixed(0);
-	document.getElementById("death").style.visibility = "visible";
+	document.getElementById("death").style.display=  'inline-block';
 	document.getElementById("death-number").innerText = deathCount;
 }
 //function to handle all clicks
@@ -388,15 +396,18 @@ function powerupSwitch(powerup) {
 function upgradable(element) {
 	if (element.className == "upgrade-node available" && skillPoints > 0) {
 		return true;
+		saveGame();
 	}
 	return false;
 }
 
 function unlockChildren(element) {
+
+	//TODO: the last nodes in each branch will be disabled if you havent fully unlocked them and refresh the page.
+	// this will cause it so you can't unlock the node ever. 
 	element.className = "upgrade-node visible";
 	var id = element.id;
 	id = String(id);
-	console.log(id)
 	var exists = false;
 	for (var item in unlockedUpgrades) {
 		if (unlockedUpgrades[item] == element.id) {
@@ -465,6 +476,10 @@ function gameTick() {
 		saveGame();
 		console.log("saving");
 		saveGameTimer = 0;
+	}
+	if (deathCount > 0 && saveGameTimer < 5){
+		document.getElementById("death").style.display=  'inline-block';
+		document.getElementById("death-number").innerText = deathCount;
 	}
 	var clicksPerSecond = 0;
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
