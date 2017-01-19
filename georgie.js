@@ -583,11 +583,12 @@ setInterval(gameTick, 50);
 function keyPressed(event) {
 	if (event.which == 32) {
 		togglePanel();
-	} else if (event.which == 77) {
-		clickOnGeorge(2000000);
-		addSkillPoints(20);
-		addCash(1000);
-	} else if (event.which == 37) {
+	// } else if (event.which == 77) {
+	// 	clickOnGeorge(2000000);
+	// 	addSkillPoints(20);
+	// 	addCash(1000);
+	} 
+	else if (event.which == 37) {
 		whaleMove("left");
 	} else if (event.which == 39) {
 		whaleMove("right");
