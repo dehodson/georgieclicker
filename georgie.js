@@ -39,27 +39,29 @@ var powerUpsAchieved = [];
 var availableUpgrades = [];
 var unlockedUpgrades = [];
 var pulpActive = false;
+
 var powerUpTree = {
-	"upgrade-clever-george": 		["upgrade-squint", "upgrade-bathrooms2"],
-	"upgrade-bathrooms2": 			["upgrade-bathrooms3"],
-	"upgrade-bathrooms3": 			[],
-	"upgrade-squint": 					["upgrade-super-squint"],
-	"upgrade-super-squint": 		[],
-	"upgrade-angry-george": 		["upgrade-twix", "upgrade-dad"],
-	"upgrade-twix": 						["upgrade-shrinkage"],
-	"upgrade-shrinkage": 				[],
-	"upgrade-dad": 							["upgrade-mom"],
-	"upgrade-mom": 							[],
+	"upgrade-clever-george":    ["upgrade-squint", "upgrade-bathrooms2"],
+	"upgrade-bathrooms2":       ["upgrade-bathrooms3"],
+	"upgrade-bathrooms3":       [],
+	"upgrade-squint":           ["upgrade-super-squint"],
+	"upgrade-super-squint":     [],
+	"upgrade-angry-george":     ["upgrade-twix", "upgrade-dad"],
+	"upgrade-twix":             ["upgrade-shrinkage"],
+	"upgrade-shrinkage":        [],
+	"upgrade-dad":              ["upgrade-mom"],
+	"upgrade-mom":              [],
 	"upgrade-dishonest-george": ["upgrade-cashmere", "upgrade-whaleBio"],
-	"upgrade-whaleBio": 				["upgrade-contest"],
-	"upgrade-contest": 					[],
-	"upgrade-cashmere": 				["upgrade-iqTest"],
-	"upgrade-iqTest": 					[],
-	"upgrade-answer-machine":		[],
-	"upgrade-human-fund":				[],
-	"upgrade-pulp":							[],
-	"upgrade-kys":							[]
+	"upgrade-whaleBio":         ["upgrade-contest"],
+	"upgrade-contest":          [],
+	"upgrade-cashmere":         ["upgrade-iqTest"],
+	"upgrade-iqTest":           [],
+	"upgrade-answer-machine":   [],
+	"upgrade-human-fund":       [],
+	"upgrade-pulp":             [],
+	"upgrade-kys":              []
 };
+
 var saveState = {};
 
 function saveGame() {
@@ -105,6 +107,7 @@ function saveGame() {
 	saveState.availableUpgrades = availableUpgrades;
 	localStorage.saveState = JSON.stringify(saveState);
 }
+
 if (localStorage.saveState) {
 	saveState = JSON.parse(localStorage.saveState);
 	totalClickAmount = saveState.totalClickAmount;
@@ -147,16 +150,15 @@ if (localStorage.saveState) {
 	pulpActive = saveState.pulpActive;
 	availableUpgrades = saveState.availableUpgrades;
 	dishonestBranchCount = saveState.dishonestBranchCount;
+
 	for (var n in unlockedUpgrades) {
 		unlockChildren(document.getElementById(unlockedUpgrades[n]));
 	}
 
 	if ( deathCount > 0){
-		document.getElementById("death").style.display=  'inline-block';
+		document.getElementById("death").style.display = 'inline-block';
 		document.getElementById("death-number").innerText = deathCount;
 	}
-
-
 
 	document.getElementById("powerup-upset-number").innerText = angerLevel;
 	document.getElementById("powerup-upset-price").innerText = 10 * (angerLevel + 10);
@@ -164,9 +166,10 @@ if (localStorage.saveState) {
 	for (var n in availableUpgrades) {
 		document.getElementById(availableUpgrades[n]).className = "upgrade-node available";
 	}
+
 	for (var n in powerUpsAchieved) {
 		document.getElementById(powerUpsAchieved[n]).style.display = 'inline-block';
-		if (powerUpsAchieved[n] != "powerup-cashmere") {
+		if (powerUpsAchieved[n] !== "powerup-cashmere") {
 			upgrade(powerUpsAchieved[n], 0);
 		} else {
 			if (cashmereSwitchCounter % 2 === 0) {
@@ -179,6 +182,7 @@ if (localStorage.saveState) {
 			}
 		}
 	}
+
 	addCash(0);
 	addSkillPoints(0);
 	document.getElementById("level").innerText = level;
@@ -187,7 +191,7 @@ if (localStorage.saveState) {
 function killYourSelf(num) {
 	if (num != 0 ){
 		for (var n in unlockedUpgrades){
-			if (document.getElementById(unlockedUpgrades[n]).id == 'upgrade-clever-george' || document.getElementById(unlockedUpgrades[n]).id == 'upgrade-angry-george' || document.getElementById(unlockedUpgrades[n]).id == 'upgrade-dishonest-george' ) {
+			if (document.getElementById(unlockedUpgrades[n]).id === 'upgrade-clever-george' || document.getElementById(unlockedUpgrades[n]).id === 'upgrade-angry-george' || document.getElementById(unlockedUpgrades[n]).id === 'upgrade-dishonest-george' ) {
 				document.getElementById(unlockedUpgrades[n]).className = "upgrade-node available";
 			}else{
 				document.getElementById(unlockedUpgrades[n]).className = "upgrade-node disabled";
@@ -249,9 +253,9 @@ function killYourSelf(num) {
 function clickOnGeorge(clicks) {
 	if (typeof clicks === 'undefined') {
 		clicks = clickPower * deathMult;
-		if (elaineHelping == 1) {
+		if (elaineHelping === 1) {
 			clicks *= 100 * deathMult;
-		} else if (elaineHelping == 2) {
+		} else if (elaineHelping === 2) {
 			clicks *= -100 * deathMult;
 		}
 		if (contestActive) {
@@ -340,6 +344,8 @@ function upgrade(name, number) {
 		clickPower = 100 * number;
 
 	}
+
+
 	//parts for upset george
 	else if (name == "powerup-upset") {
 		if ((parentLevel == 3 || angerLevel < parentLevel * 100) && playerCash >= 10 * (angerLevel + 10)) {
@@ -362,7 +368,6 @@ function upgrade(name, number) {
 	} else if (name == "powerup-pulp"){
 		pulpActive = true;
 	}
-
 
 
 	//parts for dishonest branch power ups
@@ -420,7 +425,6 @@ function upgradable(element) {
 }
 
 function unlockChildren(element) {
-
 
 	element.className = "upgrade-node visible";
 	var id = element.id;
@@ -503,13 +507,16 @@ function updateBackground() {
 function gameTick() {
 	//saves the game every ten seconds
 	saveGameTimer++;
+
 	if (saveGameTimer >= 200) {
 		saveGame();
 		saveGameTimer = 0;
 	}
+
 	var clicksPerSecond = 0;
 	clicksPerSecond += bathroomPower * amountOfBathrooms;
 	clicksPerSecond += (0.1 * (parentLevel * parentLevel)) * angerLevel;
+
 	if (georgeLying > 0) {
 		lyingSecondTimer++;
 		document.getElementById("powerup-dishonest-number").innerText = Math.ceil(lyingSecondTimer / 20) + "/10";
@@ -521,19 +528,23 @@ function gameTick() {
 			lyingSecondTimer = 0;
 		}
 	}
+
 	if (whaleActive) {
 		document.getElementById("whale").style.visibility = "visible";
 		golfBallTimer -= 1;
 		document.getElementById("powerup-whaleBio-number").innerText = "FORRREE! " + Math.ceil(golfBallTimer / 20);
 	}
+
 	if (golfBallTimer === 0) {
 		newGolfBall = true;
 		golfBallTimer = 20 * 20;
 		golfBallActive = true;
 	}
+
 	if (golfBallActive) {
 		golfBall();
 	}
+
 	if (cashmereSecondTimer > 0 && elaineHelping == 1) {
 		cashmereSecondTimer -= 1;
 		document.getElementById("powerup-cashmere-number").innerText = "Happy for " + Math.ceil(cashmereSecondTimer / 20);
@@ -541,11 +552,13 @@ function gameTick() {
 		document.getElementById("powerup-cashmere-number").innerText = "Pissed";
 		elaineHelping = 2;
 	}
+
 	if (twixTimer > 0) {
 		twixTimer -= 1;
 		clicksPerSecond *= 2;
 		document.getElementById("powerup-twix-number").innerText = Math.ceil(twixTimer / 20);
 	}
+
 	if (contestActive && contestCounter > 0) {
 		contestCounter -= 1;
 		document.getElementById("powerup-contest-number").innerText = Math.ceil(contestCounter / 20);
@@ -553,21 +566,28 @@ function gameTick() {
 		contestCounter = 60 * 20;
 		addCash(100);
 	}
+	
 	if (Math.random() > 0.99 && isLaughing) {
 		laughing(true);
 	}
+
 	clicksPerSecond = clicksPerSecond * deathMult;
 	clickOnGeorge(clicksPerSecond);
 	updateBackground();
+
 	parentPosition += 0.02;
 	if (parentPosition >= 6.28) {
 		parentPosition = 0;
 	}
+
 	orbitParents();
 }
 
+setInterval(gameTick, 50);
+
 function togglePanel() {
 	var panel = document.getElementById("upgrade-panel");
+
 	if (panel.className == "open") {
 		panel.className = "closed";
 		document.getElementById("upgrade-panel-closetext").style.visibility = "hidden";
@@ -578,17 +598,15 @@ function togglePanel() {
 		}, 150);
 	}
 }
-setInterval(gameTick, 50);
 
 function keyPressed(event) {
 	if (event.which == 32) {
 		togglePanel();
-	// } else if (event.which == 77) {
-	// 	clickOnGeorge(2000000);
-	// 	addSkillPoints(20);
-	// 	addCash(1000);
-	} 
-	else if (event.which == 37) {
+	} else if (event.which == 77) {
+		clickOnGeorge(2000000);
+		addSkillPoints(20);
+		addCash(1000);
+	} else if (event.which == 37) {
 		whaleMove("left");
 	} else if (event.which == 39) {
 		whaleMove("right");
@@ -597,6 +615,7 @@ function keyPressed(event) {
 
 function laughing(bool) {
 	var element = document.getElementById("laughing");
+
 	if (bool) {
 		element.style.top = (Math.random() * (screen.height * 0.9) + 100) + "px";
 		element.style.left = (Math.random() * (screen.width * 0.4) + 50) + "px";
@@ -609,6 +628,7 @@ function laughing(bool) {
 
 function whaleMove(direction) {
 	var element = document.getElementById("whale");
+
 	if (direction == "left") {
 		if (whaleX > 0) {
 			whaleX -= 15;
@@ -630,12 +650,15 @@ function golfBall() {
 	var rect1 = element.getBoundingClientRect();
 	var rect2 = whale.getBoundingClientRect();
 	var overlap = !(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom);
+
 	element.style.visibility = "visible";
+
 	if (newGolfBall === true) {
 		golfBallX = (Math.random() * (screen.width * 0.4) + 50);
 		golfBallY = 0;
 		newGolfBall = false;
 	}
+
 	if (!newGolfBall) {
 		golfBallY += 10;
 		element.style.left = golfBallX + "px";
@@ -646,6 +669,7 @@ function golfBall() {
 			newGolfBall = true;
 		}
 	}
+
 	if (overlap) {
 		addCash(500);
 		element.style.visibility = "hidden";
@@ -655,10 +679,12 @@ function golfBall() {
 }
 
 function orbitParents() {
-	var originX = 130;
-	var originY = 122;
 	var mom = document.getElementById("estelle");
 	var dad = document.getElementById("frank");
+
+	var originX = 130;
+	var originY = 122;
+	
 	mom.style.top = (originX + Math.cos(parentPosition) * 250) + "px";
 	mom.style.left = (originY + Math.sin(parentPosition) * 250) + "px";
 	dad.style.top = (originX + Math.cos(parentPosition - 3.14) * 250) + "px";
