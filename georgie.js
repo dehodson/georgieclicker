@@ -1,44 +1,46 @@
-var totalClickAmount = 0;
-var level = 1;
-var playerCash = 0;
-var levelMult = 1;
-var amountOfBathrooms = 0;
-var bathroomPower = 0.5;
-var angerLevel = 0;
-var twixTimer = 0;
-var georgeLying = 0;
-var isLaughing = false;
-var clickPower = 1;
-var backgroundX = 0.0;
-var skillPoints = 0;
-var lyingSecondTimer = 0;
-var cashmereSecondTimer = 0;
-var elaineHelping = 0;
-var golfBallX = 0.0;
-var golfBallY = 0.0;
-var newGolfBall = 0;
-var golfBallActive = false;
-var golfBallTimer;
-var whaleX = 500;
-var whaleActive = false;
-var cashmereSwitchCounter = 0;
-var contestCounter = 0;
-var contestActive = false;
-var parentLevel = 1;
-var parentPosition = 0;
-var iqTestActive;
-var saveGameTimer = 0;
-var cleverBranchCount = 0;
-var angryBranchCount = 0;
-var dishonestBranchCount = 0;
-var kysCount = 0;
-var deathCount = 0;
-var deathMult = 1;
-var powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund", "powerup-pulp", "powerup-kys"];
-var powerUpsAchieved = [];
-var availableUpgrades = [];
-var unlockedUpgrades = [];
-var pulpActive = false;
+var gameState = {
+	"totalClickAmount": 0,
+	"level": 1,
+	"playerCash": 0,
+	"LevelMult": 1,
+	"amountOfBathrooms": 0,
+	"bathroomPower": 0.5,
+	"angerLevel": 0,
+	"twixTimer": 0,
+	"georgeLying": 0,
+	"isLaughing": false,
+	"clickPower": 1,
+	"backgroundX": 0.0,
+	"skillPoints": 0,
+	"lyingSecondTimer": 0,
+	"cashmereSecondTimer": 0,
+	"elaineHelping": 0,
+	"golfBallX": 0.0,
+	"golfBallY": 0.0,
+	"newGolfBall": 0,
+	"golfBallActive": false,
+	"golfBallTimer": undefined,
+	"whaleX": 500,
+	"whaleActive": false,
+	"cashmereSwitchCounter": 0,
+	"contestCounter": 0,
+	"contestActive": false,
+	"parentLevel": 1,
+	"parentPosition": 0,
+	"iqTestActive": false,
+	"saveGameTimer": 0,
+	"cleverBranchCount": 0,
+	"angryBranchCount": 0,
+	"dishonestBranchCount": 0,
+	"kysCount": 0,
+	"deathCount": 0,
+	"deathMult": 1,
+	"powerUpMoveList": ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund", "powerup-pulp", "powerup-kys"],
+	"powerUpsAchieved": [],
+	"availableUpgrades": [],
+	"unlockedUpgrades": [],
+	"pulpActive": false
+};
 
 var powerUpTree = {
 	"upgrade-clever-george":    ["upgrade-squint", "upgrade-bathrooms2"],
@@ -62,24 +64,22 @@ var powerUpTree = {
 	"upgrade-kys":              []
 };
 
-var saveState = {};
-
 var upgrades = {
 	"powerup-bathrooms": function (number) {
-		if (playerCash >= 10 * (amountOfBathrooms + 1)) {
-			amountOfBathrooms = amountOfBathrooms + number;
-			document.getElementById("powerup-bathrooms-number").innerText = amountOfBathrooms;
-			document.getElementById("powerup-bathrooms-price").innerText = 10 * (amountOfBathrooms + 1);
-			spendCash(10 * amountOfBathrooms);
+		if (gameState.playerCash >= 10 * (gameState.amountOfBathrooms + 1)) {
+			gameState.amountOfBathrooms = gameState.amountOfBathrooms + number;
+			document.getElementById("powerup-bathrooms-number").innerText = gameState.amountOfBathrooms;
+			document.getElementById("powerup-bathrooms-price").innerText = 10 * (gameState.amountOfBathrooms + 1);
+			spendCash(10 * gameState.amountOfBathrooms);
 		}
 	},
 
 	"powerup-bathrooms2": function (number) {
-		bathroomPower = 1;
+		gameState.bathroomPower = 1;
 	},
 
 	"powerup-bathrooms3": function (number) {
-		bathroomPower = 2.5;
+		gameState.bathroomPower = 2.5;
 	},
 
 	"powerup-squint": function (number) {
@@ -87,7 +87,7 @@ var upgrades = {
 			number = 1;
 		}
 
-		clickPower = 5 * number;
+		gameState.clickPower = 5 * number;
 	},
 
 	"powerup-super-squint": function (number) {
@@ -95,7 +95,7 @@ var upgrades = {
 			number = 1;
 		}
 		
-		clickPower = 10 * number;
+		gameState.clickPower = 10 * number;
 	},
 
 	"powerup-answer-machine": function (number) {
@@ -103,72 +103,72 @@ var upgrades = {
 			number = 1;
 		}
 		
-		bathroomPower = bathroomPower * 2.5;
-		clickPower = 100 * number;
+		gameState.bathroomPower = gameState.bathroomPower * 2.5;
+		gameState.clickPower = 100 * number;
 	},
 
 	"powerup-upset": function (number) {
-		if ((parentLevel == 3 || angerLevel < parentLevel * 100) && playerCash >= 10 * (angerLevel + 10)) {
-			angerLevel = angerLevel + number;
-			document.getElementById("powerup-upset-number").innerText = angerLevel;
-			document.getElementById("powerup-upset-price").innerText = 10 * (angerLevel + 10);
-			spendCash(10 * angerLevel);
+		if ((gameState.parentLevel == 3 || gameState.angerLevel < gameState.parentLevel * 100) && gameState.playerCash >= 10 * (gameState.angerLevel + 10)) {
+			gameState.angerLevel = gameState.angerLevel + number;
+			document.getElementById("powerup-upset-number").innerText = gameState.angerLevel;
+			document.getElementById("powerup-upset-price").innerText = 10 * (gameState.angerLevel + 10);
+			spendCash(10 * gameState.angerLevel);
 		}
 	},
 
 	"powerup-twix": function (number) {
-		if (playerCash >= 50 && number == 1) {
+		if (gameState.playerCash >= 50 && number == 1) {
 			spendCash(50);
-			twixTimer += (60 * 20);
+			gameState.twixTimer += (60 * 20);
 		}
 	},
 
 	"powerup-shrinkage": function (number) {
-		isLaughing = true;
+		gameState.isLaughing = true;
 	},
 
 
 	"powerup-parents": function (number) {
-		parentLevel = number;
+		gameState.parentLevel = number;
 		if (number == 2) document.getElementById("frank").style.visibility = "visible";
 		if (number == 3) document.getElementById("estelle").style.visibility = "visible";
 	},
 
 
 	"powerup-pulp": function (number) {
-		pulpActive = true;
+		gameState.pulpActive = true;
 	},
 
 	"powerup-dishonest": function (number) {
-		georgeLying = 1;
+		gameState.georgeLying = 1;
 	},
 
 	"powerup-cashmere": function (elaineHelping) {
-		//elaineHelping equals 0 then she isnt helping
-		//elaineHelping equals 1 then she is helping with time not out and each click gives more points
-		//elaineHelping equals 2 she is helping but time is out and each click takes away clicks
-		if (playerCash >= 200 && cashmereSwitchCounter % 2 === 0) {
+		//gameState.elaineHelping equals 0 then she isnt helping
+		//gameState.elaineHelping equals 1 then she is helping with time not out and each click gives more points
+		//gameState.elaineHelping equals 2 she is helping but time is out and each click takes away clicks
+		if (gameState.playerCash >= 200 && gameState.cashmereSwitchCounter % 2 === 0) {
 			spendCash(200);
-			cashmereSecondTimer += (10 * 20);
+			gameState.cashmereSecondTimer += (10 * 20);
 			document.getElementById("cashmere-switch").style.visibility = "visible";
 		}
 	},
 
 
 	"powerup-whaleBio": function (number) {
-		golfBallTimer = 20;
-		whaleActive = true;
+		gameState.golfBallTimer = 20;
+		gameState.whaleActive = true;
 	},
 
 
 	"powerup-contest": function (number) {
-		contestActive = true;
-		contestCounter = 60 * 20;
+		gameState.contestActive = true;
+		gameState.contestCounter = 60 * 20;
 	},
 
 	"powerup-iqTest": function (number) {
 		// iqTest should be effected by the function powerupSwitch and in gameTick under cashmere portion
-		iqTestActive = true;
+		gameState.iqTestActive = true;
 	},
 
 	"powerup-human-fund": function (number) {
@@ -190,272 +190,194 @@ function upgrade(name, number) {
 }
 
 function saveGame() {
-	saveState.totalClickAmount = totalClickAmount;
-	saveState.level = level;
-	saveState.playerCash = playerCash;
-	saveState.levelMult = levelMult;
-	saveState.amountOfBathrooms = amountOfBathrooms;
-	saveState.bathroomPower = bathroomPower;
-	saveState.angerLevel = angerLevel;
-	saveState.twixTimer = twixTimer;
-	saveState.georgeLying = georgeLying;
-	saveState.isLaughing = isLaughing;
-	saveState.clickPower = clickPower;
-	saveState.backgroundX = backgroundX;
-	saveState.skillPoints = skillPoints;
-	saveState.lyingSecondTimer = lyingSecondTimer;
-	saveState.cashmereSecondTimer = cashmereSecondTimer;
-	saveState.elaineHelping = elaineHelping;
-	saveState.golfBallX = golfBallX;
-	saveState.golfBallY = golfBallY;
-	saveState.newGolfBall = newGolfBall;
-	saveState.golfBallActive = golfBallActive;
-	saveState.golfBallTimer = golfBallTimer;
-	saveState.whaleX = whaleX;
-	saveState.whaleActive = whaleActive;
-	saveState.cashmereSwitchCounter = cashmereSwitchCounter;
-	saveState.contestCounter = contestCounter;
-	saveState.contestActive = contestActive;
-	saveState.parentLevel = parentLevel;
-	saveState.parentPosition = parentPosition;
-	saveState.iqTestActive = iqTestActive;
-	saveState.deathCount = deathCount;
-	saveState.deathMult = deathMult;
-	saveState.powerUpsAchieved = powerUpsAchieved;
-	saveState.powerUpMoveList = powerUpMoveList;
-	saveState.unlockedUpgrades = unlockedUpgrades;
-	saveState.cleverBranchCount = cleverBranchCount;
-	saveState.dishonestBranchCount = dishonestBranchCount;
-	saveState.angryBranchCount = angryBranchCount;
-	saveState.kysCount = kysCount;
-	saveState.pulpActive = pulpActive;
-	saveState.availableUpgrades = availableUpgrades;
-	localStorage.saveState = JSON.stringify(saveState);
+	console.log("save game called ")
+	localStorage.saveState = JSON.stringify(gameState);
 }
 
 if (localStorage.saveState) {
-	saveState = JSON.parse(localStorage.saveState);
-	totalClickAmount = saveState.totalClickAmount;
-	level = saveState.level;
-	playerCash = saveState.playerCash;
-	levelMult = saveState.levelMult;
-	amountOfBathrooms = saveState.amountOfBathrooms;
-	bathroomPower = saveState.bathroomPower;
-	angerLevel = saveState.angerLevel;
-	twixTimer = saveState.twixTimer;
-	georgeLying = saveState.georgeLying;
-	isLaughing = saveState.isLaughing;
-	clickPower = saveState.clickPower;
-	backgroundX = saveState.backgroundX;
-	skillPoints = saveState.skillPoints;
-	lyingSecondTimer = saveState.lyingSecondTimer;
-	cashmereSecondTimer = saveState.cashmereSecondTimer;
-	elaineHelping = saveState.elaineHelping;
-	golfBallX = saveState.golfBallX;
-	golfBallY = saveState.golfBallY;
-	newGolfBall = saveState.newGolfBall;
-	golfBallActive = saveState.golfBallActive;
-	golfBallTimer = saveState.golfBallTimer;
-	whaleX = saveState.whaleX;
-	whaleActive = saveState.whaleActive;
-	cashmereSwitchCounter = 1;
-	contestCounter = saveState.contestCounter;
-	contestActive = saveState.contestActive;
-	parentLevel = saveState.parentLevel;
-	parentPosition = saveState.parentPosition;
-	iqTestActive = saveState.iqTestActive;
-	deathCount = saveState.deathCount;
-	deathMult = saveState.deathMult;
-	powerUpsAchieved = saveState.powerUpsAchieved;
-	powerUpMoveList = saveState.powerUpMoveList;
-	unlockedUpgrades = saveState.unlockedUpgrades;
-	cleverBranchCount = saveState.cleverBranchCount;
-	angryBranchCount = saveState.angryBranchCount;
-	kysCount = saveState.kysCount;
-	pulpActive = saveState.pulpActive;
-	availableUpgrades = saveState.availableUpgrades;
-	dishonestBranchCount = saveState.dishonestBranchCount;
+	gameState = JSON.parse(localStorage.saveState);
 
-	for (var n in unlockedUpgrades) {
-		unlockChildren(document.getElementById(unlockedUpgrades[n]));
+
+	for (var n in gameState.unlockedUpgrades) {
+		unlockChildren(document.getElementById(gameState.unlockedUpgrades[n]));
 	}
 
-	if (deathCount > 0) {
+	if (gameState.deathCount > 0) {
 		document.getElementById("death").style.display = 'inline-block';
-		document.getElementById("death-number").innerText = deathCount;
+		document.getElementById("death-number").innerText = gameState.deathCount;
 	}
 
-	document.getElementById("powerup-upset-number").innerText = angerLevel;
-	document.getElementById("powerup-upset-price").innerText = 10 * (angerLevel + 10);
+	document.getElementById("powerup-upset-number").innerText = gameState.angerLevel;
+	document.getElementById("powerup-upset-price").innerText = 10 * (gameState.angerLevel + 10);
 
-	for (var n in availableUpgrades) {
-		document.getElementById(availableUpgrades[n]).className = "upgrade-node available";
+	for (var n in gameState.availableUpgrades) {
+		document.getElementById(gameState.availableUpgrades[n]).className = "upgrade-node available";
 	}
 
-	for (var n in powerUpsAchieved) {
-		document.getElementById(powerUpsAchieved[n]).style.display = 'inline-block';
-		if (powerUpsAchieved[n] !== "powerup-cashmere") {
-			upgrade(powerUpsAchieved[n], 0);
+	for (var n in gameState.powerUpsAchieved) {
+		document.getElementById(gameState.powerUpsAchieved[n]).style.display = 'inline-block';
+		if (gameState.powerUpsAchieved[n] !== "powerup-cashmere") {
+			upgrade(gameState.powerUpsAchieved[n], 0);
 		} else {
-			if (cashmereSwitchCounter % 2 === 0) {
+			if (gameState.cashmereSwitchCounter % 2 === 0) {
 				document.getElementById("cashmere-button").innerText = "ON";
-				elaineHelping = 1;
+				gameState.elaineHelping = 1;
 			} else {
 				document.getElementById("cashmere-button").innerText = "OFF";
 				document.getElementById("powerup-cashmere-number").innerText = "Placated";
-				elaineHelping = 0;
+				gameState.elaineHelping = 0;
 			}
 		}
 	}
 
 	addCash(0);
 	addSkillPoints(0);
-	document.getElementById("level").innerText = level;
+	document.getElementById("level").innerText = gameState.level;
 }
 
 function killYourSelf(num) {
 	if (num != 0 ){
-		for (var n in unlockedUpgrades){
-			if (document.getElementById(unlockedUpgrades[n]).id === 'upgrade-clever-george' || document.getElementById(unlockedUpgrades[n]).id === 'upgrade-angry-george' || document.getElementById(unlockedUpgrades[n]).id === 'upgrade-dishonest-george' ) {
-				document.getElementById(unlockedUpgrades[n]).className = "upgrade-node available";
+		for (var n in gameState.unlockedUpgrades){
+			if (document.getElementById(gameState.unlockedUpgrades[n]).id === 'upgrade-clever-george' || document.getElementById(gameState.unlockedUpgrades[n]).id === 'upgrade-angry-george' || document.getElementById(gameState.unlockedUpgrades[n]).id === 'upgrade-dishonest-george' ) {
+				document.getElementById(gameState.unlockedUpgrades[n]).className = "upgrade-node available";
 			}else{
-				document.getElementById(unlockedUpgrades[n]).className = "upgrade-node disabled";
+				document.getElementById(gameState.unlockedUpgrades[n]).className = "upgrade-node disabled";
 			}
 		}
-		for (var n in powerUpsAchieved){
-			document.getElementById(powerUpsAchieved[n]).style.display = "none";
+		for (var n in gameState.powerUpsAchieved){
+			document.getElementById(gameState.powerUpsAchieved[n]).style.display = "none";
 		}
-		deathCount++;
-		deathMult = (deathCount + .5) * (deathCount + .5) * 5;
+		gameState.deathCount++;
+		gameState.deathMult = (gameState.deathCount + .5) * (gameState.deathCount + .5) * 5;
 
-		totalClickAmount = 0;
-		totalClickAmount = 0;
-		level = 1;
-		playerCash = 0;
-		levelMult = 1;
-		amountOfBathrooms = 0;
-		bathroomPower = 0.5;
-		angerLevel = 0;
-		twixTimer = 0;
-		georgeLying = 0;
-		isLaughing = false;
-		clickPower = 1;
-		skillPoints = 0;
-		lyingSecondTimer = 0;
-		cashmereSecondTimer = 0;
-		elaineHelping = 0;
-		golfBallX = 0.0;
-		golfBallY = 0.0;
-		newGolfBall = 0;
-		golfBallActive = false;
-		golfBallTimer;
-		whaleX = 500;
-		whaleActive = false;
-		cashmereSwitchCounter = 0;
-		contestCounter = 0;
-		contestActive = false;
-		parentLevel = 1;
-	 	parentPosition = 0;
-		iqTestActive = false;
-		saveGameTimer = 0;
-		cleverBranchCount = 0;
-		angryBranchCount = 0;
-		dishonestBranchCount = 0;
-		kysCount = 0;
-		pulpActive = false;
+		gameState.totalClickAmount = 0;
+		gameState.totalClickAmount = 0;
+		gameState.level = 1;
+		gameState.playerCash = 0;
+		gameState.levelMult = 1;
+		gameState.amountOfBathrooms = 0;
+		gameState.bathroomPower = 0.5;
+		gameState.angerLevel = 0;
+		gameState.twixTimer = 0;
+		gameState.georgeLying = 0;
+		gameState.isLaughing = false;
+		gameState.clickPower = 1;
+		gameState.skillPoints = 0;
+		gameState.lyingSecondTimer = 0;
+		gameState.cashmereSecondTimer = 0;
+		gameState.elaineHelping = 0;
+		gameState.golfBallX = 0.0;
+		gameState.golfBallY = 0.0;
+		gameState.newGolfBall = 0;
+		gameState.golfBallActive = false;
+		gameState.golfBallTimer;
+		gameState.whaleX = 500;
+		gameState.whaleActive = false;
+		gameState.cashmereSwitchCounter = 0;
+		gameState.contestCounter = 0;
+		gameState.contestActive = false;
+		gameState.parentLevel = 1;
+	 	gameState.parentPosition = 0;
+		gameState.iqTestActive = false;
+		gameState.saveGameTimer = 0;
+		gameState.cleverBranchCount = 0;
+		gameState.angryBranchCount = 0;
+		gameState.dishonestBranchCount = 0;
+		gameState.kysCount = 0;
+		gameState.pulpActive = false;
 		powerUpMoveList = ["powerup-bathrooms", "powerup-bathrooms2", "powerup-bathrooms3", "powerup-upset", "powerup-squint", "powerup-super-squint", "powerup-twix", "powerup-shrinkage", "powerup-dishonest", "powerup-cashmere", "powerup-whaleBio", "powerup-contest", "powerup-mom", "powerup-dad", "powerup-iqTest", "powerup-answer-machine", "powerup-human-fund", "powerup-pulp", "powerup-kys"];
-		powerUpsAchieved = [];
-		unlockedUpgrades = [];
+		gameState.powerUpsAchieved = [];
+		gameState.unlockedUpgrades = [];
 
 		saveGame();
 		location.reload();
 
 	}
 	document.getElementById("death").style.display=  'inline-block';
-	document.getElementById("death-number").innerText = deathCount;
+	document.getElementById("death-number").innerText = gameState.deathCount;
 }
 //function to handle all clicks
 function clickOnGeorge(clicks) {
 	if (typeof clicks === 'undefined') {
-		clicks = clickPower * deathMult;
-		if (elaineHelping === 1) {
-			clicks *= 100 * deathMult;
-		} else if (elaineHelping === 2) {
-			clicks *= -100 * deathMult;
+		clicks = gameState.clickPower * gameState.deathMult;
+		if (gameState.elaineHelping === 1) {
+			clicks *= 100 * gameState.deathMult;
+		} else if (gameState.elaineHelping === 2) {
+			clicks *= -100 * gameState.deathMult;
 		}
-		if (contestActive) {
-			contestCounter = 60 * 20;
+		if (gameState.contestActive) {
+			gameState.contestCounter = 60 * 20;
 		}
 	}
-	if (totalClickAmount + clicks < 0) {
-		totalClickAmount = 0;
+	if (gameState.totalClickAmount + clicks < 0) {
+		gameState.totalClickAmount = 0;
 	} else {
-		totalClickAmount = totalClickAmount + clicks;
+		gameState.totalClickAmount = gameState.totalClickAmount + clicks;
 	}
 	//checks to see if the player should level up because of this click
-	if (totalClickAmount - (Math.pow(2, (2*level)+2 )) >= 0) {
+	if (gameState.totalClickAmount - (Math.pow(2, (2*gameState.level)+2 )) >= 0) {
 		levelUp();
 	}
-	document.getElementById("score").innerText = totalClickAmount.toFixed(0);
+	document.getElementById("score").innerText = gameState.totalClickAmount.toFixed(0);
 }
 
 function clickOnGeorgeMoney() {
-	if (iqTestActive === true) {
-		if (elaineHelping === 0) {
+	if (gameState.iqTestActive === true) {
+		if (gameState.elaineHelping === 0) {
 			addCash(0.5);
-		} else if (elaineHelping == 1) {
+		} else if (gameState.elaineHelping == 1) {
 			addCash(10);
-		} else if (elaineHelping == 2) {
+		} else if (gameState.elaineHelping == 2) {
 			addCash(-3);
 		}
 	}
 }
 
 function addCash(amount) {
-	playerCash += amount;
-	document.getElementById("cash").innerText = playerCash;
+	gameState.playerCash += amount;
+	document.getElementById("cash").innerText = gameState.playerCash;
 }
 
 function spendCash(amount) {
-	playerCash -= amount;
-	document.getElementById("cash").innerText = playerCash;
+	gameState.playerCash -= amount;
+	document.getElementById("cash").innerText = gameState.playerCash;
 }
 
 function addSkillPoints(amount) {
-	if(pulpActive == true){
+	if(gameState.pulpActive == true){
 		var skillChance = Math.floor(Math.random() * 10) + 1
 		if(skillChance < 4){
 			console.log("gain 2 skill points ")
 			amount = 2;
 		}
 	}
-	skillPoints += amount;
-	document.getElementById("skill-points").innerText = skillPoints;
+	gameState.skillPoints += amount;
+	document.getElementById("skill-points").innerText = gameState.skillPoints;
 }
 
 function spendSkillPoints(amount) {
-	skillPoints -= amount;
-	document.getElementById("skill-points").innerText = skillPoints;
+	gameState.skillPoints -= amount;
+	document.getElementById("skill-points").innerText = gameState.skillPoints;
 }
 
 function powerupSwitch(powerup) {
 	if (powerup == 'cashmere') {
-		cashmereSwitchCounter++;
-		if (cashmereSwitchCounter % 2 === 0) {
+		gameState.cashmereSwitchCounter++;
+		if (gameState.cashmereSwitchCounter % 2 === 0) {
 			document.getElementById("cashmere-button").innerText = "ON";
-			elaineHelping = 1;
+			gameState.elaineHelping = 1;
 			saveGame();
 		} else {
 			document.getElementById("cashmere-button").innerText = "OFF";
 			document.getElementById("powerup-cashmere-number").innerText = "Placated";
-			elaineHelping = 0;
+			gameState.elaineHelping = 0;
 			saveGame();
 		}
 	}
 }
 
 function upgradable(element) {
-	if (element.className == "upgrade-node available" && skillPoints > 0) {
+	if (element.className == "upgrade-node available" && gameState.skillPoints > 0) {
 		saveGame();
 		return true;
 	}
@@ -467,155 +389,155 @@ function unlockChildren(element) {
 	element.className = "upgrade-node visible";
 	var id = element.id;
 	id = String(id);
-	var found = availableUpgrades.indexOf(id);
+	var found = gameState.availableUpgrades.indexOf(id);
 
 	 while (found !== -1) {
-			 availableUpgrades.splice(found, 1);
-			 found = availableUpgrades.indexOf(id);
+			 gameState.availableUpgrades.splice(found, 1);
+			 found = gameState.availableUpgrades.indexOf(id);
 	 }
 	var exists = false;
-	for (var item in unlockedUpgrades) {
-		if (unlockedUpgrades[item] == element.id) {
+	for (var item in gameState.unlockedUpgrades) {
+		if (gameState.unlockedUpgrades[item] == element.id) {
 			exists = true;
 		}
 	}
 	if (!exists) {
-		unlockedUpgrades.push(element.id);
+		gameState.unlockedUpgrades.push(element.id);
 	}
 	for (var i = 0; i < powerUpTree[id].length; i++) {
 		document.getElementById(powerUpTree[id][i]).className = "upgrade-node available";
-		availableUpgrades.push(powerUpTree[id][i]);
+		gameState.availableUpgrades.push(powerUpTree[id][i]);
 	}
-	if (document.getElementById("upgrade-bathrooms3").className == 'upgrade-node visible' && document.getElementById("upgrade-super-squint").className == 'upgrade-node visible' && cleverBranchCount === 0) {
-		cleverBranchCount = 1;
+	if (document.getElementById("upgrade-bathrooms3").className == 'upgrade-node visible' && document.getElementById("upgrade-super-squint").className == 'upgrade-node visible' && gameState.cleverBranchCount === 0) {
+		gameState.cleverBranchCount = 1;
 		document.getElementById("upgrade-answer-machine").className = "upgrade-node available";
-		availableUpgrades.push("upgrade-answer-machine");
+		gameState.availableUpgrades.push("upgrade-answer-machine");
 	}
-	if (document.getElementById("upgrade-shrinkage").className == 'upgrade-node visible' && document.getElementById("upgrade-mom").className == 'upgrade-node visible' && angryBranchCount === 0) {
-		angryBranchCount = 1;
+	if (document.getElementById("upgrade-shrinkage").className == 'upgrade-node visible' && document.getElementById("upgrade-mom").className == 'upgrade-node visible' && gameState.angryBranchCount === 0) {
+		gameState.angryBranchCount = 1;
 		document.getElementById("upgrade-pulp").className = "upgrade-node available";
-		availableUpgrades.push("upgrade-pulp");
+		gameState.availableUpgrades.push("upgrade-pulp");
 
 	}
-	if (document.getElementById("upgrade-contest").className == 'upgrade-node visible' && document.getElementById("upgrade-iqTest").className == 'upgrade-node visible' && dishonestBranchCount === 0) {
-		dishonestBranchCount = 1;
+	if (document.getElementById("upgrade-contest").className == 'upgrade-node visible' && document.getElementById("upgrade-iqTest").className == 'upgrade-node visible' && gameState.dishonestBranchCount === 0) {
+		gameState.dishonestBranchCount = 1;
 		document.getElementById("upgrade-human-fund").className = "upgrade-node available";
-		availableUpgrades.push("upgrade-human-fund");
+		gameState.availableUpgrades.push("upgrade-human-fund");
 
 
 	}
-	if( document.getElementById("upgrade-answer-machine").className == "upgrade-node visible" && document.getElementById("upgrade-pulp").className == "upgrade-node visible" && document.getElementById("upgrade-human-fund").className == "upgrade-node visible" && kysCount === 0){
-		kysCount = 1;
+	if( document.getElementById("upgrade-answer-machine").className == "upgrade-node visible" && document.getElementById("upgrade-pulp").className == "upgrade-node visible" && document.getElementById("upgrade-human-fund").className == "upgrade-node visible" && gameState.kysCount === 0){
+		gameState.kysCount = 1;
 		document.getElementById("upgrade-kys").className = "upgrade-node available";
-		availableUpgrades.push("upgrade-kys");
+		gameState.availableUpgrades.push("upgrade-kys");
 
 	}
 }
 
 function newUpgrade(newMove) {
 	var index, value;
-	for (index = 0; index < powerUpMoveList.length; index++) {
-		value = powerUpMoveList[index];
-		if (value == newMove && skillPoints > 0) {
+	for (index = 0; index < gameState.powerUpMoveList.length; index++) {
+		value = gameState.powerUpMoveList[index];
+		if (value == newMove && gameState.skillPoints > 0) {
 			document.getElementById(newMove).style.display = 'inline-block';
 			spendSkillPoints(1);
-			powerUpsAchieved.push(newMove);
-			powerUpMoveList.splice(index, 1);
+			gameState.powerUpsAchieved.push(newMove);
+			gameState.powerUpMoveList.splice(index, 1);
 			break;
 		}
 	}
 }
 //adds more points to spend on powerups and levels the player to the next level
 function levelUp() {
-	addCash(100 * level);
-	level++;
+	addCash(100 * gameState.level);
+	gameState.level++;
 	addSkillPoints(1);
-	levelMult = levelMult + 1;
-	document.getElementById("level").innerText = level;
+	gameState.levelMult = gameState.levelMult + 1;
+	document.getElementById("level").innerText = gameState.level;
 }
 
 function updateBackground() {
-	backgroundX += 1;
-	if (backgroundX >= 250) {
-		backgroundX = 0;
+	gameState.backgroundX += 1;
+	if (gameState.backgroundX >= 250) {
+		gameState.backgroundX = 0;
 	}
-	document.getElementById("main-container").style.backgroundPosition = backgroundX + "px " + backgroundX + "px";
+	document.getElementById("main-container").style.backgroundPosition = gameState.backgroundX + "px " + gameState.backgroundX + "px";
 }
 
 function gameTick() {
 	//saves the game every ten seconds
-	saveGameTimer++;
+	gameState.saveGameTimer++;
 
-	if (saveGameTimer >= 200) {
+	if (gameState.saveGameTimer >= 200) {
 		saveGame();
-		saveGameTimer = 0;
+		gameState.saveGameTimer = 0;
 	}
 
 	var clicksPerSecond = 0;
-	clicksPerSecond += bathroomPower * amountOfBathrooms;
-	clicksPerSecond += (0.1 * (parentLevel * parentLevel)) * angerLevel;
+	clicksPerSecond += gameState.bathroomPower * gameState.amountOfBathrooms;
+	clicksPerSecond += (0.1 * (gameState.parentLevel * gameState.parentLevel)) * gameState.angerLevel;
 
-	if (georgeLying > 0) {
-		lyingSecondTimer++;
-		document.getElementById("powerup-dishonest-number").innerText = Math.ceil(lyingSecondTimer / 20) + "/10";
-		if (lyingSecondTimer == 200) {
-			var randMin = .01 * totalClickAmount;
-			var randMax = .05 * totalClickAmount;
+	if (gameState.georgeLying > 0) {
+		gameState.lyingSecondTimer++;
+		document.getElementById("powerup-dishonest-number").innerText = Math.ceil(gameState.lyingSecondTimer / 20) + "/10";
+		if (gameState.lyingSecondTimer == 200) {
+			var randMin = .01 * gameState.totalClickAmount;
+			var randMax = .05 * gameState.totalClickAmount;
 			var lyingClicks = Math.floor(Math.random() * (randMax - randMin + 1)) + randMin;
 			clickOnGeorge(lyingClicks);
-			lyingSecondTimer = 0;
+			gameState.lyingSecondTimer = 0;
 		}
 	}
 
-	if (whaleActive) {
+	if (gameState.whaleActive) {
 		document.getElementById("whale").style.visibility = "visible";
-		golfBallTimer -= 1;
-		document.getElementById("powerup-whaleBio-number").innerText = "FORRREE! " + Math.ceil(golfBallTimer / 20);
+		gameState.golfBallTimer -= 1;
+		document.getElementById("powerup-whaleBio-number").innerText = "FORRREE! " + Math.ceil(gameState.golfBallTimer / 20);
 	}
 
-	if (golfBallTimer === 0) {
-		newGolfBall = true;
-		golfBallTimer = 20 * 20;
-		golfBallActive = true;
+	if (gameState.golfBallTimer === 0) {
+		gameState.newGolfBall = true;
+		gameState.golfBallTimer = 20 * 20;
+		gameState.golfBallActive = true;
 	}
 
-	if (golfBallActive) {
+	if (gameState.golfBallActive) {
 		golfBall();
 	}
 
-	if (cashmereSecondTimer > 0 && elaineHelping == 1) {
-		cashmereSecondTimer -= 1;
-		document.getElementById("powerup-cashmere-number").innerText = "Happy for " + Math.ceil(cashmereSecondTimer / 20);
-	} else if (cashmereSecondTimer === 0 && elaineHelping == 1) {
+	if (gameState.cashmereSecondTimer > 0 && gameState.elaineHelping == 1) {
+		gameState.cashmereSecondTimer -= 1;
+		document.getElementById("powerup-cashmere-number").innerText = "Happy for " + Math.ceil(gameState.cashmereSecondTimer / 20);
+	} else if (gameState.cashmereSecondTimer === 0 && gameState.elaineHelping == 1) {
 		document.getElementById("powerup-cashmere-number").innerText = "Pissed";
-		elaineHelping = 2;
+		gameState.elaineHelping = 2;
 	}
 
-	if (twixTimer > 0) {
-		twixTimer -= 1;
+	if (gameState.twixTimer > 0) {
+		gameState.twixTimer -= 1;
 		clicksPerSecond *= 2;
-		document.getElementById("powerup-twix-number").innerText = Math.ceil(twixTimer / 20);
+		document.getElementById("powerup-twix-number").innerText = Math.ceil(gameState.twixTimer / 20);
 	}
 
-	if (contestActive && contestCounter > 0) {
-		contestCounter -= 1;
-		document.getElementById("powerup-contest-number").innerText = Math.ceil(contestCounter / 20);
-	} else if (contestActive && contestCounter === 0) {
-		contestCounter = 60 * 20;
+	if (gameState.contestActive && gameState.contestCounter > 0) {
+		gameState.contestCounter -= 1;
+		document.getElementById("powerup-contest-number").innerText = Math.ceil(gameState.contestCounter / 20);
+	} else if (gameState.contestActive && gameState.contestCounter === 0) {
+		gameState.contestCounter = 60 * 20;
 		addCash(100);
 	}
 
-	if (Math.random() > 0.99 && isLaughing) {
+	if (Math.random() > 0.99 && gameState.isLaughing) {
 		laughing(true);
 	}
 
-	clicksPerSecond = clicksPerSecond * deathMult;
+	clicksPerSecond = clicksPerSecond * gameState.deathMult;
 	clickOnGeorge(clicksPerSecond);
 	updateBackground();
 
-	parentPosition += 0.02;
-	if (parentPosition >= 6.28) {
-		parentPosition = 0;
+	gameState.parentPosition += 0.02;
+	if (gameState.parentPosition >= 6.28) {
+		gameState.parentPosition = 0;
 	}
 
 	orbitParents();
@@ -660,7 +582,7 @@ function laughing(bool) {
 		element.style.visibility = "visible";
 	} else {
 		element.style.visibility = "hidden";
-		clickOnGeorge(totalClickAmount * 0.03);
+		clickOnGeorge(gameState.totalClickAmount * 0.03);
 	}
 }
 
@@ -668,15 +590,15 @@ function whaleMove(direction) {
 	var element = document.getElementById("whale");
 
 	if (direction == "left") {
-		if (whaleX > 0) {
-			whaleX -= 15;
-			element.style.left = whaleX + "px";
+		if (gameState.whaleX > 0) {
+			gameState.whaleX -= 15;
+			element.style.left = gameState.whaleX + "px";
 			element.className = "";
 		}
 	} else if (direction == "right") {
-		if (whaleX < document.getElementById("main-container").clientWidth - 150) {
-			whaleX += 15;
-			element.style.left = whaleX + "px";
+		if (gameState.whaleX < document.getElementById("main-container").clientWidth - 150) {
+			gameState.whaleX += 15;
+			element.style.left = gameState.whaleX + "px";
 			element.className = "flip";
 		}
 	}
@@ -691,28 +613,28 @@ function golfBall() {
 
 	element.style.visibility = "visible";
 
-	if (newGolfBall === true) {
-		golfBallX = (Math.random() * (screen.width * 0.4) + 50);
-		golfBallY = 0;
-		newGolfBall = false;
+	if (gameState.newGolfBall === true) {
+		gameState.golfBallX = (Math.random() * (screen.width * 0.4) + 50);
+		gameState.golfBallY = 0;
+		gameState.newGolfBall = false;
 	}
 
-	if (!newGolfBall) {
-		golfBallY += 10;
-		element.style.left = golfBallX + "px";
-		element.style.top = golfBallY + "px";
-		if (golfBallY >= 1000) {
+	if (!gameState.newGolfBall) {
+		gameState.golfBallY += 10;
+		element.style.left = gameState.golfBallX + "px";
+		element.style.top = gameState.golfBallY + "px";
+		if (gameState.golfBallY >= 1000) {
 			element.style.visibility = "hidden";
-			golfBallActive = false;
-			newGolfBall = true;
+			gameState.golfBallActive = false;
+			gameState.newGolfBall = true;
 		}
 	}
 
 	if (overlap) {
 		addCash(500);
 		element.style.visibility = "hidden";
-		golfBallActive = false;
-		newGolfBall = true;
+		gameState.golfBallActive = false;
+		gameState.newGolfBall = true;
 	}
 }
 
@@ -723,8 +645,8 @@ function orbitParents() {
 	var originX = 130;
 	var originY = 122;
 	
-	mom.style.top = (originX + Math.cos(parentPosition) * 250) + "px";
-	mom.style.left = (originY + Math.sin(parentPosition) * 250) + "px";
-	dad.style.top = (originX + Math.cos(parentPosition - 3.14) * 250) + "px";
-	dad.style.left = (originY + Math.sin(parentPosition - 3.14) * 250) + "px";
+	mom.style.top = (originX + Math.cos(gameState.parentPosition) * 250) + "px";
+	mom.style.left = (originY + Math.sin(gameState.parentPosition) * 250) + "px";
+	dad.style.top = (originX + Math.cos(gameState.parentPosition - 3.14) * 250) + "px";
+	dad.style.left = (originY + Math.sin(gameState.parentPosition - 3.14) * 250) + "px";
 }
