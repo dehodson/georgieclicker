@@ -64,6 +64,131 @@ var powerUpTree = {
 
 var saveState = {};
 
+var upgrades = {
+	"powerup-bathrooms": function (number) {
+		if (playerCash >= 10 * (amountOfBathrooms + 1)) {
+			amountOfBathrooms = amountOfBathrooms + number;
+			document.getElementById("powerup-bathrooms-number").innerText = amountOfBathrooms;
+			document.getElementById("powerup-bathrooms-price").innerText = 10 * (amountOfBathrooms + 1);
+			spendCash(10 * amountOfBathrooms);
+		}
+	},
+
+	"powerup-bathrooms2": function (number) {
+		bathroomPower = 1;
+	},
+
+	"powerup-bathrooms3": function (number) {
+		bathroomPower = 2.5;
+	},
+
+	"powerup-squint": function (number) {
+		if (number < 1) {
+			number = 1;
+		}
+
+		clickPower = 5 * number;
+	},
+
+	"powerup-super-squint": function (number) {
+		if (number < 1) {
+			number = 1;
+		}
+		
+		clickPower = 10 * number;
+	},
+
+	"powerup-answer-machine": function (number) {
+		if (number < 1) {
+			number = 1;
+		}
+		
+		bathroomPower = bathroomPower * 2.5;
+		clickPower = 100 * number;
+	},
+
+	"powerup-upset": function (number) {
+		if ((parentLevel == 3 || angerLevel < parentLevel * 100) && playerCash >= 10 * (angerLevel + 10)) {
+			angerLevel = angerLevel + number;
+			document.getElementById("powerup-upset-number").innerText = angerLevel;
+			document.getElementById("powerup-upset-price").innerText = 10 * (angerLevel + 10);
+			spendCash(10 * angerLevel);
+		}
+	},
+
+	"powerup-twix": function (number) {
+		if (playerCash >= 50 && number == 1) {
+			spendCash(50);
+			twixTimer += (60 * 20);
+		}
+	},
+
+	"powerup-shrinkage": function (number) {
+		isLaughing = true;
+	},
+
+
+	"powerup-parents": function (number) {
+		parentLevel = number;
+		if (number == 2) document.getElementById("frank").style.visibility = "visible";
+		if (number == 3) document.getElementById("estelle").style.visibility = "visible";
+	},
+
+
+	"powerup-pulp": function (number) {
+		pulpActive = true;
+	},
+
+	"powerup-dishonest": function (number) {
+		georgeLying = 1;
+	},
+
+	"powerup-cashmere": function (elaineHelping) {
+		//elaineHelping equals 0 then she isnt helping
+		//elaineHelping equals 1 then she is helping with time not out and each click gives more points
+		//elaineHelping equals 2 she is helping but time is out and each click takes away clicks
+		if (playerCash >= 200 && cashmereSwitchCounter % 2 === 0) {
+			spendCash(200);
+			cashmereSecondTimer += (10 * 20);
+			document.getElementById("cashmere-switch").style.visibility = "visible";
+		}
+	},
+
+
+	"powerup-whaleBio": function (number) {
+		golfBallTimer = 20;
+		whaleActive = true;
+	},
+
+
+	"powerup-contest": function (number) {
+		contestActive = true;
+		contestCounter = 60 * 20;
+	},
+
+	"powerup-iqTest": function (number) {
+		// iqTest should be effected by the function powerupSwitch and in gameTick under cashmere portion
+		iqTestActive = true;
+	},
+
+	"powerup-human-fund": function (number) {
+		addCash(20000);
+	},
+
+	"powerup-kys": function (number) {
+		//restart the game and add death counter
+		killYourSelf(number);
+	}
+};
+
+function upgrade(name, number) {
+	if (upgrades.hasOwnProperty(name)) {
+		upgrades[name](number);
+	} else {
+		console.warn("Unknown upgrade: " + name);
+	}
+}
+
 function saveGame() {
 	saveState.totalClickAmount = totalClickAmount;
 	saveState.level = level;
@@ -155,7 +280,7 @@ if (localStorage.saveState) {
 		unlockChildren(document.getElementById(unlockedUpgrades[n]));
 	}
 
-	if ( deathCount > 0){
+	if (deathCount > 0) {
 		document.getElementById("death").style.display = 'inline-block';
 		document.getElementById("death-number").innerText = deathCount;
 	}
@@ -311,93 +436,6 @@ function addSkillPoints(amount) {
 function spendSkillPoints(amount) {
 	skillPoints -= amount;
 	document.getElementById("skill-points").innerText = skillPoints;
-}
-
-function upgrade(name, number) {
-	if (name == "powerup-bathrooms") {
-		if (playerCash >= 10 * (amountOfBathrooms + 1)) {
-			amountOfBathrooms = amountOfBathrooms + number;
-			document.getElementById(name + "-number").innerText = amountOfBathrooms;
-			document.getElementById(name + "-price").innerText = 10 * (amountOfBathrooms + 1);
-			spendCash(10 * amountOfBathrooms);
-		}
-	} else if (name == "powerup-bathrooms2") {
-		bathroomPower = 1;
-	} else if (name == "powerup-bathrooms3") {
-		bathroomPower = 2.5;
-	} else if (name == "powerup-squint") {
-		if(number < 1){
-			number = 1;
-		}
-		clickPower = 5 * number;
-	} else if (name == "powerup-super-squint") {
-		if(number < 1){
-			number = 1;
-		}
-		clickPower = 10 * number;
-	} else if (name == "powerup-answer-machine") {
-		//move for answer machine
-		if(number < 1){
-			number = 1;
-		}
-		bathroomPower = bathroomPower * 2.5;
-		clickPower = 100 * number;
-
-	}
-
-
-	//parts for upset george
-	else if (name == "powerup-upset") {
-		if ((parentLevel == 3 || angerLevel < parentLevel * 100) && playerCash >= 10 * (angerLevel + 10)) {
-			angerLevel = angerLevel + number;
-			document.getElementById(name + "-number").innerText = angerLevel;
-			document.getElementById(name + "-price").innerText = 10 * (angerLevel + 10);
-			spendCash(10 * angerLevel);
-		}
-	} else if (name == "powerup-twix") {
-		if (playerCash >= 50 && number == 1) {
-			spendCash(50);
-			twixTimer += (60 * 20);
-		}
-	} else if (name == "powerup-shrinkage") {
-		isLaughing = true;
-	} else if (name == "powerup-parents") {
-		parentLevel = number;
-		if (number == 2) document.getElementById("frank").style.visibility = "visible";
-		if (number == 3) document.getElementById("estelle").style.visibility = "visible";
-	} else if (name == "powerup-pulp"){
-		pulpActive = true;
-	}
-
-
-	//parts for dishonest branch power ups
-	else if (name == "powerup-dishonest") {
-		georgeLying = 1;
-	} else if (name == "powerup-cashmere") {
-		//elaineHelping equals 0 then she isnt helping
-		//elaineHelping equals 1 then she is helping with time not out and each click gives more points
-		//elaineHelping equals 2 she is helping but time is out and each click takes away clicks
-		if (playerCash >= 200 && cashmereSwitchCounter % 2 === 0) {
-			elaineHelping = number;
-			spendCash(200);
-			cashmereSecondTimer += (10 * 20);
-			document.getElementById("cashmere-switch").style.visibility = "visible";
-		}
-	} else if (name == "powerup-whaleBio") {
-		golfBallTimer = 20;
-		whaleActive = true;
-	} else if (name == "powerup-contest") {
-		contestActive = true;
-		contestCounter = 60 * 20;
-	} else if (name == "powerup-iqTest") {
-		// iqTest should be effected by the function powerupSwitch and in gameTick under cashmere portion
-		iqTestActive = true;
-	} else if (name == "powerup-human-fund"){
-		addCash(20000);
-	} else if (name == "powerup-kys"){
-		//TODO: restart the game and add death counter
-		killYourSelf(number);
-	}
 }
 
 function powerupSwitch(powerup) {
@@ -566,7 +604,7 @@ function gameTick() {
 		contestCounter = 60 * 20;
 		addCash(100);
 	}
-	
+
 	if (Math.random() > 0.99 && isLaughing) {
 		laughing(true);
 	}
